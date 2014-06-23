@@ -11,4 +11,8 @@ import pygments_rst
 description = ('Generates (X)HTML documents from standalone reStructuredText '
                'sources.  ' + default_description)
 
-publish_cmdline(writer_name='html', description=description)
+import sys
+import re
+writer_name = re.search(r'rst2([^.]+)(.py)?', sys.argv[0]).group(1)
+
+publish_cmdline(writer_name=writer_name, description=description)
