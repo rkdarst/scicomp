@@ -39,7 +39,7 @@
 # ~~~~~~~
 
 # Set to True if you want inline CSS styles instead of classes
-INLINESTYLES = False
+INLINESTYLES = True
 
 from pygments.formatters import HtmlFormatter
 
@@ -61,23 +61,32 @@ from pygments.lexers import get_lexer_by_name, TextLexer
 class Pygments(Directive):
     """ Source code syntax hightlighting.
     """
-    required_arguments = 1
-    optional_arguments = 0
+    required_arguments = 0
+    optional_arguments = 1
     final_argument_whitespace = True
     option_spec = dict([(key, directives.flag) for key in VARIANTS])
     has_content = True
+    default_lexer = 'python'
 
     def run(self):
         self.assert_has_content()
+        if len(self.arguments) > 1:
+            lexer_name = self.arguments[0]
+        else:
+            lexer_name = self.default_lexer
         try:
-            lexer = get_lexer_by_name(self.arguments[0])
+            lexer = get_lexer_by_name(lexer_name)
         except ValueError:
             # no lexer found - use the text one instead of an exception
-            lexer = TextLexer()
+            lexer = get_lexer_by_name(self.default_lexer)
         # take an arbitrary option if more than one is given
         formatter = self.options and VARIANTS[self.options.keys()[0]] or DEFAULT
         parsed = highlight(u'\n'.join(self.content), lexer, formatter)
         return [nodes.raw('', parsed, format='html')]
 
 directives.register_directive('sourcecode', Pygments)
+directives.register_directive('code', Pygments)
 
+class Python(Pygments):
+    default_lexer = 'python'
+directives.register_directive('python', Pygments)
