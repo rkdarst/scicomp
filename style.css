@@ -1,4 +1,10 @@
 
-h2.subtitle:after {
-    vspace = 10;
+h1 {
+    margin-top: 5cm;
+}
+
+
+blockquote.epigraph {
+    font-style: italic;
+    margin: 1em 1em ;
 }

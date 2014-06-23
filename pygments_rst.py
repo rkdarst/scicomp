@@ -35,6 +35,8 @@
     :license: BSD, see LICENSE for details.
 """
 
+import os
+
 # Options
 # ~~~~~~~
 
@@ -49,6 +51,7 @@ DEFAULT = HtmlFormatter(noclasses=INLINESTYLES)
 # Add name -> formatter pairs for every variant you want to use
 VARIANTS = {
     # 'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
+    'lineno': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
 }
 
 
@@ -68,8 +71,7 @@ class Pygments(Directive):
     has_content = True
     default_lexer = 'python'
 
-    def run(self):
-        self.assert_has_content()
+    def get_lexer(self):
         if len(self.arguments) > 1:
             lexer_name = self.arguments[0]
         else:
@@ -80,9 +82,35 @@ class Pygments(Directive):
             # no lexer found - use the text one instead of an exception
             lexer = get_lexer_by_name(self.default_lexer)
         # take an arbitrary option if more than one is given
-        formatter = self.options and VARIANTS[self.options.keys()[0]] or DEFAULT
+        return lexer
+    def get_formatter(self):
+        formatter =self.options and VARIANTS[self.options.keys()[0]] or DEFAULT
+        return formatter
+
+    def run(self):
+        lexer = self.get_lexer()
+        formatter = self.get_formatter()
+
+        self.assert_has_content()
         parsed = highlight(u'\n'.join(self.content), lexer, formatter)
         return [nodes.raw('', parsed, format='html')]
+
+class PygmentsInclude(Pygments):
+    has_content = False
+    required_arguments = 1
+    def run(self):
+        lexer = self.get_lexer()
+        formatter = self.get_formatter()
+
+        fname = self.arguments[0]
+        data = os.path.join(os.path.dirname(self.src), fname)
+        data = open(data).read()
+
+        parsed = highlight(data, lexer, formatter)
+        parsed = '''<b><small><a href=%s style="color:gray">%s</a>:</small></b>\n'''%(
+            fname,fname) + parsed
+        return [nodes.raw('', parsed, format='html')]
+
 
 directives.register_directive('sourcecode', Pygments)
 directives.register_directive('code', Pygments)
@@ -90,3 +118,5 @@ directives.register_directive('code', Pygments)
 class Python(Pygments):
     default_lexer = 'python'
 directives.register_directive('python', Pygments)
+
+directives.register_directive('pyinc', PygmentsInclude)
