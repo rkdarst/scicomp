@@ -7,4 +7,44 @@ h1 {
 blockquote.epigraph {
     font-style: italic;
     margin: 1em 1em ;
+    font-size: 75% ;
+}
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs. */
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+/* */
+
+.first {
+  /* Override more specific margin styles with "! important". */
+    //margin-top: -1cm ! important ;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+
+* {
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+
+ul {
+    -webkit-padding-start: 1em
+}
+
+//ul.simple {
+//  -webkit-margin-before: .5em;
+//  -webkit-margin-after: 0em;
+//}
+
+tt.literal, pre {
+    background-color: #ecf0f3;
+    font-family: monospace, sans-serif;
+    font-size: 80.5%;
+}
+
+tt.literal {
 }

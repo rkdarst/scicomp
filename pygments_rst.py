@@ -46,7 +46,8 @@ INLINESTYLES = True
 from pygments.formatters import HtmlFormatter
 
 # The default formatter
-DEFAULT = HtmlFormatter(noclasses=INLINESTYLES)
+#DEFAULT = HtmlFormatter(noclasses=INLINESTYLES)
+DEFAULT = HtmlFormatter(noclasses=INLINESTYLES, linenos=True)
 
 # Add name -> formatter pairs for every variant you want to use
 VARIANTS = {
