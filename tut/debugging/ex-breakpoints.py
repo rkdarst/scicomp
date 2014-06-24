@@ -1,5 +1,3 @@
-
-
 def A(x):
     print 'begin A'
     a = x + 1

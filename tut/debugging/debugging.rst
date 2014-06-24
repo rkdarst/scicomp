@@ -9,8 +9,8 @@ Introduction to debugging
 What is debugging?
 ~~~~~~~~~~~~~~~~~~
 
-- Debugging is a general process of removing bugs from code, which can
-  involve many different things.
+- Debugging is a general process of making code work correctly, which
+  can involve many different things.
 
   - We've already covered tools like version control, testing, and assertions
 
@@ -19,7 +19,7 @@ What is debugging?
   bugs more efficiently**.
 
 - You could say that this is about **more effective ways of figuring
-  out what you code is doing than print statements**.
+  out what you code is doing than adding lots of print statements**.
 
 
 
@@ -36,7 +36,7 @@ Outline
   debugger usage, which is a concept that exists in *any* development
   environment.
 
-- Then, we will get more specific again and discuss more Python tools.
+- Then, we will get more specific again and discuss more Python shortcuts.
 
 
 ..
@@ -64,7 +64,7 @@ call stack:
     A data structure that stores active subroutines in a computer
     program.  On the stack is the ``main`` function, then the first
     function called, then the second function called, and so on.  The
-    python backtraces are a listing of the stack.
+    python exception tracebacks are a listing of the stack.
 
 execution frame:
    All the context within a function.  In Python, this is basically
@@ -73,12 +73,13 @@ execution frame:
 
 scope:
    I use this to mean the current attribute lookup path, ``locals()``
-   then ``globals()`` and so on.
+   then ``globals()`` and so on.  All of our interaction occurs in a
+   certain scope.
 
 
 
-List of debuggers
-~~~~~~~~~~~~~~~~~
+Debuggers for different languages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Debugging is a concept that exists across programming languages.
 Creating a debugger is a necessary step of creating any programming
@@ -96,7 +97,7 @@ language, toolchain, or operating system.
 - Python has a debugger named ``pdb``.
 
 - For C (and any language in the Gnu Compiler Collection), we have
-  `gdb`_.  This would include ``C``, ``C++``.
+  `gdb`_.  This would include C, C++, Fortran, and more.
 
   ..  _`gdb`: https://www.gnu.org/software/gdb/
 
@@ -104,41 +105,44 @@ language, toolchain, or operating system.
     have to search some to find the right debugger for your language,
     compiler, and architecture.
 
-- Other interpreted languages should have their own debuggers.
+- Other interpreted languages will have their own debuggers.
 
 - Debugging is actually an *interface*, so there can be more friendly
-  front-ends available.
+  front-ends available.  For example,
 
-  .. epigraph::
-     I don't cover these here, I am focusing on the basic concepts.
+  - The "Data Display Debugger" (``ddd``) is a more graphical debugger
+     for ``gcc``.
+  - ``pudb`` is a console (ncurses) based Python debugger.
+  - Most IDEs (e.g. emacs, spyder, ...) will integrate debuggers somehow.
+
 
 
 .. epigraph::
    Basically, whatever you do, you should be able to find a debugger for
    it.  Most of the operations I describe below should work with your
-   environment.
+   environment.  The commands within the debuggers seem to be fairly
+   standard.
 
 
 
 Prerequisites
 ~~~~~~~~~~~~~~
 
-- in C, you must compile with **debugging symbols**.
+- In C, you must compile with **debugging symbols**.
 
   - Since C programs are basically raw machine code, the program
     doesn't include the source code for each machine instruction,
     variable names, or anything human-understandable.
-
   - Compile using the ``-g`` option:
 
     .. code:: shell
 
-       $ gcc -g filename.c
+      $ gcc -g filename.c
 
 - Python, being interpreted, always has the source code available, no
   nothing special is needed.
 
-- Other languages or compilers may vary.
+- Other languages or compiler options may vary.
 
 
 
@@ -156,13 +160,12 @@ I have observed two main ways people write their code:
 - As functions that are run from the shell
 
   - There is a library of functions, but it can't be run directly.
-  -  There is one persistent interactive shell, where the library is
-     continually reloaded and functions called over and over again.
+  - There is one persistent interactive shell, where the library is
+    continually reloaded and functions called over and over again.
+  - Debugging is equally applicable here, but you need different ways
+    to start.
 
-
-- The concepts of debugging for both of these is similar, but
-- You have slightly different interfaces in each of these, and they
-  have their own quirks.
+- The concepts of debugging for both of these is similar.
 
 
 
@@ -176,8 +179,8 @@ working on.  This is how you **print debug**:
 - Run the code, see the output.
 - You get an idea of what might be wrong, and you try fixing it and it
   still dosn't work.  You add more print statements, and repeat.
-- Eventually, you fix it and you have to go comment or remove all of
-  the print statements.
+- Eventually, you figure out what's wrong, fix the code, and have to
+  go remove all of the print statements.
 
 
 This is a long, annoying process.  It takes many rounds, and you are
@@ -186,12 +189,11 @@ basically doing the same things over and over.
 You wish that you could:
 
 - Run the entire program up until a point in the function.
-- **Stop** and give you an interactive shell with all of the local
-  function variables.
-- You can play with the variables in the function yourself, observing
-  the output until you get the code you actually need.
+- **Stop** and get an interactive shell with all of the local function
+  variables.
+- Play with the variables in the function yourself, observing the
+  results until you figure out the correct code.
 - Copy that code back into the file at the right place.
-
 
 Example:
 
@@ -199,16 +201,9 @@ Example:
   external dependencies.
 - We call ``code.interact`` with a given``locals()`` dictionary.
 
-.. python::
+.. pyinc:: ex1.py
 
-    def a():
-        a = 1
-        b = 2
-        c = a+b
-        import code; code.interact(local=locals())
-        print c
-
-Example output:
+Output:
 
 .. python::
 
@@ -226,31 +221,29 @@ Example output:
 - The interactive console starts *inside* the function
 - This is *much* faster than editing the file to add prints,
   - especially since you can adapt what you print to what you see.
-
-- You can And you can *interact* with it.
-
-  - If there is/was a bug, you can take some time to figure out the
-    *correct* lines,
-  - then copy them back to the file before re-running.
+- Don't use this only for debugging: use this as a faster way of
+  writing things correctly in the first place.
 
 
 
 Other options for interactive debugging
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- It is better to use my ``verkko.misc.interact`` than code.
+- It is better to use my ``verkko.misc.interact`` module than
+  ``code.interact``.
 
   - ``locals()`` are automatically found and set.
   - ``globals()`` is also passed (not possible with ``code.interact``
   - No banner
   - Enables tab completion
-  - To use it
 
-   .. python::
+- To use it
+
+  .. python::
 
         from verkko.misc import interact ; interact.interact()
 
-- Automatically start the shell
+- Even faster method:
 
   - Simply include this in your file at the place you want to
     interact:
@@ -284,6 +277,7 @@ The debugger:
 - Allows you to move up/down in the stack frame.
 
 - You can control program execution in much more detail.
+  - Step through programs line-by-line
 
 
 
@@ -294,9 +288,9 @@ Post-mortem debugging on a program
 - Post-mortem debugging is starting the debugger after some fatal
   exception or error is reached.
 
-Example:
+  Example:
 
-.. pyinc:: ex-raises-exception.py
+  .. pyinc:: ex-raises-exception.py
 
 - We run ``pdb filename.py`` on our file
 
@@ -318,8 +312,7 @@ Example:
         func(arr)
       File "ex-raises-exception.py", line 3, in func
         x + numpy.array([1, 2])
-    ValueError: operands could not be broadcast together with
-    shapes (3) (2) 
+    ValueError: operands could not be broadcast together with shapes (3) (2) 
     Uncaught exception. Entering post mortem debugging
     Running 'cont' or 'step' will restart the program
     > /home/richard/scicomp/tut/debugging/ex-raises-exception.py(3)func()
@@ -377,9 +370,9 @@ Debugging a running program
   step?
 
 
-Invoke pdb on the file::
+  Invoke pdb on the file::
 
-    pdb filename.py
+      pdb filename.py
 
 ..
 
@@ -448,6 +441,16 @@ Output:
      11         c = y * 2
      12         print c
      13         print 'end B'
+
+.. epigraph::
+
+   A "normal" way of using this on a program would be to start the
+   debugger, set a breakpoint before the problem, and step through the
+   file, checking each line manually to see what the error is.
+
+   With interactive languages like Python that have better error
+   handling facilities, this is not as critical a development
+   strategy, but is useful nonetheless.
 
 
 
@@ -537,7 +540,7 @@ Invoking debugger at a certain place
   ``down`` commands.
 - You can start a full debugger instead by using:
 
- .. python::
+  .. python::
 
     import pdb ; pdb.set_trace()
 
@@ -550,10 +553,17 @@ Easy use of PDB from command line
 
 I wrote a module to invoke pdb automatically:
 
-- You normally run your program with ``python filename.py``
+- You normally run your program with 
 
-- Change to run your program with ``python -m verkko.misc.pdbtb
-  filename.py``
+  .. code:: console
+
+     $ python filename.py
+
+- Change to run your program with
+
+  .. code:: console
+
+     $ python -m verkko.misc.pdbtb filename.py
 
   .. epigraph::
 
@@ -568,17 +578,26 @@ I wrote a module to invoke pdb automatically:
 
 
 
-IPython
-~~~~~~~
+IPython debugger - from command line
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 IPython includes its own debugger (in a separate package,
-``python-ipdb``).  It is equivalent to the regular debugger, but has
-some 
+``python-ipdb``).  It is equivalent to the regular debugger in most
+respects.
 
-- ``ipython --pdb filename.py``
+- Can be automatically invoked with
+
+  .. code::
+
+     ipython --pdb filename.py
 
   - Runs the Python debugger on an error.  Basically equivalent to
     ``python -m pdb filename.py``
+
+
+
+IPython debugger - post-mortem
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ``%debug`` in the IPython shell.
 
@@ -589,13 +608,26 @@ some
   - You can combine this with a meaningless ``raise ValueError`` in
     the code to start the debugger at a certain point.
 
-- I have noticed that this sometimes, ``ipdb`` can't do things that
-  ``pdb`` can.  If one method does't work, try the other.
 
-  .. epigraph::
-     This probably relates to subtle implementation differences and
-     the use of local/global namespaces.  I do *not* fully understand
-     it, I figure out problems as I go.
+
+IPython debugger - interactive
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To invoke ipython debugger at a certain place, do
+
+.. code::
+
+   import ipdb.set_trace()
+
+
+.. epigraph::
+
+   I have noticed that this sometimes, ``ipdb`` can't do things that
+   ``pdb`` can.  If one method does't work, try the other.
+
+   This probably relates to subtle implementation differences and
+   the use of enclosing scopes.  I do *not* fully understand it, I
+   figure out problems as I go.
 
 
 

@@ -5,4 +5,5 @@ def a():
     import code; code.interact(local=locals())
     print c
 
-a()
+if __name__ == '__main__':
+    a()
