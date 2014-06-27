@@ -72,9 +72,9 @@ execution frame:
    (``globals()``).
 
 scope:
-   I use this to mean the current attribute lookup path, ``locals()``
-   then ``globals()`` and so on.  All of our interaction occurs in a
-   certain scope.
+   Each variable is defined in a certain scope.  For example, a local
+   variable is accessible within that function, but global variables
+   are accessible anywhere in the file.
 
 
 
@@ -91,10 +91,13 @@ language, toolchain, or operating system.
    but for operating system kernels (which have to operate at a very
    low level, maybe by external network connections since a kernel
    can't pause to debug itself), embedded devices (which may have to
-   run over dedicated cables attached to the circuit board), or over
-   network links.
+   run over dedicated cables attached to the circuit board), as
+   servers to run over network links, and so on.
 
-- Python has a debugger named ``pdb``.
+- Python has a debugger named `pdb`_.
+
+  .. _`pdb`: https://docs.python.org/2/library/pdb.html
+
 
 - For C (and any language in the Gnu Compiler Collection), we have
   `gdb`_.  This would include C, C++, Fortran, and more.
@@ -128,6 +131,9 @@ language, toolchain, or operating system.
 Prerequisites
 ~~~~~~~~~~~~~~
 
+- Python, being interpreted, always has the source code available, no
+  nothing special is needed.
+
 - In C, you must compile with **debugging symbols**.
 
   - Since C programs are basically raw machine code, the program
@@ -138,9 +144,6 @@ Prerequisites
     .. code:: shell
 
       $ gcc -g filename.c
-
-- Python, being interpreted, always has the source code available, no
-  nothing special is needed.
 
 - Other languages or compiler options may vary.
 
@@ -348,9 +351,10 @@ bt, backtrace
 
 
 u, d, up, down
-    Go up/down one stack frame.  This lets you see the variables 
+    Go up/down one stack frame.  This lets you see the variables in
+    the calling functions.
 
-p, print  <expression>
+p, print <expression>
     Print a variable or an expression evaluation.
 
 h, help
@@ -380,7 +384,7 @@ Debugging a running program
     arg1 arg2 ...``)
 
 Let's say we want to skip ahead to a certain point.  We add a
-**breakpoint**
+**breakpoint**:
 
 - Typing ``cont`` runs until there is an exception, OR
 - A breakpoint stops execution at that point
@@ -544,7 +548,8 @@ Invoking debugger at a certain place
 
     import pdb ; pdb.set_trace()
 
-  Then pdb will start exactly from that point.
+  Then pdb will start exactly from that point.  Type ``cont`` to
+  resume execution.
 
 
 
@@ -592,8 +597,7 @@ respects.
      ipython --pdb filename.py
 
   - Runs the Python debugger on an error.  Basically equivalent to
-    ``python -m pdb filename.py``
-
+    ``python -m verkko.misc.pdbtb filename.py``
 
 
 IPython debugger - post-mortem
@@ -617,7 +621,7 @@ To invoke ipython debugger at a certain place, do
 
 .. code::
 
-   import ipdb.set_trace()
+   import ipdb ; ipdb.set_trace()
 
 
 .. epigraph::
