@@ -14,19 +14,19 @@ What is debugging?
 
   - We've already covered tools like version control, testing, and assertions
 
-- This talk will focus on interactive debugging tools: **tools that
-  allow you to interact with code as it's running in order to find
-  bugs more efficiently**.
+- **Print debugging**: add print statements to figure out where you
+   are and the value of variables.
 
-- You could say that this is about **more effective ways of figuring
-  out what you code is doing than adding lots of print statements**.
+- This talk will focus on interactive debugging tools: tools that
+  allow you to *interact* with code as it's running in order to find
+  bugs more *efficiently*.
 
 
 
 Outline
 ~~~~~~~
 
-- First, we will cover the general basic concepts needed to understand
+- First, we will cover some basic concepts needed to understand
   debuggers.
 
 - Then, I will talk about simple ways of debugging things
@@ -77,6 +77,10 @@ scope:
    are accessible anywhere in the file.
 
 
+..
+
+   I should have an example of what a debugger is here, what it can do
+   in the most general sense.
 
 Debuggers for different languages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -197,6 +201,10 @@ You wish that you could:
 - Play with the variables in the function yourself, observing the
   results until you figure out the correct code.
 - Copy that code back into the file at the right place.
+
+.. epigraph
+   The difference here is that you don't have to keep re-running your
+   program.  
 
 Example:
 
@@ -378,7 +386,7 @@ Debugging a running program
 
       pdb filename.py
 
-..
+.. epigraph::
 
     (gdb: if your program has command line arguments, use ``gdb --args
     arg1 arg2 ...``)
@@ -558,7 +566,7 @@ Easy use of PDB from command line
 
 I wrote a module to invoke pdb automatically:
 
-- You normally run your program with 
+- You normally run your program with
 
   .. code:: console
 
