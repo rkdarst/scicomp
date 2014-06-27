@@ -1,0 +1,22 @@
+
+
+2014-06-24 CompNet group:
+- Raj: You should put the simpler examples first, something closer to
+  what people would actually use.  As it is, the earlier methods you
+  discuss are very abstract so a new person would be confused.
+
+
+- Faria: I have too much stuff, there are too many different ways of
+  doing things.  Could I remove most of them and have just the main
+  methods, and then more examples/interaction?
+
+- For next time:
+  - Make one way to do each thing.  Have just three tasks:
+    - %debug
+    - pdb from command line
+    - pdb.set_trace()
+  - Have a lot of the rest be examples.
+
+  - Have a table at the end summarizing the different options.  
+
+  - issues with multithreaded programs
