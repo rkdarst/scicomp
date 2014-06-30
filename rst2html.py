@@ -7,6 +7,7 @@ except:
 from docutils.core import publish_cmdline, default_description
 
 import pygments_rst
+import rst_extensions
 
 description = ('Generates (X)HTML documents from standalone reStructuredText '
                'sources.  ' + default_description)
