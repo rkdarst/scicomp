@@ -38,13 +38,11 @@ Test modules
 
 * Usage:
 
-   
+    .. console::
 
-    ::
-
-       nosetests
-       nosetests test_NAME.py
-       nosetests test_NAME.py:test1
+       $ nosetests
+       $ nosetests test_NAME.py
+       $ nosetests test_NAME.py:test1
 
   * First version: Run all tests in this directory
 
@@ -61,7 +59,7 @@ Test functions and classes
 
 * Test classes: Needs a little bit more structure (but not too much), but you can easily use other thinsg like:
 
-  * setup and teardown methods.  
+  * setup and teardown methods.
 
     * setup: something run before the test (e.g. create an object or create temporary files)
 
@@ -82,9 +80,9 @@ Assertions
 
   * If the condition is false, raise ``AssertionError`` and print some useful error message.
 
-  EXample:
+Example:
 
-::
+.. python::
 
    >>> assert_set_equal(set([1, 2, 3]), set([1, 2, 4]) )
 
@@ -97,7 +95,7 @@ Look at how it prints exactly what the difference is.  Maybe you don't even need
 
 * You can also use the ``assert`` keyword:
 
-  ::
+  .. python::
 
      assert func(5) == 1
 
@@ -110,7 +108,7 @@ See the list of ``assert*`` methods https://docs.python.org/2/library/unittest.h
 
 * Instead of ``assertSetEqual``, it will be called ``assert_set_equal`` in nose.tools.
 
-::
+.. python::
 
    nose.tools.assert_almost_equal
    nose.tools.assert_almost_equals
@@ -176,11 +174,11 @@ The ``ipython`` debugger is functionally equivalent to ``pdb``.
 
 If you want to invoke the debugger at one specific point, just use the ``raise`` keyword at that point:
 
-::
+.. python::
 
    raise
 
-::
+.. python::
 
    if n == 5:
        raise
@@ -199,9 +197,12 @@ Recommendations for making tests
 
 * You will be tempted to import the module and run it.  Don't do that.  Whatever you would do in the shell,
 
-  * Put it in a test instead - it's the same amount of work.
+  * Put it in a test instead - it's the same amount of work to
+    reproduce the problem.
 
-  * If there is an exception or ``AssertionError``, then use ``--pdb`` or ``--pdb-fail`` to 
+  * If there is an exception or ``AssertionError``, then use ``--pdb``
+    or ``--pdb-fail`` to drop to a Python shell at that point and
+    figure out what the problem is.
 
 * Have two windows open: one with the editor, and one to run ``nosetests`` over and over again.
 
@@ -289,7 +290,7 @@ Instructions:
 
 * Make a module ``test_001.py`` and write a test for this function.  Hint:
 
-  ::
+  .. python::
 
      from nose.tools import *
      from e001 import euler001

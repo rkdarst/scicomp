@@ -165,15 +165,16 @@ The simplest way to do unit tests is to use nose.
 
 Example:
 
-::
+.. python::
 
    from nose.tools import assert_true, assert_equal, assert_greater_equal, assert_less
 
    from pcd.support.growsf_gb import *
 
    def test_sole():
-       # For small graphs we can exactly specify what the outcome should be:                      
-       # alpha=0, delta=0                                                                         
+       # For small graphs we can exactly specify what the outcome should be:
+
+       # alpha=0, delta=0
        assert_isomorphic(sole(T=3, alpha=0, delta=0),
                          G({0:(1,2), 1:(0,2)}))
 
@@ -182,14 +183,12 @@ Example:
 
 http://docs.python.org/library/unittest.html https://nose.readthedocs.org/
 
-* Example bits: 
+.. * Example bits: 
 
 doctests
 ~~~~~~~~
 
 * Put tests in the docstring of functions.
-
-   
 
     ::
 
@@ -204,7 +203,7 @@ doctests
 
 Example:
 
-::
+.. python::
 
    def factorial(n):
        """Return the factorial of n, an exact integer >= 0.
@@ -220,6 +219,7 @@ Example:
        265252859812191058636308480000000L
        >>> factorial(30L)
        265252859812191058636308480000000L
+       """
 
 https://docs.python.org/2/library/doctest.html
 
@@ -234,7 +234,7 @@ Assertions
 
 * Recommendation: write assertions when making new functions.  Remove them later once the function works AND if speed is an issue.
 
-* Can be removed automatically for performance purposes 
+* Can be removed automatically for performance purposes.
 
   * ``python -o`` runs python without assertions,  ``gcc -DNDEBUG`` compiles without assertions.
 
@@ -242,19 +242,19 @@ Assertions
 
 Example usage:
 
-* I am making a growing model of a network.  
+* I am making a growing model of a network.
 
-* My calculations say the next edge should be added between a and b.  
+* My calculations say the next edge should be added between a and b.
 
-* Before calling g.add_edge(a, b), I ...
+* Before calling ``g.add_edge(a, b)``, I ...
 
-* ... write assert not g.has_edge(a, b).
+* ... write ``assert not g.has_edge(a, b)``.
 
 * If my calculations were wrong, I will know instead of it passing silently.
 
 Python syntax:
 
-::
+.. python::
 
    assert test_expression, message
        # test__expression - evaluated, if True then nothing happens, if false raise AssertionError
@@ -262,7 +262,7 @@ Python syntax:
 
 C syntax:
 
-::
+.. code:: c
 
    #include <assert.h>
 

@@ -20,21 +20,21 @@ Before you come
 
 Set up your git config file:
 
-::
+.. console::
 
-   git config --global user.name "Your Name"
-   git config --global user.email your.name@aalto.fi
-   git config --global alias.log1 "log --oneline --graph --decorate"
-   git config --global core.editor nano            # You can set whatever editor you would like.
+   $ git config --global user.name "Your Name"
+   $ git config --global user.email your.name@aalto.fi
+   $ git config --global alias.log1 "log --oneline --graph --decorate"
+   $ git config --global core.editor nano            # You can set whatever editor you would like.
 
 Here are some personal aliases you might like:
 
-::
+.. console::
 
-   git config --global alias.cm "commit -v"
-   git config --global alias.di "diff"
-   git config --global alias.st "status"
-   git config --global alias.diw "diff --word-diff=color"
+   $ git config --global alias.cm "commit -v"
+   $ git config --global alias.di "diff"
+   $ git config --global alias.st "status"
+   $ git config --global alias.diw "diff --word-diff=color"
 
 The Presentation
 ================
@@ -158,25 +158,25 @@ Cloning (getting) a repository
 
 * Getting another repository is called **cloning** it. 
 
-  ::
+  .. console::
 
-     git clone https://git.becs.aalto.fi/complex-networks/tutorial.git
+     $ git clone https://git.becs.aalto.fi/complex-networks/tutorial.git
 
 * This makes a new repository linked to the old one
 
 * Let's look at the remotes:
 
-  ::
+  .. console::
 
-     git remote -v
+    $ git remote -v
 
-    *origin* is the conventional name for the upstream.
+  *origin* is the conventional name for the upstream.
 
 * Let's look at your *branches*
 
-  ::
+  .. console::
 
-     git branch -avv
+     $ git branch -avv
 
 * A branch is one line of development.  We will work on your branch ``master`` and then send the changes to the branch ``origin/master``
 
@@ -187,21 +187,21 @@ Commands for sending/receiving code
 
 * Get changes from remote repository but don't update local copies with them
 
-  ::
+  .. console::
 
-     git fetch
+     $ git fetch
 
 * Combine your code in with upstream code (simple changes): 
 
-  ::
+  .. console::
 
-     git rebase
+     $ git rebase
 
 * Send local changes to upstream
 
-  ::
+  .. console::
 
-     git push
+     $ git push
 
   Before you can send things upstream, you need to have all of upstream changes locally.  So, every time before you ``push``, run ``fetch`` and ``rebase``.
 
@@ -212,32 +212,32 @@ Typical workflow
 
 * Before you make any chances, make sure you are up to date:
 
-  ::
+  .. console::
 
-     git fetch
-     git rebase
+     $ git fetch
+     $ git rebase
 
 * You do some work, committing it as you go along.
 
-  ::
+  .. console::
 
-     git commit
-     git commit
+     $ git commit
+     $ git commit
 
 * Before you can push code, you want to make sure that you have the latest copy of upstream.  Otherwise, you can't push!
 
   * It never hurts to do these commands some extra times.
 
-  ::
+  .. console::
 
-     git fetch
-     git rebase
+     $ git fetch
+     $ git rebase
 
 * Send the code back
 
-  ::
+  .. console::
 
-     git push
+     $ git push
 
 If someone else beats you to the ``push`` after your ``git fetch``, then it'll fail again.  In this tutorial, with everyone doing this at the same time, this may be a problem.  You have to be fast!
 
@@ -275,19 +275,19 @@ How to resolve conflicts
 
 * ``git diff`` shows the conflicting lines
 
-  ::
+  .. console::
 
-     git status          # show the files that are unresolved and resolved.
-     git diff            # show what is unresolved
+     $ git status          # show the files that are unresolved and resolved.
+     $ git diff            # show what is unresolved
 
 * You need to resolve the conflicts so that it is consistent.  Look and edit it.
 
 * Run the command it says to continue.
 
-  ::
+  .. console::
 
-     git add FILE
-     git rebase --continue
+     $ git add FILE
+     $ git rebase --continue
 
   **Don't do** ``git commit`` **to finish things, use** ``git rebase --continue``
 
@@ -321,10 +321,10 @@ Optional: Merge vs rebase
 
 * To use merge, simply do ``merge`` instead of ``rebase``
 
-  ::
+  .. console::
 
-     git fetch
-     git merge
+     $ git fetch
+     $ git merge
 
 * If a rebase gets too complicated, you can ``git rebase --abort`` and ``git merge`` instead.  You'll still have to resolve the conflict but it will save more history and maybe be easier.
 
@@ -333,7 +333,7 @@ Optional: Merge vs rebase
 Optional: stashing uncommitted changes
 --------------------------------------
 
-* Lets say you 
+* Lets say you
 
   * made some local changes, but are not ready to commit
 
@@ -347,9 +347,9 @@ Optional: stashing uncommitted changes
 
   * Stash the code:
 
-    ::
+    .. console::
 
-       git stash
+       $ git stash
 
   * See current changes: ``git diff```
 
@@ -357,9 +357,9 @@ Optional: stashing uncommitted changes
 
   * *Reapply* your stashed changes:
 
-    ::
+    .. console::
 
-       git stash pop
+       $ git stash pop
 
   * Look at current status: ``git diff``
 
@@ -385,7 +385,7 @@ This section will have follow-up information later.
 
 To discuss (eventually):
 
-* What permissions and ownerships should we have on the 
+* What permissions and ownerships should we have on the repositories?
 
 * How do we want to manage our own shared stuff?
 
@@ -411,7 +411,7 @@ Interactive project #1: basic usage
 
 * send the file upstream. (git fetch, git rebase, git push)
 
-* Verify that you see the file in gitlab. 
+* Verify that you see the file in gitlab.
 
 * Fetch everyone else's file (git fetch, git rebase)
 

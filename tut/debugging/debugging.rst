@@ -145,7 +145,7 @@ Prerequisites
     variable names, or anything human-understandable.
   - Compile using the ``-g`` option:
 
-    .. code:: shell
+    .. code:: console
 
       $ gcc -g filename.c
 
