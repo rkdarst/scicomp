@@ -1,8 +1,10 @@
-#format rst
+Introduction to software testing
+********************************
+
 
 This talk is designed to discuss the concepts of software testing.  In it, I will outline the concept of software testing and summarize the current real-world best practices and procedures.  We will then discuss how to, and the difficulties of, applying this to scientific software, but we won't actually discuss how to do it this week: next time will be a tutorial for that, based on this week's feedback.
 
-CategoryTutorial_
+
 
 The presentation
 ================

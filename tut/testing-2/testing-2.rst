@@ -1,8 +1,10 @@
-#format rst
+Software testing with Python and nose
+*************************************
+
 
 Git repository for the talk:  https://git.becs.aalto.fi/complex-networks/tutorial
 
-CategoryTutorial_
+
 
 The presentation
 ================
@@ -231,7 +233,7 @@ Prime number testing
 Fibonacci numbers
 ~~~~~~~~~~~~~~~~~
 
-* ``fib.py`` contains two functions to calculate the ``n``th Fibonacci number
+* ``fib.py`` contains two functions to calculate the ``n``\ th Fibonacci number
 
 * In ``test_fib.py`` you see a class-based method of testing both the functions.
 
@@ -277,9 +279,9 @@ Euler 001: sum of multiples of 3 and 5
 
 Problem: https://projecteuler.net/problem=1
 
-**If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+**If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23**.
 
-Find the sum of all the multiples of 3 or 5 below 1000.**
+**Find the sum of all the multiples of 3 or 5 below 1000.**
 
 Instructions:
 
@@ -301,7 +303,4 @@ Further topics
 Statistical tests
 ~~~~~~~~~~~~~~~~~
 
-.. ############################################################################
-
-.. _CategoryTutorial: ../CategoryTutorial
 

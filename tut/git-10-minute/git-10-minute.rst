@@ -1,4 +1,6 @@
-#format rst
+10 minute git
+*************
+
 
 This is a 10 minute introduction to git.  It has a very specific goal: to teach one enough to use git to store the revisions to their own projects.  It does not cover sharing repositories, using someone else's repository, branching, or any number of advanced features.  Furthermore, this is more of an introduction to version control rather than something specific to git.  It emphasizes operations that can be done with any version control system.
 
@@ -17,7 +19,7 @@ After completing this tutorial, you should be able to:
 
 * You will be able to use that history to see what changed on any given day, or how your project looked at any given point in time.
 
-CategoryTutorial_
+
 
 The tutorial
 ============
@@ -75,9 +77,9 @@ Terminology
 
 * **Repository**: one directory
 
-* **Revision** or **commit**(noun): One version of the files at one point in time.
+* **Revision** or **commit** (noun): One version of the files at one point in time.
 
-* **Commit**(verb): The recording of one new point in history
+* **Commit** (verb): The recording of one new point in history
 
 * **Patch** or **diff** or **hunk**: changes between one version and another.
 

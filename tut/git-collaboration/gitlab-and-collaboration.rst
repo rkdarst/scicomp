@@ -1,4 +1,5 @@
-#format rst
+Gitlab and collaboration
+************************
 
 This presentation talks about simple git collaboration.  First, it goes through the user interface of Gitlab, which we use at BECS to host our master repositories.  We then talk a minimal process to clone (get a copy of) a repository there, edit it, and push changes back.
 
@@ -461,5 +462,5 @@ Interactive project #4: partial commit and stashing
 
 * Now ``git stash pop``
 
-CategoryTutorial_
+
 
