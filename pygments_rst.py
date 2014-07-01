@@ -72,8 +72,10 @@ class Pygments(Directive):
     has_content = True
     default_lexer = 'python'
 
-    def get_lexer(self):
-        if len(self.arguments) > 1:
+    def get_lexer(self, lexername=None):
+        if lexername:
+            lexer_name = lexername
+        elif len(self.arguments) > 1:
             lexer_name = self.arguments[0]
         else:
             lexer_name = self.default_lexer
@@ -99,11 +101,19 @@ class Pygments(Directive):
 class PygmentsInclude(Pygments):
     has_content = False
     required_arguments = 1
+    optional_arguments = 1
+    default_lexer = 'python'
     def run(self):
-        lexer = self.get_lexer()
+        if len(self.arguments) == 1:
+            lexer = None
+            fname = self.arguments[0]
+        else:
+            lexer = self.arguments[0]
+            fname = self.arguments[1]
+
+        lexer = self.get_lexer(lexer)
         formatter = self.get_formatter()
 
-        fname = self.arguments[0]
         data = os.path.join(os.path.dirname(self.src), fname)
         data = open(data).read()
 
@@ -118,6 +128,9 @@ directives.register_directive('code', Pygments)
 
 class Python(Pygments):
     default_lexer = 'python'
-directives.register_directive('python', Pygments)
+class Console(Pygments):
+    default_lexer = 'console'
+directives.register_directive('python', Python)
+directives.register_directive('console', Console)
 
 directives.register_directive('pyinc', PygmentsInclude)
