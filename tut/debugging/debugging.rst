@@ -643,31 +643,71 @@ To invoke ipython debugger at a certain place, do
 
 
 
-Things to watch out for
-~~~~~~~~~~~~~~~~~~~~~~~
+Things to watch out for: lines not in functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Current versions of ``pdb`` and ``ipdb`` have problems with module
+  lines that are **not** in any function.
+
+- If the exception is on a line that is **not** in any function, it
+  will show the exception in the first line of the file (even though
+  it probably isn't there.
+
+- As a workaround, run using one of these methods:
+
+.. code:: console
+
+   $ ipython --pdb <filename>.py
+   $ python -m verkko.misc.pdbtb <filename>.py
+
+Example:
+
+.. pyinc:: exception-not-in-function.py
+
+.. code:: pycon
+
+    $ pdb exception-not-in-function.py
+    (Pdb) cont
+    1
+    Traceback (most recent call last):
+      ...
+      File "exception-not-in-function.py", line 1, in <module>
+        print 1
+    Exception: The bug is on this line.
+    Uncaught exception. Entering post mortem debugging
+    Running 'cont' or 'step' will restart the program
+    > .../exception-not-in-function.py(1)<module>()
+    -> print 1
+
+Notice that lines 6-7 and 11-12 in the output say that the exception is on
+line 1 in the code, ``print 1``, **not** line 2.
+
+
+Things to watch out for: nested contexts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Sometimes, scopes can get mixed up and you can get to a point where
-  a certain frame can't be debugged.  For example, generators can have
-  problems:
+  a certain frame can't be debugged.  
+
+- This  mainly happens with generators
+
+Example:
 
   .. python::
 
      a = [1, 2, 3]
      print (x+b for x in a)``
 
-  Inside this generator (where the ``NameError`` is raised), you can't
-  print ``a``.  The scope gets messed up inside the generator and it
-  doesn't know how to find the ``a`` variable.  If you type ``up`` in
-  the debugger one or two times, it will work.
+Inside this generator (where the ``NameError`` is raised), you can't
+print ``a``.  The scope gets messed up inside the generator and it
+doesn't know how to find the ``a`` variable.  If you type ``up`` in
+the debugger one or two times, it will work.
 
+.. epigraph::
 
-- ``pdb`` seems to have problems with lines in files that are *not*
-  part of any function.  When you are running a file as a script and
-  aren't in any function, it always looks like it is only on the first
-  line of the file..
-
-
-
+   The technical explanation is that when python does the ``exec`` of
+   your input in the debugger, it doesn't properly use the *enclosing*
+   scope.
 
 Conclusions
 ~~~~~~~~~~~
