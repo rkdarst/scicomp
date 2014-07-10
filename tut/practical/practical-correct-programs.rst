@@ -6,6 +6,8 @@ Practical ways to write correct code
 We've covered testing.  We've covered version control.  But still
 
 
+
+
 Life-critical programming
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -15,6 +17,8 @@ rover?  We would completely fail at that.
 There are techniques that professionals use in order to circumvent
 human error.
 
+I can't claim to know these techniques, but I can talk about what I
+do.
 
 
 Types of bugs
@@ -70,6 +74,9 @@ Write as clearly as possible
 
 Even if something is more verbose or slower, clearer is better.
 
+Beautiful is easy to read and understand, easy to understand is more
+likely to be correct, and more likely to be correct is more productive.
+
 Think as if you want someone else to be able to read it and use it.
 
 
@@ -77,7 +84,7 @@ Think as if you want someone else to be able to read it and use it.
 Program incrementally
 ~~~~~~~~~~~~~~~~~~~~~
 
-- Use the debugger / interact to test each step of the way
+- Use the debugger / interact to test each step of the way.
 
 
 
@@ -90,8 +97,6 @@ Once I saw something about complete rewrites being bad:
   there for a reason, to solve some bug or problem.
 
 - Re-writing means that all of these have to be figured out again.
-
-
 
 
 
