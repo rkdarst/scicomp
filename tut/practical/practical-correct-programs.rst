@@ -3,7 +3,18 @@
 Practical ways to write correct code
 ====================================
 
-We've covered testing.  We've covered version control.  But still
+We've covered testing.  We've covered version control.  But have we
+put it all together yet?
+
+I (and I think most people) are surprised by the number of trivial
+bugs we find in our code.  This discussion is based off of techniques
+I use to minimize bugs.  Most of them are summaries of things
+discussed in other talks.  Since I am not an expert here, I hope that
+others will contribute ideas to this talk.
+
+
+See also: http://arxiv.org/abs/1210.0530, "Best Practices for
+Scientific Computing", Greg Wilson et. al.
 
 
 
@@ -129,6 +140,19 @@ Use assertions
 - Raise exceptions for input domain which is not handled yet.
 
 .. Good use of assertions
+
+
+
+Reproducible
+~~~~~~~~~~~~~
+
+One command line will repeat my entire analysis and produce the final
+output, even if all intermediate results are done.
+
+- Code is auditable: I can (and while expanding it, do) always look
+  and check old things.
+
+- If there is a bug, fixing and re-running is fast.
 
 
 References
