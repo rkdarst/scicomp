@@ -1,3 +1,6 @@
+Profiling, algorithms, and optimization
+=======================================
+
 
 
 
@@ -164,17 +167,44 @@ Python profiles with ``gprof2dot.py``
 - Source (single script file) and help:
   https://code.google.com/p/jrfonseca/wiki/Gprof2Dot
 
+Example output:
+
+.. image:: profile-growsf-zoom.png
+   :alt: Example of gprof2dot profile.  Click for full image.
+   :target: profile-growsf.png
+   :height: 5cm
 
 
-Using pstats directly
-~~~~~~~~~~~~~~~~~~~~~
+
+Things to examine in the profile
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- What functions take most time?
+
+- Who calls the functions that take most time?  Often, the actual
+  most important function is several steps up.
+
+- C-implemented functions or methods do not appear.
+
+- You generally want to find things that are using lots of time but
+  *shouldn't* be major operations.
+
+- Each time you improve some things, re-generate the profile to see
+  new hotspots.
+
+- Threads or multi-processes take more work (they won't appear in
+  traces by default)!
+
+
+
+Advanced: using pstats directly
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can examine the raw ``profile.out`` data using the command line:
 
 .. code:: console::
 
    $ python -m pstats profile
-
 
 Available commands:
 
@@ -194,13 +224,26 @@ callers [funcname]
 
 
 Reference: https://docs.python.org/2/library/profile.html
-Better tutorial: 
+Better tutorial: ???
 
 
-Extensions to profiling
-~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Other programs and extensions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- pycallgraph (produces .png directly from running program)
 
 - Line-based profiles
+
+- ``runsnakerun``: simple area-based view.
+
+- ``oprofile`` - system-wide statistical profiler.
+
+- Memory profiling in Python: Meliae: https://launchpad.net/meliae
+
+
+
 
 
 
@@ -315,7 +358,7 @@ What do we want to talk about next?
 
 
 Examples
-========
+~~~~~~~~
 
 
 Introduction to computational complexity
