@@ -31,9 +31,21 @@ appears every 2-3 weeks, or whenever I can present them.
    testing-2/testing-2                  Software testing with Python
    debugging/debugging                  Debugging
 
+The following tutorials are "under development": they have some
+content, but have not been presented yet and thus are not fully
+structurally sound:
 
-Similar resources:
+.. tut-index::
+
+   tut/practical/practical-correct-programs  Practical suggestions for writing good programs.  Putting all the other tutorials together.
+   tut/profiling/profiling              Profiling and optimizing data structures
+
+
+Similar or other resources:
 
  - http://software-carpentry.org/lessons.html  Software Carpentry is
    an organization dedicated to teaching these same skills to
    scientists.
+ - http://rkd.zgib.net/wiki/ScientificProgramming  My wiki page which
+   I use to collect more resources.
+ - https://github.com/rkdarst/scicomp/  Github project.
