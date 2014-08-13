@@ -1,9 +1,6 @@
-
-
 from nose.tools import *
 
 from prime import *
-
 
 def test_is_prime():
     assert_true(is_prime(2))
@@ -13,4 +10,3 @@ def test_is_prime():
     assert_false(is_prime(9))
     assert_false(is_prime(10))
     assert_true(is_prime(13))
-

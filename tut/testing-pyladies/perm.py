@@ -21,5 +21,5 @@ def perm(it, r=None):
         first = it[i]
         rest = it[:i] + it[i+1:]
         for order in perm(rest, r-1):
-            print(' '*r, first, order)
+            #print(' '*r, first, order)
             yield (first,) + order

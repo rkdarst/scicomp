@@ -1,4 +1,4 @@
-from nose.tools import *
+simport unittest
 
 from count import *
 
@@ -9,3 +9,6 @@ def test_count():
     assert_dict_equal(count([]), {})
 
     # [1] -> {1: 1}
+
+if __name__ == '__main__':
+    unittest.main()
