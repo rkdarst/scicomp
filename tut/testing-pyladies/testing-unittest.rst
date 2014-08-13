@@ -105,7 +105,7 @@ Python ``unittest`` module
 * Basic unit testing framework included in the standard library (based
   on JUnit/xUnit).
 
-* It is (pathologically?) object-oriented and only basic interface to
+* It is (perhaps too much?) object-oriented and only basic interface to
   running tests.
 
 * It is a base that other frameworks build on, but unless you need
@@ -332,70 +332,15 @@ Testing and debugging
 
 
 
-Invoking the python debugger (not with ``unittest``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Testing and debugging
+~~~~~~~~~~~~~~~~~~~~~
 
-If a test fails, you can automatically invoke the debugger:
+* When using other testing packages, you can give options like
+  ``--pdb`` to cause the Python debugger to start when there are
+  exceptions (or failures).
 
-* ``nosetests --pdb``  starts pdb when there is an exception or
-  assertion failure.
-
-  .. epigraph::
-
-     Note: for older versions, you must use ``-pdb`` or ``--pdb-failures``.
-
-Useful pdb commands:
-
-* ``l`` or ``list`` - list lines of code around the point
-
-* ``bt`` or ``backtrace`` - list full call stack.
-
-* ``u`` or ``up`` and ``d`` or ``down`` - Go up or down the call stack
-
-* ``p`` or ``print`` - print any variable or expression
-
-* Any other input: evaluate that line at that point (i.e. evaluate an
-  expression).
-
-Full list of commands: https://docs.python.org/2/library/pdb.html#debugger-commands
-
-
-
-Invoking the python debugger (``unittest``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* There is not an automatic way to do this with ``unittest``.  This is
-  not an easy way to do this included in ``unittest``.
-
-* You ca monkey-patch ``unittest`` to make it work, by adding this
-  line before unittest.main():
-
-.. python::
-
-    import unittest; unittest.TestCase.run = lambda self,*args,**kw: unittest.TestCase.debug(self)
-
-* Then, run the test under ``pdb``:
-
-  .. console::
-
-     $ pdb test_NAME.py
-
-
-
-Example: Debugging (prime numbers) (not with ``unittest``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* `prime.py <prime.py>`_ contains a function for testing for primality of numbers.
-
-* Run `test_prime_ut.py <test_prime_ut.py>`_ in nosetests.
-
-* When it fails, add the magic line from the last slide and run with
-  ``pdb`` instead of ``python`` to invoke the debugger and examine the
-  situation.
-
-* Try to fix the line in the debugger so that it works.
-
-* Copy your fix to the module, then repeat.
+* This is not easy with ``unittest`` without weird hacks, so this talk
+  excludes it (slides moved to the end).
 
 
 
@@ -519,5 +464,71 @@ Extensions we haven't covered
 * Doctests: tests in docstrings automatically run.  Serve as
   documentation.
 
+
+
+Extra: Invoking the python debugger (not with ``unittest``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If a test fails, you can automatically invoke the debugger:
+
+* ``nosetests --pdb``  starts pdb when there is an exception or
+  assertion failure.
+
+  .. epigraph::
+
+     Note: for older versions, you must use ``-pdb`` or ``--pdb-failures``.
+
+Useful pdb commands:
+
+* ``l`` or ``list`` - list lines of code around the point
+
+* ``bt`` or ``backtrace`` - list full call stack.
+
+* ``u`` or ``up`` and ``d`` or ``down`` - Go up or down the call stack
+
+* ``p`` or ``print`` - print any variable or expression
+
+* Any other input: evaluate that line at that point (i.e. evaluate an
+  expression).
+
+Full list of commands: https://docs.python.org/2/library/pdb.html#debugger-commands
+
+
+
+Invoking the python debugger (``unittest``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* There is not an automatic way to do this with ``unittest``.  This is
+  not an easy way to do this included in ``unittest``.
+
+* You ca monkey-patch ``unittest`` to make it work, by adding this
+  line before unittest.main():
+
+.. python::
+
+    import unittest; unittest.TestCase.run = lambda self,*args,**kw: unittest.TestCase.debug(self)
+
+* Then, run the test under ``pdb``:
+
+  .. console::
+
+     $ pdb test_NAME.py
+
+
+
+Example: Debugging (prime numbers) (not with ``unittest``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* `prime.py <prime.py>`_ contains a function for testing for primality of numbers.
+
+* Run `test_prime_ut.py <test_prime_ut.py>`_ in nosetests.
+
+* When it fails, add the magic line from the last slide and run with
+  ``pdb`` instead of ``python`` to invoke the debugger and examine the
+  situation.
+
+* Try to fix the line in the debugger so that it works.
+
+* Copy your fix to the module, then repeat.
 
 
