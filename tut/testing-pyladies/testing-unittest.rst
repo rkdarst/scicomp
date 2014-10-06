@@ -467,7 +467,7 @@ Extensions we haven't covered
 
 
 Extra: Invoking the python debugger (not with ``unittest``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If a test fails, you can automatically invoke the debugger:
 
@@ -498,17 +498,20 @@ Full list of commands: https://docs.python.org/2/library/pdb.html#debugger-comma
 Invoking the python debugger (``unittest``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* There is not an automatic way to do this with ``unittest``.  This is
-  not an easy way to do this included in ``unittest``.
+* There is not an automatic way to do this with ``unittest``.
 
-* You ca monkey-patch ``unittest`` to make it work, by adding this
-  line before unittest.main():
+* Option 1) add ``import pdb ; pdb.set_trace()`` in the function
+  before the error you want to debug.
 
-.. python::
+* Option 2) To emulate ``--pdb`` of nose, you can monkey-patch
+  ``unittest`` to make it work, by adding this line before
+  unittest.main():
+
+  .. python::
 
     import unittest; unittest.TestCase.run = lambda self,*args,**kw: unittest.TestCase.debug(self)
 
-* Then, run the test under ``pdb``:
+  Then, run the test under ``pdb``:
 
   .. console::
 
