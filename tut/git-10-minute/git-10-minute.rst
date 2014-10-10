@@ -1,6 +1,8 @@
 10 minute git
 *************
 
+Introduction
+============
 
 This is a 10 minute introduction to git.  It has a very specific goal: to teach one enough to use git to store the revisions to their own projects.  It does not cover sharing repositories, using someone else's repository, branching, or any number of advanced features.  Furthermore, this is more of an introduction to version control rather than something specific to git.  It emphasizes operations that can be done with any version control system.
 
@@ -20,9 +22,8 @@ After completing this tutorial, you should be able to:
 * You will be able to use that history to see what changed on any given day, or how your project looked at any given point in time.
 
 
-
-The tutorial
-============
+Before beginning
+----------------
 
 Before starting, run these commands
 
@@ -33,6 +34,35 @@ Before starting, run these commands
    $ git config --global color.ui auto
 
 These set some standard global options for your user - your name, and making output colorful.
+
+
+
+The tutorial
+============
+
+Why version control?
+--------------------
+
+Have you ever:
+
+* Made a bunch of changes, and suddenly nothing works, and you have no
+  idea what you did
+
+* Found a bug, and wished you knew exactly when it occurred so you
+  know what results are wrong?
+
+* Wished you could collaborate easier with people?
+
+Then you need version control!
+
+.. epigraph::
+
+    Basically, version control systems (VCSs) stores history and
+    provides tools to manage and examine that.  It makes all of these
+    things things easier, and solves many, many problems.  It is
+    nothing exotic: it is a standard tool of software development,
+    that everyone needs.  This talk introduces these concepts to
+    scientists, who may not know about it.
 
 What is history?
 ----------------
