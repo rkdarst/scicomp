@@ -37,8 +37,8 @@ structurally sound:
 
 .. tut-index::
 
-   tut/practical/practical-correct-programs  Practical suggestions for writing good programs.  Putting all the other tutorials together.
-   tut/profiling/profiling              Profiling and optimizing data structures
+   practical/practical-correct-programs  Practical suggestions for writing good programs.  Putting all the other tutorials together.
+   profiling/profiling              Profiling and optimizing data structures
 
 
 Similar or other resources:
