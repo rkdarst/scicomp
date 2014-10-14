@@ -44,7 +44,7 @@ Profiling and optimizing
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 - **Profiling**: A form of dynamic program analysis that measures time
-    (or space) usage of a program.
+  (or space) usage of a program.
 
 - Faster is better.  But what part is slowest?
   - Usually writing, debugging, collaborating, maintaining.
@@ -52,9 +52,9 @@ Profiling and optimizing
 - 10% of code is 90% of run time.
   - You only want to work on that 10%, but what 10% is it?
 
-Famous saying:
+There is a famous saying:
 
-  **Premature optimization is the root of all evil**
+**Premature optimization is the root of all evil**
 
 .. epigraph::
 
@@ -134,7 +134,7 @@ We run the program under the ``cProfile`` module.
 - ``python -m cProfile``: Run library module ``cProfile`` as a script.
 
 - ``-o profile.out``: Tells ``cProfile`` to write the profile to the
-    file ``profile.out``.
+  file ``profile.out``.
 
 - ``SCRIPT.py arg1 arg2 ...``: Your normal ``python`` interpreter arguments.
 
@@ -161,6 +161,7 @@ Visualizing the profile information (gprof2dot)
   different ways.  You then use graphviz (``dot``) to make a picture.
 
 - This command runs everything and displays the output.
+
 
   .. code:: console
 
@@ -300,8 +301,12 @@ callers [funcname]
     spent in calls from each function.
 
 
-Reference: https://docs.python.org/2/library/profile.html
-Better tutorial: ???
+.. epigraph::
+
+  References:
+
+  - https://docs.python.org/2/library/profile.html
+  - Better tutorial: ???
 
 
 
@@ -310,7 +315,7 @@ Better tutorial: ???
 Profile C code (and other languages)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Any decent language will have profiling facilities.
+Any decent language will have profiling facilities.  For C:
 
 - Compile with ``gcc -pg``
 
@@ -444,8 +449,8 @@ another file and visualize with ``gprof2dot.py``.
 How to use your profile: Actually optimizing your code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- This talk does *not* talk about optimizing, the process of actually
-  making these things go faster.
+- This tutorial does *not* talk about optimizing, the process of actually
+  making these things go faster (that's a future tutorial!).
 
 - Rough suggestions:
 
