@@ -7,9 +7,12 @@ blockquote.epigraph {
     border: 1px solid;
     padding: .5em;
 }
+blockquote.epigraph p {
+    margin: .5em 0em .5em 0em;
+}
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs. */
-//div.compound .compound-first, div.compound .compound-middle {
+/* //div.compound .compound-first, div.compound .compound-middle {
 //  margin-bottom: 0.5em }
 //
 //div.compound .compound-last, div.compound .compound-middle {
@@ -17,7 +20,7 @@ blockquote.epigraph {
 /* */
 ul li p {
   /* Override more specific margin styles with "! important". */
-    //margin-top: -1cm ! important ;
+  /* margin-top: -1cm ! important ; */
   margin-top: 0em;
   margin-bottom: 0em;
 }
