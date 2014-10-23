@@ -1,5 +1,5 @@
-Profiling, algorithms, and optimization
-=======================================
+Time-profiling code
+===================
 
 
 Scientists "know" that faster programs is better.  But what does this
@@ -47,9 +47,11 @@ Profiling and optimizing
   (or space) usage of a program.
 
 - Faster is better.  But what part is slowest?
+
   - Usually writing, debugging, collaborating, maintaining.
 
 - 10% of code is 90% of run time.
+
   - You only want to work on that 10%, but what 10% is it?
 
 There is a famous saying:
@@ -147,6 +149,14 @@ In the first step, we run the program using the ``cProfile`` module.
 This just stores up the profile information, and we will examine it in
 the next step.
 
+Change this:
+
+.. python::
+
+   $ python SCRIPT.py arg1 arg2 ....
+
+To this:
+
 .. python::
 
    $ python -m cProfile -o profile.out  SCRIPT.py arg1 arg2 ....
@@ -199,7 +209,7 @@ Visualizing the profile information (gprof2dot)
 
   .. code:: console
 
-     $ python gprof2dot.py -f profile.out | dot -Tpng | display
+     $ python gprof2dot.py -f pstats profile.out | dot -Tpng | display
 
   This creates and displays the PNG all in one go.
 
@@ -340,7 +350,7 @@ without making a picture.
 
 .. code:: console::
 
-   $ python -m pstats profile
+   $ python -m pstats profile.out
 
    % strip           # make output names shorter
    % sort time       # Sort by time
@@ -462,7 +472,8 @@ Any decent language will have profiling facilities.  For C:
   - You will then find a file ``gmon.out`` with the profiling data.
 
 - View it with ``gprof``: ``gprof a.out gmon.out``.  The interface is
-  like the Python command-line profiling.
+  like the Python command-line profiling.  You can also use
+  ``gprof2dot`` in the same way as Python, without ``-f pstats``.
 
 .. epigraph::
 
@@ -656,6 +667,9 @@ Resources
     instructions for other languages)
 
   - http://www.vrplumber.com/programming/runsnakerun/
+
+  - Python line profiler https://pypi.python.org/pypi/line_profiler/
+    (`source <https://github.com/rkern/line_profiler>`_)
 
 - Optimization of Python
 

@@ -30,6 +30,7 @@ appears every 2-3 weeks, or whenever I can present them.
    testing/testing                      Introduction to software testing
    testing-2/testing-2                  Software testing with Python
    debugging/debugging                  Debugging
+   profiling/profiling                  Profiling
 
 The following tutorials are "under development": they have some
 content, but have not been presented yet and thus are not fully
@@ -38,7 +39,6 @@ structurally sound:
 .. tut-index::
 
    practical/practical-correct-programs  Practical suggestions for writing good programs.  Putting all the other tutorials together.
-   profiling/profiling              Profiling and optimizing data structures
 
 
 Similar or other resources:

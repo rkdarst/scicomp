@@ -1,0 +1,22 @@
+CPU: CPU with timer interrupt, speed 0 MHz (estimated)
+Profiling through timer interrupt
+samples  %        image name               symbol name
+2709     63.8614  _cmodels.so              energy_cmty_n_sparse
+472      11.1268  _cmodels.so              isInCmty
+457      10.7732  _cmodels.so              greedy_sparse
+182       4.2904  _cmodels.so              energy_cmty_n
+105       2.4752  _cmodels.so              F1_one
+101       2.3810  _cmodels.so              energy_cmty_cmty_sparse
+83        1.9566  _cmodels.so              cmtyIntersect
+79        1.8623  _cmodels.so              combine_sparse
+18        0.4243  _cmodels.so              remap
+10        0.2357  _cmodels.so              cmtyGetContents
+7         0.1650  _cmodels.so              find_empty_cmty
+5         0.1179  _cmodels.so              cmtyListAddOverlap
+4         0.0943  _cmodels.so              mutual_information
+3         0.0707  _cmodels.so              SetClear
+3         0.0707  _cmodels.so              cmtyListInit
+1         0.0236  _cmodels.so              F1
+1         0.0236  _cmodels.so              energy
+1         0.0236  _cmodels.so              hashClear
+1         0.0236  _cmodels.so              q
