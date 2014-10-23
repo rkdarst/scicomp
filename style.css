@@ -31,10 +31,6 @@ li {
 li li {
     margin-top: .2em;
 }
-pre {
-  margin-top: 0em;
-  margin-bottom: 0em;
-}
 ul pre {
   margin-top: .5em;
   margin-bottom: .5em;
@@ -42,5 +38,10 @@ ul pre {
 tt.literal, pre {
     background-color: #ecf0f3;
     font-family: monospace, sans-serif;
-    font-size: 80.5%;
+    font-size: 90.5%;
+}
+pre {
+  margin-top: 0em;
+  margin-bottom: 0em;
+  font-size: 100.0%;
 }

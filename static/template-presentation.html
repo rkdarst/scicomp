@@ -1,0 +1,59 @@
+%(head_prefix)s
+%(head)s
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script>
+// Add goTo method to elements
+// http://stackoverflow.com/questions/4801655/how-to-go-to-a-specific-element-on-page
+(function($) {
+    $.fn.goTo = function() {
+        $('html, body').animate({
+            scrollTop: $(this).offset().top //+ 'px'
+        }, 'fast');
+        return this; // for chaining...
+    }
+})(jQuery);
+
+
+var position = -1;
+
+document.addEventListener('keydown', function (event) {
+
+    switch(event.which) {
+            case 37: // left
+	    	 position -= 1;
+	    	 break;
+
+            case 38: // up
+
+            case 39: // right
+	    	 position += 1;
+	    	 break;
+
+            case 40: // down
+
+	    default:
+	        return; // exit this handler for other keys
+        }
+    //alert(position);
+
+    //var els = document.getElementsByClassName("section");
+    var els = $(".section");
+
+    var els_len = els.length;
+    position = ((position%%els_len)+els_len) %% els_len;
+
+    $(els[position]).goTo();
+
+}, true)
+
+
+</script>
+
+%(stylesheet)s
+%(body_prefix)s
+%(body_pre_docinfo)s
+%(docinfo)s
+%(body)s
+%(body_suffix)s

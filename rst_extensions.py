@@ -41,9 +41,9 @@ class TutorialIndex(Directive):
 
             # Make the sub-list
             l2 = nodes.bullet_list('ul-name')
-            for ext, title in [('.html', 'Main text'),
-                               ('-big.html', 'Big text (for presentation)'),
-                               ('-s5.html', 'Slide Show'),
+            for ext, title in [('.html', 'Normal text'),
+                               ('-big.html', 'Presentation mode'),
+                               #('-s5.html', 'Slide Show'),
                                ]:
                 line_text = '`%s <%s%s>`__'%(title.strip(), path, ext)
                 #print line_text
