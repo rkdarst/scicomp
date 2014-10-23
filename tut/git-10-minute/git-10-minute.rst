@@ -4,11 +4,32 @@
 Introduction
 ============
 
-This is a 10 minute introduction to git.  It has a very specific goal: to teach one enough to use git to store the revisions to their own projects.  It does not cover sharing repositories, using someone else's repository, branching, or any number of advanced features.  Furthermore, this is more of an introduction to version control rather than something specific to git.  It emphasizes operations that can be done with any version control system.
+Have you ever:
 
-This is designed to be a part of an oral presentation, thus does not necessarily stand on its own.  It should serve as notes for after that presentation for further research and reading.  If you are reading this on your own, you will have to do more reading to understand things here.
+* Made a bunch of changes, and suddenly nothing works, and you have no
+  idea what you did
 
-Keep in mind: I can't teach you git, but I can give you ideas and your curiosity can teach you git.
+* Found a bug, and wished you knew exactly when it occurred so you
+  know what results are wrong?
+
+* Wished you could collaborate better with people, without having to
+  send new versions back and forth?
+
+You aren't the first person to have these problems, in fact there is a
+big set of tools to handle these issues.  Welcome: version control.
+
+This is a 10 minute introduction to ``git``, one specific version
+control system.  The tutorial has a very specific goal: to teach one
+the general concepts of version control, and enough to use ``git`` on
+their own, personal projects.  It doesn't go into the full power of
+``git`` or version control systems (that's the next tutorial).
+
+Keep in mind: I can't teach you git, but I can give you ideas and your
+curiosity can teach you git.
+
+
+
+
 
 Goals
 -----
@@ -19,13 +40,34 @@ After completing this tutorial, you should be able to:
 
 * Record changes in that project: for example, you might make a commit once per day, or a commit every time you add a new feature
 
-* You will be able to use that history to see what changed on any given day, or how your project looked at any given point in time.
+* You will be able to find bugs or regressions by using that history
+  to see changes.  You will be able to see exactly what your code
+  lookd like on any given day, and find exactly what time a line was
+  written.
 
 
 Before beginning
 ----------------
 
-Before starting, run these commands
+Install git.
+
+.. epigraph::
+
+   This tutorial doesn't talk about how to install ``git``!  However, this
+   is a very well documented thing, so you should have no problem
+   doing it yourself.  If you have a shared computer, it probably
+   already has ``git`` installed.  You can download it for almost any
+   operating system here:
+
+   - http://www.git-scm.com/downloads
+
+   ``git`` is not just one program, there are also other graphical
+   user interface (GUI) git clients, which can provide a nicer
+   interface for certain tasks.  In this tutorial, I focus on the
+   concepts of ``git`` and the command line.  At the end I will
+   demonstrate some other programs.
+
+There are some standard configuration options that everyone should set first:
 
 .. console::
 
@@ -33,7 +75,7 @@ Before starting, run these commands
    $ git config --global user.email your.name@domain.fi
    $ git config --global color.ui auto
 
-These set some standard global options for your user - your name, and making output colorful.
+
 
 
 
@@ -51,9 +93,14 @@ Have you ever:
 * Found a bug, and wished you knew exactly when it occurred so you
   know what results are wrong?
 
-* Wished you could collaborate easier with people?
+* Wished you could collaborate better with people, without having to
+  send new versions back and forth?
 
-Then you need version control!
+You aren't the first person to have these problems, in fact there is a
+big set of tools to handle these issues.  Welcome: version control.
+
+* Version control can be used for code, papers, websites, anything
+  textual.
 
 .. epigraph::
 
@@ -64,6 +111,18 @@ Then you need version control!
     that everyone needs.  This talk introduces these concepts to
     scientists, who may not know about it.
 
+    Pros use version control for everything: code, papers (LaTeX),
+    websites, notes, etc.  All my papers are in version control, and I
+    can even make PDFs showing what changed between revisions.  My
+    website is in ``git``, I record changes and "push" to the server
+    to automaticaly update it.  People have written ``git`` add-ons
+    for distributed storage of large files (``git-annex``).  These
+    tutorials are stored in a repository.
+
+
+
+
+
 What is history?
 ----------------
 
@@ -71,36 +130,69 @@ What is history?
 
 * Metadata about what you have done and when
 
-  * *Commit title, commit description, files changed, previous version*
+  * Commit title, commit description, files changed, previous version
 
 * Uses: debugging, reproducibility, sharing, collaborating.
 
-* Useful for: code, papers, websites, anything textual.
+* Can be considered either a series of snapshots in time, or a chain
+  of differences between revisions.  They are equivalent.
 
-  * *It can include binary files (images, pdfs, ...) but isn't the best for that*
-
-To view history, run:
+To view history in ``git``, run:
 
 .. console::
 
    $ git log
    $ git log --oneline
+   $ git log --patch
 
-Where is this history stored / what is a git repository?
---------------------------------------------------------
+.. epigraph::
+
+   To run these git commands, first you need a repository.  All of
+   these instructions use the command line - if you need to, ``ssh``
+   to another server to play.  Let's practice using the repository of
+   these tutorials themselves.  To get this repository, run this:
+
+   .. console::
+
+     $ git clone https://github.com/rkdarst/scicomp/
+
+   You will see a ``scicomp`` folder created.  Change directory into
+   it (``cd scicomp``).  You can then run the ``git log`` commands
+   above.  We will learn more about the format of this repository soon.
+
+
+
+
+
+Just what is this ``git`` repository?
+-------------------------------------
 
 * Everything is stored in a ``.git`` directory within your project.
 
-* Main project files are never touched unless you run a command, such as "revert to old version".
+* ``git`` doesn't automatically do anything.  You develop as normal,
+  and ``git`` records or changes things when you tell it to (such as
+  ``git revert`` to go to an older version).
 
-* Create the git directory with
+Let's say you want to make a new git repository for your project.  The
+``git init`` command does this.
 
   .. console::
 
      $ cd /path/to/your/project/
      $ git init
 
-* *The specific format is simple but complicated, and each VCS works differently.  We don't need to worry about it now.*
+
+.. epigraph::
+
+   The specific git repository format is simple but complicated, and
+   each VCS works differently.  We don't need to worry about it now.
+
+   Once you run ``git init``, you won't notice any changes.  The only
+   thing that will happen is the creation of a ``.git`` directory.
+
+
+
+
 
 Terminology
 -----------
@@ -111,12 +203,19 @@ Terminology
 
 * **Commit** (verb): The recording of one new point in history
 
-* **Patch** or **diff** or **hunk**: changes between one version and another.
+* **Patch** or **diff**: changes between one version and another.
 
 * **Parent**: In git, the revision before the current one.
 
+
+
+
+
 Adding initial files
 --------------------
+
+* Git doesn't automatically track anything.  You have to tell it which
+  files are important (to track them).
 
 * Use ``git add`` to make git see and track files.
 
@@ -125,7 +224,19 @@ Adding initial files
      $ git add *.py
      $ git add file1.txt dir/file2.txt
 
-* *You have to use* ``git add`` *here, but* ``git add`` *has another use that I am* **not** *going to talk about, "staging"*
+.. epigraph::
+
+   You have to use ``git add`` here, but ``git add`` has another use
+   that I am *not* going to discuss in this tutorial.  This is known
+   as "staging" things to the "index".  It can be useful, but for now
+   it's an unnecessary complication that you'll learn about when
+   reading other things.
+
+   You will usually run ``git status`` to check if you forgot anything
+   (next section).
+
+
+
 
 Making your first commit
 ------------------------
@@ -142,7 +253,21 @@ Making your first commit
 
      $ git commit
 
-* You will be prompted for a message.  Type "initial commit" or something similar. 
+* You will be prompted for a message.  "Initial commit" is
+  traditional.
+
+.. epigraph::
+
+   ``git status`` shows what the current state is.  You will see a
+   section for "files staged for commit", "modified files", and
+   "untracked files".  "Untracked" is files you have not ``git
+   add``ed yet.  "Modified" is tracked files which you have edited
+   since the last commit.  "Staged" is files you run ``git add`` on
+   but not yet committed.
+
+
+
+
 
 Status
 ------
@@ -165,6 +290,10 @@ Status
 
 * This makes the "git status" output more useful and you generally want to keep your ignore file up to date.
 
+
+
+
+
 Regular work flow
 -----------------
 
@@ -182,6 +311,10 @@ This is what you do on normal working days:
      $ git commit -a                         # commit all changes
      $ git commit -p                         # commit specific changes (it will ask you)
      $ git commit -p file1.txt               # commit specific changes in specific file
+
+
+
+
 
 Getting information
 -------------------
@@ -221,6 +354,10 @@ Getting information
 
      $ git show COMMIT_HASH:file1.txt
 
+
+
+
+
 How does this work in practice?
 -------------------------------
 
@@ -258,6 +395,10 @@ How does this work in practice?
            2. add timeformat(date/double/integer) attribute to graph
            3. add 'start' and 'end' attribute to edge
 
+
+
+
+
 Conclusion
 ----------
 
@@ -282,6 +423,10 @@ Conclusion
   * What code did I run one month and eight days ago to make this plot?
 
   * I am using this version of the code for my paper.  I want to never forget this point. (See ``git tag``).
+
+
+
+
 
 Next steps
 ==========
