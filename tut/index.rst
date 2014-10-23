@@ -41,6 +41,15 @@ structurally sound:
    practical/practical-correct-programs  Practical suggestions for writing good programs.  Putting all the other tutorials together.
 
 
+Future tutorials will include:
+
+- Algorithms and data structures: computational complexity and writing efficient code.
+- Optimization of Python
+- Random useful science software
+- Using Triton (and other HPC systems)
+- Group library work
+- Getting data: structured vs unstructured data, scraping, storage, parsing.
+
 Similar or other resources:
 
  - http://software-carpentry.org/lessons.html  Software Carpentry is
