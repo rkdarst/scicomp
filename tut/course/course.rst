@@ -1,5 +1,5 @@
-Software Development for Scientists
-===================================
+Practical programming tools for scientists
+==========================================
 
 Are you a scientist who programs for a living, but have never studied
 how to write software well?
@@ -34,7 +34,7 @@ Topics which will be covered:
 - How to efficiently use the UNIX environment and high performance
   computing resources.
 
-- Release process: publishing, managing releases, accepting
+- Project management: publishing, managing releases, accepting
   contributions, building a community.
 
 - Open-source software and its role in science.  Why and how to
@@ -64,7 +64,8 @@ Course format
 
 - One credit
 
-- Ten course sessions, combining both lecture and hands-on format
+- Twelve one-hour course meetings over two terms.  Course meetings
+  include both both lecture and hands-on practical work.
 
 - No homework, but students are expected to apply the techniques from
   this class to their preexisting projects.  Brief examples or reports
@@ -72,7 +73,7 @@ Course format
 
 - No exams
 
-- Course format and topics subject to change based on class interest
+- Course format and topics will be adapted to class size and interest
 
 - Course reading material will consist of publicly available
   tutorials and reference material online.
@@ -85,7 +86,9 @@ Software is used everywhere in the modern world, especially in
 science.  There are many "computational fields" where work is
 purely making calculations in code, but also almost all fields
 software is used for data processing and analysis.  Software is the
-ultimate in reproduciability and verifiability.
+ultimate in reproduciability and verifiability.  And most importantly,
+analysis is less often "off-the-shelf" and scientists must create new
+tools themselves.
 
 Despite the importance of good software, scientists are rarely trained
 in its use.  Imagine a physicist building a machine without a training
