@@ -1,18 +1,131 @@
+Algorithms and data structures
+==============================
 
 
-Part 2: Algorithms and data structures
+..
+
+    P art 2: Algorithms and data structures
+    ~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Once you know which functions (or lines) are slow what do you do?
+
+    - This is where you **optimize** to make these parts (and only these
+      parts) faster.
+
+    - However, optimization is pointless until you are using the best
+      algorithms and data structures for the job.
+
+    - That is what this part is about.
+
+
+
+
+Why are algorithms important?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Once I was given a program in C, a "fast" language.
+
+* I re-wrote it in Python, a "slow" language.
+
+* My Python code was faster, for large networks.
+
+Why was this?  The Python code used better algorithms.
+
+
+
+Another example: graph representations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once you know which functions (or lines) are slow what do you do?
+* Methods of storing a graph with ``N`` nodes:
 
-- This is where you **optimize** to make these parts (and only these
-  parts) faster.
+ * Matrix
 
-- However, optimization is pointless until you are using the best
-  algorithms and data structures for the job.
+ * List of lists
 
-- That is what this part is about.
+* How long does it take to compute the number of edge in the graph?
 
+  * Matrix: have to look at ``N*N`` elements.
+
+  * List of lists: have to take ``len()`` of ``N`` lists
+
+* The lists of lists is clearly much faster in computing
+
+
+
+Big-O notation
+~~~~~~~~~~~~~~
+
+Expressing "speed" and memory usage of algorithms?
+
+* **Big-O notation**: used to classify algorithms by how they
+    respond (processing time or memory requirements) to changes in
+    input size.
+
+* Important since scientists tend to want to process bigger data.
+
+* "time ``O(N^2)``" means "time to run is proportional to ``N^2``",
+  ``N`` is some property of the input
+
+  * ``N`` can be different parameters, e.g. array size, number of
+    records, number of nodes.
+
+  * Can be combined: ``O(N*m)``
+
+* We do not care about constant factors.
+
+
+Big-O example
+~~~~~~~~~~~~~
+
+This is ``O(N)``:
+.. code::
+
+   for i in range(N):
+       pass
+
+This is ``O(N)``:
+
+.. code::
+
+   for i in range(N):
+       for j in range(N):
+           pass
+
+How to calculate big-O: multiply sizes of all loops and the inner
+statements.
+
+.. epigraph::
+
+   ``pass`` is a single statement (that does nothing), so is O(1), the
+   best possible.
+
+   ``for i in range(N):`` does the loop ``N`` times.
+
+
+
+Data structures
+~~~~~~~~~~~~~~~
+
+* Algorithms are intrinsically tied to data structures.
+
+* This talk will focus on *time complexity of data structures*.
+
+Example:
+
+.. python::
+
+   lst = range(10000)
+   lst.append(5)        # time complexity O(1)
+   list.insert(0, 5)    # time complexity O(N)
+
+If your list is big, you do **not** want to be doing the second one!
+
+.. epigraph::
+
+   This talk doesn't have the depth to go into a deep algorithmic
+   analysis.  Instead, I will talk about specific data structures and
+   their time complexities.  This time complexity is really about the
+   algorithms behind the data structures, which I am not
 
 
 Time complexity in python data structures
