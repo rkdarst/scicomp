@@ -1,5 +1,5 @@
-Practical programming tools for scientists
-==========================================
+Practical programming tools for researchers
+===========================================
 
 Are you a scientist who programs for a living, but have never studied
 how to write software well?
@@ -48,6 +48,10 @@ or development model, but as techniques applicable to any project.
 Prerequisites and target audience
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The target audience is new PhD students in computational (not
+computer) sciences and above, who have not been exposed to these
+topics before.
+
 Students should already program in some language, and have serious
 preexisting projects as part of other work or studies.  Most course
 examples will be in Python or C, but these languages are not required.
@@ -62,14 +66,16 @@ has knowledge of most topics listed.
 Course format
 ~~~~~~~~~~~~~
 
-- One credit
+- This is a graduate special topics seminar
+
+- One or two credits
 
 - Twelve one-hour course meetings over two terms.  Course meetings
   include both both lecture and hands-on practical work.
 
-- No homework, but students are expected to apply the techniques from
-  this class to their preexisting projects.  Brief examples or reports
-  of this are expected for credit to be given.
+- Homework is minimal and practical.  Students are expected to apply
+  the techniques from this class to their preexisting projects, not
+  complete exercises.
 
 - No exams
 
