@@ -23,6 +23,23 @@ state when it was presented).  This page has existed only a few weeks,
 so is under active development.  Also, a new tutorial hopefully
 appears every 2-3 weeks, or whenever I can present them.
 
+Tutorials
+~~~~~~~~~
+
+Tutorials are created to serve two purposes at the same time, a) a
+presentation to be given in a lecture or workshop format, and b) a
+notes format that can be read independently after the lecture.  To
+save work and make the product most useful, both of these formats are
+combined in the same documents.  In the presentation version, you see
+a "slide version" (use left/right arrows to scroll) followed by a
+hidden box of details.  In the normal version, the box of details is
+larger and should roughly cover what should be said in a presentation
+(but sometimes in more detail).
+
+This project is new, and thus different tutorials have various phases
+of completeness.  Some have just the presentation part completed, some
+are in an older format.
+
 .. tut-index::
 
    git-10-minute/git-10-minute          10 Minute Git
@@ -40,6 +57,25 @@ structurally sound:
 
    practical/practical-correct-programs  Practical suggestions for writing good programs.  Putting all the other tutorials together.
 
+..
+  Course
+  ~~~~~~
+  
+  The material here 
+
+
+
+Other information
+~~~~~~~~~~~~~~~~~
+
+Similar or other resources:
+
+ - http://software-carpentry.org/lessons.html  Software Carpentry is
+   an organization dedicated to teaching these same skills to
+   scientists.
+ - http://rkd.zgib.net/wiki/ScientificProgramming  My wiki page which
+   I use to collect more resources.
+ - https://github.com/rkdarst/scicomp/  Github project.
 
 Future tutorials will include:
 
@@ -50,11 +86,3 @@ Future tutorials will include:
 - Group library work
 - Getting data: structured vs unstructured data, scraping, storage, parsing.
 
-Similar or other resources:
-
- - http://software-carpentry.org/lessons.html  Software Carpentry is
-   an organization dedicated to teaching these same skills to
-   scientists.
- - http://rkd.zgib.net/wiki/ScientificProgramming  My wiki page which
-   I use to collect more resources.
- - https://github.com/rkdarst/scicomp/  Github project.
