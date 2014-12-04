@@ -120,66 +120,181 @@ big set of tools to handle these issues.  Welcome: version control.
     tutorials are stored in a repository.
 
 
+Actual examples
+---------------
 
+* Before we talk about the actual mechanics of version control, let's
+  look at some real examples.
 
-
-What is history?
-----------------
-
-* History shows you the state of your project at any time in the past
-
-* Metadata about what you have done and when
-
-  * Commit title, commit description, files changed, previous version
-
-* Uses: debugging, reproducibility, sharing, collaborating.
-
-* Can be considered either a series of snapshots in time, or a chain
-  of differences between revisions.  They are equivalent.
-
-To view history in ``git``, run:
-
-.. console::
-
-   $ git log
-   $ git log --oneline
-   $ git log --patch
+* What you are about to see is ways that version control is useful,
+  after you start using it
 
 .. epigraph::
 
-   To run these git commands, first you need a repository.  All of
-   these instructions use the command line - if you need to, ``ssh``
-   to another server to play.  Let's practice using the repository of
-   these tutorials themselves.  To get this repository, run this:
-
-   .. console::
-
-     $ git clone https://github.com/rkdarst/scicomp/
-
-   You will see a ``scicomp`` folder created.  Change directory into
-   it (``cd scicomp``).  You can then run the ``git log`` commands
-   above.  We will learn more about the format of this repository soon.
+   We'll talk about how to use git in the next section.  Thus, this
+   talk is backwards for actually using git, but this way you will
+   better understand the point of version control this way.
 
 
+Example: I just made a bug!
+---------------------------
+
+* You have a big coding project, and you realize it doesn't work
+  anywhere.  You can't figure out why.
+
+* You type ``git diff`` at the terminal, and see every change since
+  yesterday.
+
+.. code:: diff
+
+    diff --git a/support/algorithms.py b/support/algorithms.py
+    index d96131b..6114c3b 100644
+    --- a/support/algorithms.py
+    +++ b/support/algorithms.py
+    @@ -131,7 +131,7 @@
+         weighted = False
+    -    def __init__(self, g, dir=None, basename=None, **kwargs):
+    +    def __init__(self, g, dir=None, basename=None, cache=None, **kwargs):
+             """
+             Arguments:
+
+
+.. epigraph::
+
+   What is the point of diffs?  Let's say you have tens of thousands
+   of lines of code, and you make a few changes.  In order to
+   comprehend what has changed, looking at the files themselves is too
+   much.  Instead, we have a tool, the **diff**, that can direct our
+   attention *only* to the important parts.
+
+   The terms **diff** and **patch** are mostly interchangeable.  They
+   are one of the fundamental building blocks of programming, so you
+   will see them often.
+
+   Running ``git diff`` tells you the changes made since the last
+   commit (save point), but you can get other diffs too.
+
+   Here's how to read it:
+
+   First two lines provide some general metadata - exactly what this
+   part is about.  The details aren't important now.
+
+   Next, we see ``--- FILENAME`` and ``+++ FILENAME``, saying what file
+   this diff is of.
+
+   Then, we see ``@@ -131,7 +131,7 @@``, which says what lines this
+   diff relates to.
+
+   Then, we see the diff itself.  Each line beginning with ``-`` is a
+   line **removal**, and each line with beginning with ``+`` is a line
+   **addition**.  For a line that is changed (like this example), you
+   see both ``-`` and ``+`` together.
+
+   Before and after the ``-`` and ``+``, you have **context**, which
+   are unchanged lines.  You need a few lines before and after in
+   order to properly understand what is changed.
+
+
+   There are other diff formats.  There is a **word diff** that is
+   based on words instead of lines.  It can be very useful sometimes
+   (and what I look at more often than regular diffs).
 
 
 
-Just what is this ``git`` repository?
--------------------------------------
+What have you done recently?
+----------------------------
 
-* Everything is stored in a ``.git`` directory within your project.
+* You can look at the **log** to see all past changes.
 
-* ``git`` doesn't automatically do anything.  You develop as normal,
-  and ``git`` records or changes things when you tell it to (such as
-  ``git revert`` to go to an older version).
+  * ``git log`` to see just descriptions, times, and who made the
+    change.
 
-Let's say you want to make a new git repository for your project.  The
-``git init`` command does this.
+  * ``git log -p`` also shows you diffs of every change.
+
+* If multiple people are working on the same project, you need to
+  be able to quickly see what others have done.
+
+* If you ever wonder what you were doing recently (for example, you
+  haven't worked on a project lately but need to come back to it),
+  this will help.
+
+
+
+Where did a line come from?
+---------------------------
+
+* Let's say you find a bug that happened a long time ago: longer than
+  you can remember.
+
+* Exactly when did it happen?
+
+* ``git annotate FILENAME`` can answer this question
+
+.. code::
+
+   114175ac        (Richard Darst  2014-01-08 15:04:10 +0200       804)        args = (_get_file(self._binary),
+   114175ac        (Richard Darst  2014-01-08 15:04:10 +0200       805)                "-seed", str(self._randseed),
+   e9a83ab3        (Richard Darst  2013-11-02 16:52:16 +0200       806)                "-w" if self.weighted else '-uw', #unweighted or weighted
+   e9a83ab3        (Richard Darst  2013-11-02 16:52:16 +0200       807)                "-f", self.graphfile,
+   8085f076        (Richard Darst  2014-01-23 19:07:45 +0200       808)                )
+
+
+.. epigraph::
+
+   This command is used less often, but when you need it, it's very
+   helpful.
+
+   Let's say that you just found a bug, a bad one.  You need to know
+   immediately how many results are wrong: Are the plots you showed
+   your boss one week ago wrong?  What about those from one month ago?
+   If you are making lots of changes, or working with several people,
+   this may not be obvious.
+
+   If you can track down the bug to a few lines, the annotate command
+   will tell you the change ID (more on this later), who made the
+   change, , when the change  was made, the line number, and the
+   actual code.  You can use the change ID to get further information
+   on the change.
+
+   This looks a bit ugly, but graphical user interfaces make it much
+   more convenient (and there are many).
+
+
+Looking at an old version
+-------------------------
+
+You can see old versions easily:
+
+* ``git show COMMIT-ID:filename.py``
+
+* ``git show git show '@{one week ago}':support/algorithms.py``
+
+
+
+Actual usage of git
+-------------------
+
+* We have seen that if you have a lot of history saved, you can answer
+  some useful questions.
+
+* The next section will talk about how you save all this history.
+
+
+
+Making a new repository
+-----------------------
+
+* Let's say you want to make a new git repository for your project.  The
+  ``git init`` command does this.
 
   .. console::
 
      $ cd /path/to/your/project/
      $ git init
+
+* Everything is stored in a ``.git`` directory within your project.
+
+* Files are only updated when you run a ``git`` command.
 
 
 .. epigraph::
@@ -190,24 +305,10 @@ Let's say you want to make a new git repository for your project.  The
    Once you run ``git init``, you won't notice any changes.  The only
    thing that will happen is the creation of a ``.git`` directory.
 
-
-
-
-
-Terminology
------------
-
-* **Repository**: one directory
-
-* **Revision** or **commit** (noun): One version of the files at one point in time.
-
-* **Commit** (verb): The recording of one new point in history
-
-* **Patch** or **diff**: changes between one version and another.
-
-* **Parent**: In git, the revision before the current one.
-
-
+   No versions are saved, and your files are not touch, unless you run
+   a ``git`` yourself.  This makes git relatively safe.  Nothing
+   happens in the background without you knowing.  If you delete the
+   ``.git`` directory, it's as if it was never made.
 
 
 
@@ -289,6 +390,80 @@ Status
      *~
 
 * This makes the "git status" output more useful and you generally want to keep your ignore file up to date.
+
+
+
+
+
+
+
+
+
+
+
+What is history?
+----------------
+
+* History shows you the state of your project at any time in the past
+
+* Metadata about what you have done and when
+
+  * Commit title, commit description, files changed, previous version
+
+* Uses: debugging, reproducibility, sharing, collaborating.
+
+* Can be considered either a series of snapshots in time, or a chain
+  of differences between revisions.  They are equivalent.
+
+To view history in ``git``, run:
+
+.. console::
+
+   $ git log
+   $ git log --oneline
+   $ git log --patch
+
+.. epigraph::
+
+   To run these git commands, first you need a repository.  All of
+   these instructions use the command line - if you need to, ``ssh``
+   to another server to play.  Let's practice using the repository of
+   these tutorials themselves.  To get this repository, run this:
+
+   .. console::
+
+     $ git clone https://github.com/rkdarst/scicomp/
+
+   You will see a ``scicomp`` folder created.  Change directory into
+   it (``cd scicomp``).  You can then run the ``git log`` commands
+   above.  We will learn more about the format of this repository soon.
+
+
+
+
+
+
+
+
+
+
+Terminology
+-----------
+
+* **Repository**: one directory
+
+* **Revision** or **commit** (noun): One version of the files at one point in time.
+
+* **Commit** (verb): The recording of one new point in history
+
+* **Patch** or **diff**: changes between one version and another.
+
+* **Parent**: In git, the revision before the current one.
+
+
+
+
+
 
 
 
