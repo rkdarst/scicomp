@@ -1,0 +1,74 @@
+
+- What are versions?  why?
+- Example: my project has a bug.
+- Version control systems (there is more than one!)
+- General use cases
+  - code
+  - papers
+  - notes, data
+  - websites
+- What data can you get if you save versions?  different use cases.
+  - What have you just done?
+  - Diffing any two versions
+  - Getting any old version
+  - 
+- Usage of git
+  - behind the scenes database concept: only touches files when you
+    run a command.  .git directory
+  - Initializing repository
+  - Adding new files
+  - Making edits
+  - Committing
+  - Git status commands
+  - Reverting to an old version
+- Practical suggestions
+  - How often to commit?
+- Advanced, specific uses
+  - GUIs and integration
+  - Git data model, one commit isn't one file, it is everything.
+  - Branches and remotes.
+  - diffing papers
+- Conclusions
+- Reference materials
+  - My useful aliases
+  - branching
+  - remotes
+    - 
+  - Glossary
+
+
+
+
+- Installation and availability.
+
+
+
+Second course on collaboration
+
+- Using VCS to collaborate collaboration
+- git commit model and branches
+  - Git commits are a DAG
+  - Branches are simply leaves of the DAG
+  - Remotes are simply branches.
+  - `git remote add`: say a remote exists.  `git fe` peeks at the
+    remote.
+    + use `git log1a` to examine the situation!
+- Merging
+  - Philosophy behind merging. 
+  - Abstract steps of a merge (any vcs).
+    + Two versions of the same file.  Both edited at the same line.
+    + Pull attempted.
+    + VCS attempts merge and leves conflict markes in working
+      directory
+    + You use `git st` and friends to see where the conflicts are.
+    + Edit the conflicts to say how it should be.
+    + Mark the conflict as resolved and finalize the commit.
+    + Once you start the process, you must either finish or 
+  - Making conflicting edits
+  - Pulling
+  - Conflict markers, examining the situation
+  - Resolving the conflict
+  - Marking conflict as resolved, finaling commit.
+
+  - Non-conflicting merges
+    - Two commits that don't edit the same file, but still need merging.
