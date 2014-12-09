@@ -62,16 +62,37 @@ This course will be to basic for someone who has previously used or
 has knowledge of most topics listed.
 
 
+Vital information
+~~~~~~~~~~~~~~~~~
+
+- Two credits, Eleven 1-1.5 hour course meetings.
+
+- Tuesdays, 15:00--16:30, excluding 06.01 holiday and 17.02 evaluation
+  week.
+
+- Terms III and IV, 13 January--31 March 2014.
+
+- Registration: via `Oodi <https://oodi.aalto.fi/>`_.  Course number
+  is ``BECS-114.Z``.  To find the course, search the course number in
+  *Spring 2015*; it is listed under the generic course name
+  *Postgraduate studies*.  Please register so that I can get an
+  estimated attendance.  If you do not have the right to register in
+  Oodi and do not want credit, just email me (RD).
+
+- This course website will be updated as information becomes
+  available.
+
+- Instructor: Richard Darst <richard.darst aalto.fi>.  Responsible professor:
+  Jari Saramäki <jari.saramaki aalto.fi>.
 
 Course format
 ~~~~~~~~~~~~~
 
 - This is a graduate special topics seminar
 
-- One or two credits
 
-- Twelve one-hour course meetings over two terms.  Course meetings
-  include both both lecture and hands-on practical work.
+- Course meetings include both both lecture and hands-on practical
+  work, please be prepared to bring a computer on some days.
 
 - Homework is minimal and practical.  Students are expected to apply
   the techniques from this class to their preexisting projects, not
@@ -85,8 +106,8 @@ Course format
   tutorials and reference material online.
 
 
-Course manifesto
-~~~~~~~~~~~~~~~~
+Course extended description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Software is used everywhere in the modern world, especially in
 science.  There are many "computational fields" where work is
@@ -149,7 +170,7 @@ work and contribute in this modern world.
 Resources
 ~~~~~~~~~
 
-This course is open-source, licensed under the GPL, and all materials
+This course is open-source, licensed under the GPLv3, and all materials
 are available on github and contributions are welcome.
 
 - Course website: http://rkd.zgib.net/scicomp/
