@@ -1,0 +1,127 @@
+
+
+Short course
+~~~~~~~~~~~~
+
+- Day 1
+  - Introduction, about class
+  - Why is software important to science?
+    - Also good to know this for other jobs, too.
+  - Survey about student's backgrounds.
+  - version control #1: individual use (git)
+
+- Day 2
+  - Git internals
+  - Version control and collaboration (git)
+
+- Day 3
+  - Debugging
+
+- Day 4
+  - Profiling
+  - Introduction to optimization
+
+- Day 5
+  - Software testing #1: general concepts
+
+- Day 6
+  - Software testing #2: testing frameworks
+
+- Day 7
+  - Code design for extendabality
+
+- Day 8
+  - Algorithms and data structures
+
+- Day 9
+  - Introduction to BECS systems and Triton.
+
+- Day 10
+
+
+- Day 11
+  - Free Software and Science
+  - Project management, releasing code
+
+- Day 12
+  - Wrap up, integrating everything together.
+
+
+
+
+Full list of course topics
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Class meta-information
+  - Why
+  - This is not a CS class!
+  - This is an informal course: I teach, we work together
+  - Platform: I use linux.  
+  - programming languages: any
+  - This class won't teach you things fully.  It will introduce and
+    you need to follow up on what you need.
+  - general format
+
+- Project management and Free Software
+  - Licenses
+    - copyleft vs not
+    - open source vs free software vs shareware
+    - Important terms: "freeware, freely available
+    - Licenses help your software to not die
+    - Key licenses: BSD, GPL, AGPL
+
+  - Community driver projects
+    - How to make something self-sustaining?
+    - most long lasting projects have permanent people managing them
+    - Anatomy of a project
+      - public website (updateable), public mailing list, issue
+        tracker.
+      - Other people are trusted to join and get "commit rights"
+    - Importance of listening and community building
+    - Consider joining some other project and contributing there.
+      That can increase servility.
+    - Important to write down how to contribute and become part of the
+      project.
+
+  - How to tag version as corresponding to your paper
+  - Release cycle: develop, bugfix, beta, release
+
+- Writing documentation
+  - most important part to users, last done and least fun for
+    developers.
+  - targets: user docs and developer docs
+  - developer docs
+    - key architectural decisions, "where to look"
+    - How to provide patches and contribute
+  - user docs
+    - tutorials
+    - how-tos
+    - reference
+    - API docs for libraries (auto-generated?)
+    - program docs: 1 line summary, input, output, options, mechanics,
+      prerequisites.
+  - docstrings
+  - comments
+    - How to write good comments
+  - Template to quickly write docs for a {fuction, program, module}
+
+- Useful science software
+
+- Unix environment
+  - ssh
+    - keys, sshfs, config file, universality
+  - shell, shell configuration, .bashrc, highligthing
+    - environment variables
+  - installing things locally
+  - `module` system
+
+- How to contribute to the course
+
+- Modular/OO design
+- functional design
+- breaking apart problems to solve them
+
+
+- Error rate
+  - older has fewer errors
+  - shorter functions has fewer errors
+  - more used has fewer errors
