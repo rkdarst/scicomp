@@ -106,8 +106,8 @@ Course format
   tutorials and reference material online.
 
 
-Course extended description
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Why should you take this course?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Software is used everywhere in the modern world, especially in
 science.  There are many "computational fields" where work is
