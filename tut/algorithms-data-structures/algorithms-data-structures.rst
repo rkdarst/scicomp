@@ -2,7 +2,7 @@ Algorithms and data structures
 ==============================
 
 
-..
+.. ::
 
     P art 2: Algorithms and data structures
     ~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,6 +18,25 @@ Algorithms and data structures
     - That is what this part is about.
 
 
+Outline
+~~~~~~~
+
+* Algorithms: What and why?
+
+* Basic meaning of ``O()`` notation and why it is important.
+
+* Properties of different data structures
+
+
+
+
+What are algorithms?
+~~~~~~~~~~~~~~~~~~~~
+
+* **Algorithm**: A series of steps to complete some process.
+
+* There can be different algorithms that produce the same result.
+
 
 
 Why are algorithms important?
@@ -31,65 +50,86 @@ Why are algorithms important?
 
 Why was this?  The Python code used better algorithms.
 
+.. epigraph::
+
+   The exact situation was that the C code used a linear search to do
+   a weighted random choice.  This meant that the C code saw four
+   times as slow for a network of twice the size.  In my code, I used
+   a binary search I already had written, and doubling the network
+   size makes the problem :math:`2*\log(2)` times slower.  That C code
+   doesn't stand a chance.
+
+   This also nicely illustrates a benefit of high-level languages.
+   It is easier to use good algorithms.
+
+
 
 
 Another example: graph representations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Methods of storing a graph with ``N`` nodes:
+* Methods of storing a graph with :math:`N` nodes:
 
- * Matrix
+ * Adjacency matrix: :math:`N \times N` matrix.
 
- * List of lists
+ * List of lists: :math:`N` lists of neighbors.
 
 * How long does it take to compute the number of edge in the graph?
 
-  * Matrix: have to look at ``N*N`` elements.
+  * Matrix: have to look at :math:`N^2` elements.
 
-  * List of lists: have to take ``len()`` of ``N`` lists
+  * List of lists: have to take ``len()`` of :math:`N` lists, which takes
+    time :math:`cN`.
 
-* The lists of lists is clearly much faster in computing
+* The lists of lists is clearly much faster, *for this problem*.
 
 
 
 Big-O notation
 ~~~~~~~~~~~~~~
 
-Expressing "speed" and memory usage of algorithms?
+How do we express the "speeds" of algorithms?
 
-* **Big-O notation**: used to classify algorithms by how they
-    respond (processing time or memory requirements) to changes in
-    input size.
+* **Big-O notation**: used to classify algorithms by how they respond
+  (processing time or memory requirements) to changes in input size.
 
-* Important since scientists tend to want to process bigger data.
+* Important since scientists tend to want to process bigger data (:math:`N`).
 
-* "time ``O(N^2)``" means "time to run is proportional to ``N^2``",
-  ``N`` is some property of the input
+* "Time :math:`O(N^2)`" means "time to run is proportional to :math:`N^2`".
 
-  * ``N`` can be different parameters, e.g. array size, number of
+  * :math:`N` can be different parameters, e.g. array size, number of
     records, number of nodes.
 
-  * Can be combined: ``O(N*m)``
+  * Can be combined: :math:`O(N \times m)`
 
-* We do not care about constant factors.
+* Algorithmic analysis does not care about constant factors.
+
+.. epigraph::
+
+   You've probably seen this before.  This is a quick formalization
+   and review.
+
+   There is not just :math:`O()`, but also :math:`o()`,
+   :math:`\Theta()`, :math:`\Omega()`, and :math:`\omega()`.  These
+   all represent different degrees of bounding.  For the purposes of
+   this talk, I am ignoring these differences.
+
+   I say that we don't care about constant factors.  They *are*
+   important for optimization, but generally you want to first find
+   the best algorithm, and then optimize constant factors.  For small
+   problems, a higher complexity algorithm with smaller constant is
+   better.
 
 
-Big-O example
-~~~~~~~~~~~~~
+Example 1: trivial
+~~~~~~~~~~~~~~~~~~
 
-This is ``O(N)``:
 .. code::
 
    for i in range(N):
        pass
 
-This is ``O(N)``:
-
-.. code::
-
-   for i in range(N):
-       for j in range(N):
-           pass
+This is :math:`O(N)`.
 
 How to calculate big-O: multiply sizes of all loops and the inner
 statements.
@@ -101,16 +141,186 @@ statements.
 
    ``for i in range(N):`` does the loop ``N`` times.
 
+   If :math:`N` doubles, the amount of work we have to do also
+   doubles.
+
+
+Example 2: nested
+~~~~~~~~~~~~~~~~~
+
+.. code::
+
+   for i in range(N):
+       for j in range(N):
+           pass
+
+This is :math:`O(N^2)`.
+
+.. epigraph::
+
+   Hopefully this is clear.  The total number of lines that execute
+   here is :math:`constant N^2`.
+
+
+
+
+Example 3: consider complexity of functions called
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Suppose :math:`func(L)` is :math:`O(L)`.
+
+.. code::
+
+   for i in range(N):
+       for j in range(M):
+       	   func(L)
+
+This is :math:`O(NML)`.
+
+.. epigraph::
+
+   You can't forget the time complexity of the functions you call.
+
+
+Example 4: more called functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Suppose ``func(N)`` is :math:`O(N)`
+
+.. code::
+
+   for i in range(N):
+       func(N)
+
+This is :math:`O(N^2)`.
+
+Why?  First and third lines combine to give a time of
+:math:`1+2+\cdots+N = \frac{N(N-1)}{2} = O(N^2)`.
+
+
+
+
+How is complexity reduced?
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Figuring :math:`O()` is good, but what's the difference between a
+  good and bad algorithm?
+
+.. code::
+
+   for i in range(len(data)):
+       if data[i] == value:
+           return i
+
+* This is :math:`O(\mathrm{len}(\mathrm{data}))`
+
+* But most lines do nothing!  Ideally we could short-circuit and
+  return the right index directly!
+
+.. epigraph::
+
+   I'm not getting into formal algorithmic analysis, but here is when
+   more formal theory could be helpful.  For each problem, there is
+   some theoretical minimum amount of work that could be done.  Some
+   algorithms are less efficient than that.
+
+   In the case above, see compare every element in a list to
+   ``value``, but just return one.  All of those needless comparisons
+   could be avoided if we could filter down candidates somehow.
+
+
+
+Complexity reduction 2
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code::
+
+   for i in range(len(data)):
+       if data[i] != 0:
+           f(data[i])
+
+* In this case, we do :math:`O(\mathrm{len}(\mathrm{data}))`
+  operations, but the important part could be called much less often
+  if ``data`` is sparse.
+
+* In this case, one should keep track of important elements
+  separately, if ``data`` will be mostly zeros.
+
+
+
+Memory complexity
+~~~~~~~~~~~~~~~~~
+
+* Memory complexity judges the amount of extra space needed for an
+  algorithm.
+
+.. code::
+
+   range(N)
+   xrange(N)
+
+
+
+Algorithms: summary
+~~~~~~~~~~~~~~~~~~~
+
+* Recursion can greatly increase complexity.
+
+* *Think* about time and memory complexity when you write things.
+
+  * I haven't taught you how to write algorithms.
+
+  * Just know where to look for slow algorithms.  You can come back to
+    them if needed, and maybe ask someone for ideas.
+
+* In practice, do your best to make things :math:`O(\mathrm{size of data})`
+
+* "Big data" has *extremely* clever algorithms for complexity
+  reduction.
+
+  * They can make anything :math:`O(N)`!
+
+.. epigraph::
+
+   I haven't even come close to giving you an understanding of the
+   field of analysis of algorithms.  A CS person would be ashamed.
+   However, the main point I am trying to make is *think* about what
+   you are doing.  When you identify something slow, you can
+
+   * See if you can figure out something better.
+
+   * Remember to come back to it.
+
+   * Ask someone for help, or search for better algorithms yourself.
+
+   * When you do come back to algorithms, it will be much easier.
+
+   For an example of a clever big data algorithm, see one of my last
+   examples.
+
+
 
 
 Data structures
 ~~~~~~~~~~~~~~~
 
-* Algorithms are intrinsically tied to data structures.
+* Data structures are specific arrangements of data in memory.
 
-* This talk will focus on *time complexity of data structures*.
+* Arrangements allow low-complexity operations on the data.
 
-Example:
+* Key point: **Using data structures properly is the most important
+  way to have fast code**.
+
+  * They package optimal algorithms for you so that you don't have to
+    know about them.
+
+* Memory/time tradeoff: Using more memory often can mean faster.
+
+
+
+
+Why are data structures important?  Python list insertion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. python::
 
@@ -122,27 +332,29 @@ If your list is big, you do **not** want to be doing the second one!
 
 .. epigraph::
 
-   This talk doesn't have the depth to go into a deep algorithmic
-   analysis.  Instead, I will talk about specific data structures and
-   their time complexities.  This time complexity is really about the
-   algorithms behind the data structures, which I am not
+   The point of the second half of this talk is to understand the
+   property of data structures, so that you don't accidentally be
+   doing things like the second one, adding unneeded factors of
+   :math:`O(N)` (or more) to your code!
 
 
-Time complexity in python data structures
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- **Time complexity**: Time needed to complete an operation or
-  algorithm as a function of the input size.
 
-- Expressed as a scaling: ``O(1)``, ``O(N)``, or ``O(N*k)``, for example.
+Example 2: Time complexity of lists and sets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Let us do a quick example of lists and sets.
 
 .. python::
+
     n = 100
     L = range(n)
     S = set(L)
 
     %timeit n//2 in L
     %timeit n//2 in S
+
+Actual time used:
 
 =====  =====  =====  ======  ========
 \      n=1    n=10   n=100   n=1000
@@ -152,83 +364,127 @@ set    202ns  202ns  203ns   235ns
 =====  =====  =====  ======  ========
 
 .. epigraph::
-   Different implementations have different constanst: ``c*O(n)``.
-   These constants can matter, but generally the ``O(*)`` matters more
-   for initial design.
+
+   We see that sets take about the same of time to use the ``in``
+   operator, regardless of size.  For lists, it scales with :math:`N`.
+   Clearly, if we want to analyze big data, we want to be using sets!
+
 
 
 
 Time complexity of Python data structures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Rest of talk: Python data structures and complexities.
+
 Full story: https://wiki.python.org/moin/TimeComplexity
 
-- Lists: O(1) appending, indexing, length
 
-- Dicts/sets: O(1) lookup, ``in`` operator, addition, and removal.
 
-- numpy arrays: O(n) for all operations, but very low constants.
 
-- ``collections`` module
+Python ``list``
+~~~~~~~~~~~~~~~
 
-  - deque: O(1) append, appendleft, pop, popleft, O(n) selecting from
-    middle.
+Data layout: resizable linear array of :math:`N` elements.
+
+* *Front operations:* ``.append(...)`` and del[-1]: :math:`O(1)`
+
+* *Back operations:* ``.insert(0, ...)`` and del[0]: :math:`O(N)`
+
+* *Indexing:* lst[...]: :math:`O(1)`
+
+
+
+Python ``tuple``
+~~~~~~~~~~~~~~~~
+
+* Same as list, but is immutable.
+
+* More memory efficient, especially if creating/destroying often.
+
+
+
+Python ``dict``
+~~~~~~~~~~~~~~~
+* Underlying data structure: hash table
+
+ * Lookups are an :math:`O(1)` operation!
+
+ .. code::
+
+     def get(x):
+         return hash_table[ hash(x) % len(hash_table) ]
+
+* *Insertions:*  ``d[k] =v``  :math:`O(1)`
+* *Deletions:* ``del d[k]``   :math:`O(1)`
+* *Lookups:* ``d[k]``         :math:`O(1)`
+* *Contains:*: ``k in d``     :math:`O(1)`
+* *Size:*: ``len(d)``         :math:`O(1)`
+* There is no ordering.
+* Greater memory use than lists (still :math:`O(N)`)
+
+Basically, all operations here is :math:`O(1)`.  ``dict``s trade extra
+memory for fastest lookups and modification.
 
 .. epigraph::
-   "Slow" code using O(1) operations is better than "fast" code using
-   O(n) or worse operations.
+
+   Hash tables have been called "one of the most important data
+   structures known".  When studying big data algorithms, most somehow
+   use hash tables to turn a :math:`O(N^k)` operation into
+   :math:`O(N)`.  Their properties seem almost magical.
 
 
 
-Use the short constants built into data structures
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-``O(1)`` operations are great, but you usually have to loop over
-things, sometime.
-
-- Improve the innermost loop first.  That is probably all you need.
-
-- If you have to do math, use numpy arrays, not lists.
-
-- Using internal python operations better than doing it explicitly:
-
-  .. python::
-
-      [ (a+b) for a,b in zip(A, B) ]
-
-  vs
-
-  .. python::
-
-     L = [ ]
-     for a, b in zip(A, B):
-         L.append(a+b)
-
-.. epigraph::
-
-   This is the realm of optimizing.  We will discuss this later.
+Python ``set``
+~~~~~~~~~~~~~~
+* Same storage as dictionary, but no values.
+* Insert/delete/contains also :math:`O(1)`.
+* Optimal ``intersection`` and ``union`` operations:
+  :math:`O(\mathrm{min}(N,M))` and :math:`O(N+M)`
 
 
 
-Good algorithms are more important than any optimization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Python ``numpy`` arrays
+~~~~~~~~~~~~~~~~~~~~~~~
+* Linear array of values *of the same type*.
+* Inserting at beginning is :math:`O(N)`.
+* Resizing is :math:`O(1)` but not recommended.
+* Fast vector operations: ``+``, ``*``, ``numpy.add``, etc.
+  * :math:`O(N)` which is optimal.
+
+
+
+Other useful data structures
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Linked list - ``collections.deque`` - fast ``d.appendleft()`` and
+  ``d.popleft()``.  Can't index middle.
+* Heap - ``collections.hepaq`` - list which is always sorted.
+
+
+
+
+
+Algorithms vs optimization
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Algorithmic optimization provides world-changing improvements.
+
+* Once you have the best algorithm, tricks to speed it up are
+  optimization.
+
+  * We will look at this next time.
+
+
+
+
+
+Conclusions
+~~~~~~~~~~~
+
 
 
 
 
 Examples
 ~~~~~~~~
-
-
-Introduction to computational complexity
-
-Step 1: understand O() of all algorithms
-
-Have two sample programs and profile them.
-
-
-
-..
-
-
-copying numpy arrays
