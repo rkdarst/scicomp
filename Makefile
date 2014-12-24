@@ -20,5 +20,7 @@ tut/index.html: tut/index.rst
 	        -a ! -e `dirname $*`/big.html \
 	    && ln -s `basename $*`-big.html `dirname $*`/big.html || true
 
+DEST=kafka:/srv/rkd/www/scicomp/
+
 pub: default
-	rsync -avP --inplace --delete tut/ kafka:/srv/rkd/www/scicomp/
+	rsync -avP --inplace --delete tut/ $(DEST)/
