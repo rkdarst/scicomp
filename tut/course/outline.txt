@@ -28,22 +28,24 @@ Short course
   - Software testing #2: testing frameworks
 
 - Day 7
-  - Code design for extendabality
+  - Git advanced
 
 - Day 8
   - Algorithms and data structures
 
 - Day 9
-  - Introduction to BECS systems and Triton.
+  - The UNIX system
+    - Useful science software
+    - BECS systems and Triton.
 
 - Day 10
-
+  - Free Software and Science
+  - Software development
+    - Project management, releasing code
+    - Development strategies: waterfall, agile, etc.
+    - Code design for extendabality
 
 - Day 11
-  - Free Software and Science
-  - Project management, releasing code
-
-- Day 12
   - Wrap up, integrating everything together.
 
 
@@ -54,12 +56,27 @@ Full list of course topics
 - Class meta-information
   - Why
   - This is not a CS class!
-  - This is an informal course: I teach, we work together
-  - Platform: I use linux.  
-  - programming languages: any
   - This class won't teach you things fully.  It will introduce and
     you need to follow up on what you need.
-  - general format
+    - If you have a basic knowledge of topics, this will be too
+      basic.  If you have used something but don't entirely know why,
+      this will be good for you.
+  - This is an informal course: I teach, we work together
+  - Platform: I use linux and open source stuff, so that is what I
+    know best.
+  - programming languages: any
+  - Required course information
+  - Examples of why this course is important.
+    - Your code works properly, but you spend days fixing/debugging
+      things.
+    - It is easier to work alone than with other people (but you need
+      to collaborate to do science).
+    - You realize a bug made you lose the last six months of your
+      work.
+  - What this course will not do
+    - Teach you things as deep as you would expect a course on these
+      things to be.
+    - Be satisfying to a professional.
 
 - Project management and Free Software
   - Licenses
@@ -114,6 +131,24 @@ Full list of course topics
   - installing things locally
   - `module` system
 
+- Testing
+  - Design for testability
+  - There are usually simple ways and fast ways to program something.
+    do both and test against each other.
+
+- Software design and development
+  - modularity of code
+    - key to good and understandable software is modularity
+    - 
+    - discuss examples of different layers
+  - libraries of common functions - more stable
+  - Design paradigms
+    - OO
+    - functional design?
+  - Development styles: agile, waterfall, extreme programming, etc.
+    pair programming, TDD, etc.
+
+
 - How to contribute to the course
 
 - Modular/OO design
@@ -125,3 +160,7 @@ Full list of course topics
   - older has fewer errors
   - shorter functions has fewer errors
   - more used has fewer errors
+
+
+- bash scripting and so on
+- simple parallization? (enrico has an example)
