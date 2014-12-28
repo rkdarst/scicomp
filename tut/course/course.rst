@@ -106,6 +106,28 @@ Course format
   tutorials and reference material online.
 
 
+Schedule
+~~~~~~~~
+
+This is a proposed schedule.  All classes on Tuesday at 15:00.  Links
+go to *previous* versions of tutorials, presented to my group last
+year.  Until the lecture, they won't be refined.
+
+* Day 1  (13 Jan): (a) Introduction (b) `Version control intro (git) <../git-10-minute/git-10-minute.html>`_
+* Day 2  (20 Jan): `Git and collaboration <../git-collaboration/gitlab-and-collaboration.html>`_
+* Day 3  (27 Jan): `Debugging <../debugging/debugging.html>`_
+* Day 4  (03 Feb): `Profiling <../profiling/profiling.html>`_
+* Day 5  (10 Feb): `Software testing introduction <../testing/testing.html>`_
+* (17 Feb: evaluation week, no class) Use time to prepare code to be tested.
+* Day 6  (24 Feb): `Software testing <../testing-2/testing-2.html>`_
+* Day 7  (03 Mar): `Advanced git <../git-advanced/git-advanced.html>`_
+* Day 8  (10 Mar): `Understanding algorithms and data structures <../algorithms-data-structures/algorithms-data-structures.html>`_
+* Day 9  (17 Mar): The UNIX system
+* Day 10 (24 Mar): Free software and science
+* Day 11 (31 Mar): Wrap-up
+
+
+
 Why should you take this course?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
