@@ -123,7 +123,7 @@ year.  Until the lecture, they won't be refined.
 * Day 7  (03 Mar): `Advanced git <../git-advanced/git-advanced.html>`_
 * Day 8  (10 Mar): `Understanding algorithms and data structures <../algorithms-data-structures/algorithms-data-structures.html>`_
 * Day 9  (17 Mar): The UNIX system
-* Day 10 (24 Mar): Free software and science
+* Day 10 (24 Mar): `Development, free software, and science <../open-science/open-science.html>`_
 * Day 11 (31 Mar): Wrap-up
 
 
