@@ -442,6 +442,10 @@ Caching
 ~~~~~~~
 * **Cache**: temporary storage to increase performance
 
+Other tools
+~~~~~~~~~~~
+* ``sqlite`` and key-value datastores
+
 
 Other Python implementations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
