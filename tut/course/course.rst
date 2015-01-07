@@ -113,7 +113,7 @@ This is a proposed schedule.  All classes on Tuesday at 15:00.  Links
 go to *previous* versions of tutorials, presented to my group last
 year.  Until the lecture, they won't be refined.
 
-* Day 1  (13 Jan): (a) Introduction (b) `Version control intro (git) <../git-10-minute/git-10-minute.html>`_
+* Day 1  (13 Jan): (a) `Introduction <intro.html>`_ (b) `Version control intro (git) <../git-10-minute/git-10-minute.html>`_
 * Day 2  (20 Jan): `Git and collaboration <../git-collaboration/gitlab-and-collaboration.html>`_
 * Day 3  (27 Jan): `Debugging <../debugging/debugging.html>`_
 * Day 4  (03 Feb): `Profiling <../profiling/profiling.html>`_
