@@ -423,7 +423,7 @@ Python ``dict``
 * There is no ordering.
 * Greater memory use than lists (still :math:`O(N)`)
 
-Basically, all operations here is :math:`O(1)`.  ``dict``s trade extra
+Basically, all operations here is :math:`O(1)`.  ``dict``\ s trade extra
 memory for fastest lookups and modification.
 
 .. epigraph::
@@ -460,7 +460,21 @@ Other useful data structures
 * Linked list - ``collections.deque`` - fast ``d.appendleft()`` and
   ``d.popleft()``.  Can't index middle.
 * Heap - ``collections.hepaq`` - list which is always sorted.
+* Trie and DAWG
 
+I'm not saying to write things yourself: use libraries
+
+
+Other complexities
+~~~~~~~~~~~~~~~~~~
+* Worst case performance
+* Best case performanec
+* Amortized worst case performance
+
+Transitions in complexity
+~~~~~~~~~~~~~~~~~~~~~~~~~
+* If you change parameters and code slows down...
+* ... are you transitioning to a higher complexity?
 
 
 
@@ -476,6 +490,18 @@ Algorithms vs optimization
   * We will look at this next time.
 
 
+
+"Big data algorithms"
+~~~~~~~~~~~~~~~~~~~~~
+* Book: "Mining of massive datasets", http://mmds.org/
+* Use hash tables to transform :math:`O(N^x)` operations to
+  :math:`O(N)` operations
+* Example: locality-sensitive hashing
+
+  - Finding similar documents appears to be an :math:`O(N^2)`
+    operation
+  - Hash functions which tend to put similar documents in same bin.
+  - Combine them to magnify effect, reduce number of pairs to check.
 
 
 
