@@ -3,7 +3,8 @@
     margin-bottom: .2em;
 }
 body {
-    font-size: 150%;
+    font-size: 200%;
+    margin-bottom: 20em;
 }
 body > div.document > p {
     margin: .5em 0em .5em 0em;
