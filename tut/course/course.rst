@@ -72,6 +72,8 @@ Vital information
 
 - Terms III and IV, 13 January--31 March 2014.
 
+- Location: BECS Coffee Room, F336.
+
 - Registration: via `Oodi <https://oodi.aalto.fi/>`_.  Course number
   is ``BECS-114.Z``.  To find the course, search the course number in
   *Spring 2015*; it is listed under the generic course name
@@ -113,17 +115,19 @@ This is a proposed schedule.  All classes on Tuesday at 15:00.  Links
 go to *previous* versions of tutorials, presented to my group last
 year.  Until the lecture, they won't be refined.
 
-* Day 1  (13 Jan): (a) `Introduction <intro.html>`_ (b) `Version control intro (git) <../git-10-minute/git-10-minute.html>`_
-* Day 2  (20 Jan): `Git and collaboration <../git-collaboration/gitlab-and-collaboration.html>`_
-* Day 3  (27 Jan): `Debugging <../debugging/debugging.html>`_
-* Day 4  (03 Feb): `Profiling <../profiling/profiling.html>`_
-* Day 5  (10 Feb): `Software testing introduction <../testing/testing.html>`_
+* Day 1  (13 Jan): (a) `Introduction <intro.html>`_ (b) `Version
+  control intro (git) <../git-10-minute/git-10-minute.html>`_ (c)
+  `Class notes <day01.html>`_
+* Day 2  (20 Jan): `Git and collaboration <../git-collaboration/gitlab-and-collaboration.html>`_ (unrevised)
+* Day 3  (27 Jan): `Debugging <../debugging/debugging.html>`_ (unrevised)
+* Day 4  (03 Feb): `Profiling <../profiling/profiling.html>`_ (unrevised)
+* Day 5  (10 Feb): `Software testing introduction <../testing/testing.html>`_ (unrevised)
 * (17 Feb: evaluation week, no class) Use time to prepare code to be tested.
-* Day 6  (24 Feb): `Software testing <../testing-2/testing-2.html>`_
-* Day 7  (03 Mar): `Advanced git <../git-advanced/git-advanced.html>`_
-* Day 8  (10 Mar): `Understanding algorithms and data structures <../algorithms-data-structures/algorithms-data-structures.html>`_
+* Day 6  (24 Feb): `Software testing <../testing-2/testing-2.html>`_ (unrevised)
+* Day 7  (03 Mar): `Advanced git <../git-advanced/git-advanced.html>`_ (unrevised)
+* Day 8  (10 Mar): `Understanding algorithms and data structures <../algorithms-data-structures/algorithms-data-structures.html>`_ (unrevised)
 * Day 9  (17 Mar): The UNIX system
-* Day 10 (24 Mar): `Development, free software, and science <../open-science/open-science.html>`_
+* Day 10 (24 Mar): `Development, free software, and science <../open-science/open-science.html>`_ (unrevised)
 * Day 11 (31 Mar): Wrap-up
 
 
