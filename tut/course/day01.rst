@@ -1,5 +1,5 @@
-Information for day1: version control system introduction
-=========================================================
+Information for day 1: version control system introduction
+==========================================================
 
 This page is the companion
 
@@ -23,18 +23,25 @@ The most common systems are:
 Installation of git
 ~~~~~~~~~~~~~~~~~~~
 Whatever system you choose, you will need to install it yourself.  It
-is already installed on all BECS-managed Linux and windows computers.
+is already installed on all BECS-managed Linux and Windows computers.
 
-The git web page has information on downloading and installation.
+The git web page has information on downloading and installation.  One
+advantage of git is that it is so common, there are many resources and
+different packages.
 
 The "official" distributions can be downloaded from
-http://www.git-scm.com/downloads
+http://www.git-scm.com/downloads .
+
+"Git" is a general concept.  There is more than one program that can
+interact with the repositories.  So, for example, there is a GitHub
+package, ``git-cola`` is a graphical user interface, and many editors
+(integrated development environments) will directly interface with the
+repository, so that you don't have to use the command line.
 
 
-
-To do
-~~~~~
-
+"Homework"
+~~~~~~~~~~
+* You are expected to have to do some reading yourself!
 * Explore the repository for this course on Github:
   https://github.com/rkdarst/scicomp/
 
@@ -43,12 +50,23 @@ To do
   - Find how to view the "annotations" (who last edited each line) of files
   - When was the project started?
 
-
-"Homework"
-~~~~~~~~~~
-
 * Create a git repository for one of your own projects
-* Use it for one week, making commits as necessary
+* Use the repository for one week, making commits as you work.  Try to
+  maintain good development practices
+
+  - Commit often enough
+  - Have good commit messages
+
+* Try to use each of these commands (you may have to read some)
+
+  - ``git status``
+  - ``git log``
+  - ``git log -p``
+  - ``git log --stat``
+  - ``git commit -p``
+  - ``git commit --amend``
+
+
 * Send me the commit log once you have been using the project for a
   week
 
