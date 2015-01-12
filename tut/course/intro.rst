@@ -11,13 +11,6 @@ Purpose of this course
   - Make you better at research
   - Allow you a better transition into industry
 
-What this course is not
-~~~~~~~~~~~~~~~~~~~~~~~
-* A computer science class
-* A software development class
-* Overly theoretical (hence the name)
-* Be satisfying to professionals in these fields
-
 What this course will do
 ~~~~~~~~~~~~~~~~~~~~~~~~
 * Provide an introduction to software development tools...

@@ -38,7 +38,8 @@ After completing this tutorial, you should be able to:
 
 * Take one of your existing projects and create a git repository for it.
 
-* Record changes in that project: for example, you might make a commit once per day, or a commit every time you add a new feature
+* Record changes in that project: for example, you might make a commit
+  once per day, or a commit every time you add a new feature
 
 * You will be able to find bugs or regressions by using that history
   to see changes.  You will be able to see exactly what your code
@@ -46,101 +47,125 @@ After completing this tutorial, you should be able to:
   written.
 
 
-Before beginning
-----------------
-
-Install git.
-
-.. epigraph::
-
-   This tutorial doesn't talk about how to install ``git``!  However, this
-   is a very well documented thing, so you should have no problem
-   doing it yourself.  If you have a shared computer, it probably
-   already has ``git`` installed.  You can download it for almost any
-   operating system here:
-
-   - http://www.git-scm.com/downloads
-
-   ``git`` is not just one program, there are also other graphical
-   user interface (GUI) git clients, which can provide a nicer
-   interface for certain tasks.  In this tutorial, I focus on the
-   concepts of ``git`` and the command line.  At the end I will
-   demonstrate some other programs.
-
-There are some standard configuration options that everyone should set first:
-
-.. console::
-
-   $ git config --global user.name "Your Name"
-   $ git config --global user.email your.name@domain.fi
-   $ git config --global color.ui auto
-
-
-
-
 
 The tutorial
 ============
 
-Why version control?
---------------------
+What is version control?
+------------------------
 
-Have you ever:
+* **Version**: Contents of files at one time
+* **Control**: Tracking, storage, and analysis
+* **VCS**: version control system
+* Equivalent of a lab notebook for computer data
 
-* Made a bunch of changes, and suddenly nothing works, and you have no
-  idea what you did
-
-* Found a bug, and wished you knew exactly when it occurred so you
-  know what results are wrong?
-
-* Wished you could collaborate better with people, without having to
-  send new versions back and forth?
-
-You aren't the first person to have these problems, in fact there is a
-big set of tools to handle these issues.  Welcome: version control.
-
-* Version control can be used for code, papers, websites, anything
-  textual.
-
-.. epigraph::
-
-    Basically, version control systems (VCSs) stores history and
-    provides tools to manage and examine that.  It makes all of these
-    things things easier, and solves many, many problems.  It is
-    nothing exotic: it is a standard tool of software development,
-    that everyone needs.  This talk introduces these concepts to
-    scientists, who may not know about it.
-
-    Pros use version control for everything: code, papers (LaTeX),
-    websites, notes, etc.  All my papers are in version control, and I
-    can even make PDFs showing what changed between revisions.  My
-    website is in ``git``, I record changes and "push" to the server
-    to automaticaly update it.  People have written ``git`` add-ons
-    for distributed storage of large files (``git-annex``).  These
-    tutorials are stored in a repository.
+Let's look at science *without* using VCS.
 
 
-Actual examples
----------------
-
-* Before we talk about the actual mechanics of version control, let's
-  look at some real examples.
-
-* What you are about to see is ways that version control is useful,
-  after you start using it
-
-.. epigraph::
-
-   We'll talk about how to use git in the next section.  Thus, this
-   talk is backwards for actually using git, but this way you will
-   better understand the point of version control this way.
+Part 1: Science without version control
+---------------------------------------
 
 
-Example: I just made a bug!
----------------------------
+Strategy: Just work, no backups
+-------------------------------
+* Not reproducible, you lose information
+* Change something and everything breaks, you have no idea what
+  happened
+
+* **Version control tracks and lets you go backwards**
+
+
+
+Strategy: Copying files
+-----------------------
+The strategy:
+
+* You work in a directory
+* Every so often, you make a backup.
+
+Advantages:
+
+* You have some backups
+
+Disadvantages:
+
+* Manual work, many files
+* No metadata or analysis tools
+
+
+
+Diffs
+-----
+* **diff**: program to find differences between versions
+* Example ``diff -u file1.v2.txt file1.txt``:
+
+.. code:: diff
+
+    --- file1.v2.txt        2015-01-11 15:23:37.336871222 +0200
+    +++ file1.txt   2015-01-11 15:26:28.796446554 +0200
+    @@ -1,5 +1,5 @@
+     mbkidbbx
+     kbudbuhu
+     mmmmkb uuixdeui uiyd
+    -uhxgu ih hhxmui uhighi
+    +uhxgu ih rxwege uhighi
+     umxcu umhiui muihuihmx
+
+
+
+Strategy: Sending files back and forth
+--------------------------------------
+* Disadvantage: only one person can edit at a time
+* Disadvantage: who made what change?
+* **Version control lets you seamlessly share and merge changes**
+
+
+
+..
+    Why version control?
+    - -------------------
+
+    Have you ever:
+
+    * Made a bunch of changes, and suddenly nothing works, and you have no
+      idea what you did
+
+    * Found a bug, and wished you knew exactly when it occurred so you
+      know what results are wrong?
+
+    * Wished you could collaborate better with people?
+
+    You aren't the first person to have these problems, in fact there is a
+    big set of tools to handle these issues.  Welcome: version control.
+
+    * Version control can be used for code, papers, websites, anything
+      textual.
+
+    .. epigraph::
+
+        Basically, version control systems (VCSs) stores history and
+        provides tools to manage and examine that.  It makes all of these
+        things things easier, and solves many, many problems.  It is
+        nothing exotic: it is a standard tool of software development,
+        that everyone needs.  This talk introduces these concepts to
+        scientists, who may not know about it.
+
+
+
+Part 2: What information does version control store?
+----------------------------------------------------
+
+* Let's look at that data you can get out of a version controled
+  project
+
+
+
+Differences between versions
+----------------------------
 
 * You have a big coding project, and you realize it doesn't work
-  anywhere.  You can't figure out why.
+  anywhere.  You can't figure out why and don't remember what you
+  changed.
 
 * You type ``git diff`` at the terminal, and see every change since
   yesterday.
@@ -157,6 +182,10 @@ Example: I just made a bug!
     +    def __init__(self, g, dir=None, basename=None, cache=None, **kwargs):
              """
              Arguments:
+
+* `Github example (for this talk)
+  <https://github.com/rkdarst/scicomp/commit/32484303269df229756aca2e288d4f8816c4b846>`_
+
 
 
 .. epigraph::
@@ -201,8 +230,8 @@ Example: I just made a bug!
 
 
 
-What have you done recently?
-----------------------------
+What are recent changes?
+------------------------
 
 * You can look at the **log** to see all past changes.
 
@@ -218,6 +247,8 @@ What have you done recently?
   haven't worked on a project lately but need to come back to it),
   this will help.
 
+* `Github example (for this class)
+  <https://github.com/rkdarst/scicomp/commits/master>`_
 
 
 Where did a line come from?
@@ -238,6 +269,8 @@ Where did a line come from?
    e9a83ab3        (Richard Darst  2013-11-02 16:52:16 +0200       807)                "-f", self.graphfile,
    8085f076        (Richard Darst  2014-01-23 19:07:45 +0200       808)                )
 
+* `Github example (this page)
+  <https://github.com/rkdarst/scicomp/blame/master/tut/git-10-minute/git-10-minute.rst>`_
 
 .. epigraph::
 
@@ -269,22 +302,88 @@ You can see old versions easily:
 
 * ``git show git show '@{one week ago}':support/algorithms.py``
 
+* `Github example
+  <https://github.com/rkdarst/scicomp/commits/master/tut/git-10-minute/git-10-minute.rst>`_
+  (pick any version)
 
 
-Actual usage of git
+What should version control be used for?
+----------------------------------------
+
+* Code
+* Papers, books
+* Websites
+* Anything textual
+* Miscellaneous data
+* This course
+
+.. epigraph::
+
+    Pros use version control for everything: code, papers (LaTeX),
+    websites, notes, etc.  All my papers are in version control, and I
+    can even make PDFs showing what changed between revisions.  My
+    website is in ``git``, I record changes and "push" to the server
+    to automaticaly update it.  People have written ``git`` add-ons
+    for distributed storage of large files (``git-annex``).  These
+    tutorials are stored in a repository.
+
+
+
+Part 3: Actual usage of git
+---------------------------
+
+* In this section, we get down to actually using ``git`` (finally!)
+* Many options to choose from
+  - command line program ``git``
+  - Graphical user interfaces (``gitk``, ``git-cola``, and more)
+  - Integrated support in your editor...
+* Or, your group may settle on a completely different VCS (Mercurial,
+  Subversion, etc...)
+
+
+
+Installation of git
 -------------------
 
-* We have seen that if you have a lot of history saved, you can answer
-  some useful questions.
+* I do not cover this here
+* See class notes for some more information.
 
-* The next section will talk about how you save all this history.
+.. epigraph::
 
+   This tutorial doesn't talk about how to install ``git``!  However, this
+   is a very well documented thing, so you should have no problem
+   doing it yourself.  If you have a shared computer, it probably
+   already has ``git`` installed.  You can download it for almost any
+   operating system here:
+
+   - http://www.git-scm.com/downloads
+
+   ``git`` is not just one program, there are also other graphical
+   user interface (GUI) git clients, which can provide a nicer
+   interface for certain tasks.  In this tutorial, I focus on the
+   concepts of ``git`` and the command line.  At the end I will
+   demonstrate some other programs.
+
+
+
+Standard configuration options
+------------------------------
+
+* There are some standard configuration options that everyone should
+  set first
+* Copy these into a shell and edit for your name/email
+
+.. console::
+
+   $ git config --global user.name "Your Name"
+   $ git config --global user.email your.name@domain.fi
+   $ git config --global color.ui auto
 
 
 Making a new repository
 -----------------------
 
-* Let's say you want to make a new git repository for your project.  The
+* Let's say you want to make a new git **repository** for your project.  The
   ``git init`` command does this.
 
   .. console::
@@ -292,7 +391,7 @@ Making a new repository
      $ cd /path/to/your/project/
      $ git init
 
-* Everything is stored in a ``.git`` directory within your project.
+* Everything is stored in the ``.git`` directory within your project.
 
 * Files are only updated when you run a ``git`` command.
 
@@ -394,15 +493,8 @@ Status
 
 
 
-
-
-
-
-
-
-
-What is history?
-----------------
+Viewing history
+---------------
 
 * History shows you the state of your project at any time in the past
 
@@ -440,13 +532,6 @@ To view history in ``git``, run:
 
 
 
-
-
-
-
-
-
-
 Terminology
 -----------
 
@@ -458,11 +543,7 @@ Terminology
 
 * **Patch** or **diff**: changes between one version and another.
 
-* **Parent**: In git, the revision before the current one.
-
-
-
-
+* **Parent**: In git, the commit before the current one.
 
 
 
@@ -572,6 +653,11 @@ How does this work in practice?
 
 
 
+What you do **not** know yet
+----------------------------
+* Branching
+* Remotes and dealing with servers (this includes Github and Gitlab)
+
 
 
 Conclusion
@@ -606,9 +692,60 @@ Conclusion
 Next steps
 ==========
 
+
+References
+----------
+* Git manual pages:
+
+  - ``git COMMAND -h``: brief summary of major options (to help your
+    memory).
+
+  - ``man git-COMMAND`` or ``git COMMAND --help``: Full manual page
+    for each command.  These are very long and detailed, but once you
+    have a critical mass, these are *the* places to go for
+    authoritative information.
+
+* The git book (Pro Git): http://www.git-scm.com/book/
+
+  - This is probably the best, and most detailed, reference there is.
+
+  - Remember that I have purposely left out many things from this
+    first talk.  The following are not discussed: branches, remotes,
+    pushing, pulling, cloning, servers
+
+  - At this point, only these chapters are relevant.
+
+    + Chapter 1, for basic setup
+
+    + Chapter 2, for working on your own project
+
+* Official git documentation: http://git-scm.com/documentation
+
+  - Manual pages for each command, online
+
+  - Videos
+
+* This tutorial from `Software Carpentry
+  <http://software-carpentry.org/v5/novice/git/index.html>`_
+
+* This `interactive tutorial <http://try.github.io/>`_ from Github
+
+* Brain and Mind Laboratory `git micromanual <https://git.becs.aalto.fi/bml/bramila/wikis/git-micromanual>`_
+
+* This is a `cool cheat sheet
+  <http://ndpsoftware.com/git-cheatsheet.html>`_, but it is too
+  involved for what we know so far.  Next week, it will be more
+  useful.
+
+
+
+
+Other things to try
+-------------------
+
 Here are some ideas for independent study that you need to try yourself:
 
-* If you need to revert to a former version of the file: 
+* If you need to revert to a former version of the file:
 
   .. console::
 
