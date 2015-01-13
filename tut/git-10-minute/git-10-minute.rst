@@ -463,7 +463,8 @@ Making your first commit
    "untracked files".  "Untracked" is files you have not ``git
    add``ed yet.  "Modified" is tracked files which you have edited
    since the last commit.  "Staged" is files you run ``git add`` on
-   but not yet committed.
+   but not yet committed.  If you do this, you can use ``git diff
+   --cached`` to see the diff.
 
 
 
@@ -490,7 +491,13 @@ Status
 
 * This makes the "git status" output more useful and you generally want to keep your ignore file up to date.
 
+.. epigraph::
 
+   I should really emphasize how important the ``.gitignore`` file is!  It
+   seems minor, but clean "status" output will really make ``git``
+   much more usable.  ``.gitignore`` can be checked into version
+   control itself.  You can also use a ``~/.gitignore`` file in your
+   home directory.
 
 
 Viewing history
@@ -514,6 +521,8 @@ To view history in ``git``, run:
    $ git log
    $ git log --oneline
    $ git log --patch
+   $ git log --stat
+   $ git log --oneline --graph --decorate --all
 
 .. epigraph::
 
@@ -531,15 +540,17 @@ To view history in ``git``, run:
    above.  We will learn more about the format of this repository soon.
 
 
-
 Terminology
 -----------
 
 * **Repository**: one directory
 
-* **Revision** or **commit** (noun): One version of the files at one point in time.
+* **Revision** or **commit** (noun): One version of the files at one
+    point in time.
 
-* **Commit** (verb): The recording of one new point in history
+    - Identified by a hexadecimal hash in ``git``, like ``526b2f9a``.
+
+* **Commit** or **check in** (verb): The recording of one new point in history.
 
 * **Patch** or **diff**: changes between one version and another.
 
@@ -557,7 +568,13 @@ This is what you do on normal working days:
 
 * Make changes to your project
 
-* Run ``git status`` and ``git diff`` to see what you have done
+* Check status and diff to see what you have done
+
+  .. console::
+
+     $ git status
+     $ git diff
+     $ git diff --word-diff=color
 
 * Commit specific files
 
@@ -585,6 +602,8 @@ Getting information
 
      $ git log
      $ git log --oneline
+     $ git log --stat
+     $ git log --oneline --graph --decorate --all
 
 * Show what changed since last commit
 
@@ -656,7 +675,21 @@ How does this work in practice?
 What you do **not** know yet
 ----------------------------
 * Branching
+* Sharing and collaborating
 * Remotes and dealing with servers (this includes Github and Gitlab)
+* Git config files ``.gitconfig`` and aliases
+* Graphical user interfaces
+
+
+
+Revisiting: what can version control be used for?
+--------------------------------------------------
+* Code
+* Papers, books
+* Websites
+* Anything textual
+* Miscellaneous data
+* This course
 
 
 
