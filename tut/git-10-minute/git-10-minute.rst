@@ -62,64 +62,6 @@ What is version control?
 Let's look at science *without* using VCS.
 
 
-Part 1: Science without version control
----------------------------------------
-
-
-Strategy: Just work, no backups
--------------------------------
-* Not reproducible, you lose information
-* Change something and everything breaks, you have no idea what
-  happened
-
-* **Version control tracks and lets you go backwards**
-
-
-
-Strategy: Copying files
------------------------
-The strategy:
-
-* You work in a directory
-* Every so often, you make a backup.
-
-Advantages:
-
-* You have some backups
-
-Disadvantages:
-
-* Manual work, many files
-* No metadata or analysis tools
-
-
-
-Diffs
------
-* **diff**: program to find differences between versions
-* Example ``diff -u file1.v2.txt file1.txt``:
-
-.. code:: diff
-
-    --- file1.v2.txt        2015-01-11 15:23:37.336871222 +0200
-    +++ file1.txt   2015-01-11 15:26:28.796446554 +0200
-    @@ -1,5 +1,5 @@
-     mbkidbbx
-     kbudbuhu
-     mmmmkb uuixdeui uiyd
-    -uhxgu ih hhxmui uhighi
-    +uhxgu ih rxwege uhighi
-     umxcu umhiui muihuihmx
-
-
-
-Strategy: Sending files back and forth
---------------------------------------
-* Disadvantage: only one person can edit at a time
-* Disadvantage: who made what change?
-* **Version control lets you seamlessly share and merge changes**
-
-
 
 ..
     Why version control?
@@ -152,23 +94,91 @@ Strategy: Sending files back and forth
 
 
 
-Part 2: What information does version control store?
-----------------------------------------------------
+Part 1: Science without version control
+---------------------------------------
+
+
+
+Strategy: Just work, no backups
+-------------------------------
+* Not reproducible, you lose information
+* Change something and everything breaks, you have no idea what
+  happened
+
+* **Version control tracks and lets you go backwards**
+
+.. epigraph::
+
+   This is the most basic way of working.  Once you change something,
+   the old version is gone and you can't get it back.
+
+
+
+Strategy: Copying files
+-----------------------
+The strategy:
+
+* You work in a directory
+* Every so often, you make a backup.
+
+Advantages:
+
+* You have some backups
+
+Disadvantages:
+
+* Manual work, many files
+* No metadata or analysis tools
+
+.. epigraph::
+
+   With this system, at least you have some backups.  But you have to
+   copy it yourself, and you end up with ``code.v2.py``, ``code.v3.py``,
+   ``code.final.py``, ``code.submitted.py``,
+   ``code.submitted.final.py``, and so on.  And then, once you have
+   all these files, you have to keep them organized, and getting any
+   information out of them is a lot of work, too.  You probably won't
+   make backups often enough, either.
+
+
+
+Strategy: Sending files back and forth
+--------------------------------------
+* Disadvantage: only one person can edit at a time
+* Disadvantage: who made what change?
+* **Version control lets you seamlessly share and merge changes**
+
+.. epigraph::
+
+   I've seen this used for papers often (it could be used for code,
+   but in that case it's probably easier to just work by yourself).
+   You end up with the filename game again, and only one person can
+   edit at once.
+
+
+
+Part 2: What can you get out of version control?
+------------------------------------------------
 
 * Let's look at that data you can get out of a version controled
   project
+
+.. epigraph::
+
+   This shows some ``git`` command line options that show you very
+   useful information.  In the next part, we'll talk about how to
+   actually put this information into ``git``.
 
 
 
 Differences between versions
 ----------------------------
 
-* You have a big coding project, and you realize it doesn't work
-  anywhere.  You can't figure out why and don't remember what you
-  changed.
-
+* You are working on a project, and it stopped working.  You changed
+  something and broke it.
+* You can't figure out why and don't remember what you changed.
 * You type ``git diff`` at the terminal, and see every change since
-  yesterday.
+  your last "commit".
 
 .. code:: diff
 
@@ -183,10 +193,6 @@ Differences between versions
              """
              Arguments:
 
-* `Github example (for this talk)
-  <https://github.com/rkdarst/scicomp/commit/32484303269df229756aca2e288d4f8816c4b846>`_
-
-
 
 .. epigraph::
 
@@ -196,9 +202,11 @@ Differences between versions
    much.  Instead, we have a tool, the **diff**, that can direct our
    attention *only* to the important parts.
 
-   The terms **diff** and **patch** are mostly interchangeable.  They
-   are one of the fundamental building blocks of programming, so you
-   will see them often.
+   The terms **diff** and **patch** are mostly interchangeable
+   (Incidentally, ``diff`` is a program that makes diffs out of two
+   files, ``patch`` is a program that takes a file and a diff and
+   produces the other file).  They are one of the fundamental building
+   blocks of programming, so you will see them often.
 
    Running ``git diff`` tells you the changes made since the last
    commit (save point), but you can get other diffs too.
@@ -228,6 +236,9 @@ Differences between versions
    based on words instead of lines.  It can be very useful sometimes
    (and what I look at more often than regular diffs).
 
+   `Github example (for this talk).
+   <https://github.com/rkdarst/scicomp/commit/32484303269df229756aca2e288d4f8816c4b846>`_
+
 
 
 What are recent changes?
@@ -238,24 +249,26 @@ What are recent changes?
   * ``git log`` to see just descriptions, times, and who made the
     change.
 
-  * ``git log -p`` also shows you diffs of every change.
+* If multiple people are working on the same project, you can check
+  what others are doing.
 
-* If multiple people are working on the same project, you need to
-  be able to quickly see what others have done.
+.. epigraph::
 
-* If you ever wonder what you were doing recently (for example, you
-  haven't worked on a project lately but need to come back to it),
-  this will help.
+   The log also includes a *commit message*, which can explain to
+   others (or yourself) what was going on at that time.  This is
+   especially useful for multi-person projects.  There are many
+   variations on these commands, including ``git log -p`` to show the
+   diffs also, and ``git log --stat`` to show what files are changing.
 
-* `Github example (for this class)
-  <https://github.com/rkdarst/scicomp/commits/master>`_
+   * `Github example (for this class itself).
+     <https://github.com/rkdarst/scicomp/commits/master>`_
+
 
 
 Where did a line come from?
 ---------------------------
 
-* Let's say you find a bug that happened a long time ago: longer than
-  you can remember.
+* Let's say you find a bug that happened a long time ago.
 
 * Exactly when did it happen?
 
@@ -269,8 +282,7 @@ Where did a line come from?
    e9a83ab3        (Richard Darst  2013-11-02 16:52:16 +0200       807)                "-f", self.graphfile,
    8085f076        (Richard Darst  2014-01-23 19:07:45 +0200       808)                )
 
-* `Github example (this page)
-  <https://github.com/rkdarst/scicomp/blame/master/tut/git-10-minute/git-10-minute.rst>`_
+* This shows , for every line, who wrote it and when.
 
 .. epigraph::
 
@@ -292,19 +304,12 @@ Where did a line come from?
    This looks a bit ugly, but graphical user interfaces make it much
    more convenient (and there are many).
 
+   Of course, you can view these older versions, too: ``git show
+   COMMIT-ID:filename.py``
 
-Looking at an old version
--------------------------
+   * `Github example (this page).
+     <https://github.com/rkdarst/scicomp/blame/master/tut/git-10-minute/git-10-minute.rst>`_
 
-You can see old versions easily:
-
-* ``git show COMMIT-ID:filename.py``
-
-* ``git show git show '@{one week ago}':support/algorithms.py``
-
-* `Github example
-  <https://github.com/rkdarst/scicomp/commits/master/tut/git-10-minute/git-10-minute.rst>`_
-  (pick any version)
 
 
 What should version control be used for?
@@ -371,13 +376,20 @@ Standard configuration options
 
 * There are some standard configuration options that everyone should
   set first
-* Copy these into a shell and edit for your name/email
+* Run these in a shell and edit for your name/email
 
 .. console::
 
    $ git config --global user.name "Your Name"
    $ git config --global user.email your.name@domain.fi
    $ git config --global color.ui auto
+
+.. epigraph::
+
+   These store some information in the file ``$HOME/.gitconfig``.
+   Your name and email are used in the commit logs.  We'll be using
+   the git config file more, later.
+
 
 
 Making a new repository
@@ -409,6 +421,8 @@ Making a new repository
    happens in the background without you knowing.  If you delete the
    ``.git`` directory, it's as if it was never made.
 
+   Notice how easy this is.  You should be doing it for every project.
+
 
 
 Adding initial files
@@ -434,7 +448,6 @@ Adding initial files
 
    You will usually run ``git status`` to check if you forgot anything
    (next section).
-
 
 
 
@@ -468,78 +481,6 @@ Making your first commit
 
 
 
-
-
-Status
-------
-
-* Make some changes to your files.
-
-* Use ``git status`` to see what is changed / what is added and waiting to be committed.
-
-  .. console::
-
-     $ git status
-
-* Make a file called ``.gitignore`` and put patterns of things you want to ignore.
-
-  ::
-
-     *.o
-     *.pyc
-     *~
-
-* This makes the "git status" output more useful and you generally want to keep your ignore file up to date.
-
-.. epigraph::
-
-   I should really emphasize how important the ``.gitignore`` file is!  It
-   seems minor, but clean "status" output will really make ``git``
-   much more usable.  ``.gitignore`` can be checked into version
-   control itself.  You can also use a ``~/.gitignore`` file in your
-   home directory.
-
-
-Viewing history
----------------
-
-* History shows you the state of your project at any time in the past
-
-* Metadata about what you have done and when
-
-  * Commit title, commit description, files changed, previous version
-
-* Uses: debugging, reproducibility, sharing, collaborating.
-
-* Can be considered either a series of snapshots in time, or a chain
-  of differences between revisions.  They are equivalent.
-
-To view history in ``git``, run:
-
-.. console::
-
-   $ git log
-   $ git log --oneline
-   $ git log --patch
-   $ git log --stat
-   $ git log --oneline --graph --decorate --all
-
-.. epigraph::
-
-   To run these git commands, first you need a repository.  All of
-   these instructions use the command line - if you need to, ``ssh``
-   to another server to play.  Let's practice using the repository of
-   these tutorials themselves.  To get this repository, run this:
-
-   .. console::
-
-     $ git clone https://github.com/rkdarst/scicomp/
-
-   You will see a ``scicomp`` folder created.  Change directory into
-   it (``cd scicomp``).  You can then run the ``git log`` commands
-   above.  We will learn more about the format of this repository soon.
-
-
 Terminology
 -----------
 
@@ -558,34 +499,114 @@ Terminology
 
 
 
-
-
-
-Regular work flow
------------------
+Regular work flow: edits and status
+-----------------------------------
 
 This is what you do on normal working days:
 
 * Make changes to your project
 
-* Check status and diff to see what you have done
+* Use ``git status`` to see what is changed / what is added and waiting to be committed.
 
   .. console::
 
      $ git status
+
+* Make a file called ``.gitignore`` and put patterns of things you want to ignore.
+
+  ::
+
+     *.o
+     *.pyc
+     *~
+
+* This makes the "git status" output *more useful* and you generally
+  want to keep your ignore file up to date.
+
+.. epigraph::
+
+   Status tells you what you have edited since the last commit.  If it
+   shows nothing, then you can be happy: everything is committed.
+
+   I should really emphasize how important the ``.gitignore`` file is!  It
+   seems minor, but clean "status" output will really make ``git``
+   much more usable.  ``.gitignore`` can be checked into version
+   control itself.  You can also use a ``~/.gitignore`` file in your
+   home directory.
+
+
+
+Regular work flow: check diffs
+------------------------------
+
+* Check diffs to see the exact changes.
+
+  .. console::
+
      $ git diff
      $ git diff --word-diff=color
+
+* This shows you the exact edits you have made since the last commit.
+* Gives you another chance to check yourself.
+
+.. epigraph::
+
+   Why should you look at diffs?  First, and most importantly, it lets
+   you check yourself.  You can see all changes you have made since
+   your last checkpoint (commit), to see if it makes sense when put
+   together.  This may be a bit of extra work, but it is very
+   important for good development practices.
+
+
+
+Regular work flow: committing
+-----------------------------
 
 * Commit specific files
 
   .. console::
 
-     $ git commit file1.txt calculate.py     # commit specific files
      $ git commit -a                         # commit all changes
+     $ git commit file1.txt calculate.py     # commit specific files
      $ git commit -p                         # commit specific changes (it will ask you)
      $ git commit -p file1.txt               # commit specific changes in specific file
 
+* You can commit in different ways
 
+  - All changes to all files
+  - Only specific files
+  - Interactively review and confirm each change (``-p`` mode)
+
+* You will be asked for a commit message.  (Advice later)
+
+.. epigraph::
+
+   This is the last step.  Before doing this, check status and diffs.
+   After doing this, check status and make sure everything is clean.
+
+   We'll talk about how to structure and group changes into commits
+   later.
+
+
+
+Viewing history
+---------------
+
+* The log shows history of past commits.
+
+* Metadata about what you have done and when
+
+  * Commit title, commit description, files changed, previous version
+
+To view history in ``git``, run:
+
+.. console::
+
+   $ git log
+   $ git log --oneline              # abbreviated format
+   $ git log --patch                # also show patches
+   $ git log --stat                 # also show stats
+   $ git log --oneline --graph --decorate --all  # for later use
 
 
 
@@ -595,15 +616,6 @@ Getting information
 * You will have to try each of these yourself to see what they do
 
 * COMMIT_HASH is the hexadecimal like ``86d026287189acd341e7fb2ee88063375e2e1e73`` or ``86d026`` (short).  It's a unique identifier for everything git knows.
-
-* Show your history of changes
-
-  .. console::
-
-     $ git log
-     $ git log --oneline
-     $ git log --stat
-     $ git log --oneline --graph --decorate --all
 
 * Show what changed since last commit
 
@@ -628,8 +640,6 @@ Getting information
   .. console::
 
      $ git show COMMIT_HASH:file1.txt
-
-
 
 
 
@@ -696,9 +706,11 @@ Revisiting: what can version control be used for?
 Conclusion
 ----------
 
-* You should now be able to begin collecting history for your own projects
+* You should now be able to begin collecting history for your own
+  projects
 
-* Start using this.  In the future, if you need to do something, ask or search.
+* Start using this.  In the future, if you need to do something, ask
+  or search.
 
 * We have not covered:
 
@@ -706,17 +718,21 @@ Conclusion
 
   * sharing and remotes (collaboration and publishing)
 
-* You can answer questions like these (you'll have to search later though):
+* You can answer questions like these (you'll have to search later
+  though):
 
   * What was I doing yesterday?
 
   * My code just broke, what did I change?
 
-  * I just found a bug, I need to know when it got written so I will know how much is invalid.
+  * I just found a bug, I need to know when it got written so I will
+    know how much is invalid.
 
-  * What code did I run one month and eight days ago to make this plot?
+  * What code did I run one month and eight days ago to make this
+    plot?
 
-  * I am using this version of the code for my paper.  I want to never forget this point. (See ``git tag``).
+  * I am using this version of the code for my paper.  I want to never
+    forget this point. (See ``git tag``).
 
 
 
@@ -724,6 +740,30 @@ Conclusion
 
 Next steps
 ==========
+
+Summary of commands
+-------------------
+
+The commands needed, as we know them now.
+
+* Initialization
+
+  - ``git init``  (create new repository)
+  - ``git add``  (begin tracking file)
+
+* Working and committing
+
+  - ``git status``  (see summary of changed files)
+  - ``git diff``  (see exact latest changes)
+  - ``git commit``  (make new commit)
+
+* Viewing history
+
+  - ``git log``  (show commits and messages)
+  - ``git show``  (show old commit diffs, also show old versions of files)
+  - ``git diff  A..B`` (show differences between any two versions)
+  - ``git annotate``  (show when files were last edited)
+
 
 
 References
@@ -772,11 +812,33 @@ References
 
 
 
+The "staging area" or "index"
+-----------------------------
+* For simplicity, I leave out one thing common in introductory
+  tutorials: the "staging area" or "index"
+* For "regular work flow", you can also do this:
+
+  - ``git add [ filename OR -a OR -p ]``: add file to staging area
+
+  - ``git commit``: Commits files previously staged with ``git add``.
+
+* This extra step can be useful for large projects, but for us it's
+  just extra work.
+
+* By using ``git commit``  with a filename, ``-a`` (all changes), or
+  ``-p`` (interactively select changes), it does the same job as ``git
+  add`` followed by ``git commit``.
+
+* Just be aware that you will see this in other tutorials.  You can
+  replace ``add+commit`` with just ``commit`` if you want.
+
+
 
 Other things to try
 -------------------
 
-Here are some ideas for independent study that you need to try yourself:
+Here are some ideas for independent study that you need to try
+yourself:
 
 * If you need to revert to a former version of the file:
 
@@ -793,25 +855,10 @@ Here are some ideas for independent study that you need to try yourself:
      $ git reset COMMIT_HASH            # doesn't lose file changes
      $ git reset COMMIT_HASH  --hard    # obliterates changes in working directory - dangerous!
 
-* If you want to see the commit that added or edited a particular line in a file (for example, to figure out what commit introduced a bug):
-
-  .. console::
-
-     $ git annotate FILENAME
-
 * There are many git GUIs, including
 
   .. console::
 
      $ gitk
      $ git-cola
-
-Regarding ``git add``: I did **not** talk about **the index** (also known as **staging**).  This is everything related to the command ``git add``.  Most tutorial and example usages of git talk about this extensivly.  Basically, instead of running ``git commit FILENAME``, people will run
-
-.. console::
-
-   $ git add FILENAME
-   $ git commit
-
-so there is another step in there.  This is conceptually advantageous, but for now is an extra complication (and I hardly ever use it).  Just be aware that other tutorials will talk about ``git add``, and eventually knowing about "the index" will be a little bit useful.
 
