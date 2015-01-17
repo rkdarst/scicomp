@@ -18,6 +18,13 @@ What this course will do
 * Provide an appreciation of software development
 * Provide information for future study
 
+What this course is not
+~~~~~~~~~~~~~~~~~~~~~~~
+* A computer science class
+* A software development class
+* Overly theoretical (hence the name)
+* Be satisfying to professionals in these fields
+
 How this class works
 ~~~~~~~~~~~~~~~~~~~~
 * Each lecture is self-contained on some topic
@@ -25,10 +32,12 @@ How this class works
 * Not programming-language specific
 * Lectures provide background and ideas
 
-  - You will have to do independent work for your problem, language,
-    and workflow.
+  - You will have to do independent study for your problem,
+    programming language, and workflow.
 
 * Mostly discussion-based, not just lectures
+
+
 
 Why might this course be important?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
