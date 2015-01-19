@@ -131,6 +131,18 @@ year.  Until the lecture, they won't be refined.
 * Day 11 (31 Mar): Wrap-up
 
 
+IRC channel
+~~~~~~~~~~~
+Internet relay chat (IRC) is a channel-based communication system.
+There is one channel, where everyone from the class can ask questions
+to anyone else.
+
+* Basic information: channel ``#scicomp`` on the server
+  ``irc.oftc.net``
+* Use any normal IRC client (details later).
+* `Use this web chat <http://webchat.oftc.net/?channels=scicomp>`_.
+  Pick some nickname and you can connect directly.
+
 
 Why should you take this course?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
