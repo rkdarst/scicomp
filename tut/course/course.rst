@@ -117,8 +117,10 @@ year.  Until the lecture, they won't be refined.
 
 * Day 1  (13 Jan): (a) `Introduction <intro.html>`_ (b) `Version
   control intro (git) <../git-10-minute/git-10-minute.html>`_ (c)
-  `Class notes <day01.html>`_
-* Day 2  (20 Jan): `Git and collaboration <../git-collaboration/gitlab-and-collaboration.html>`_ (unrevised)
+  `Class notes 1 <day01.html>`_
+* Day 2  (20 Jan): (a) `Git and collaboration
+  <../git-collaboration/gitlab-and-collaboration.html>`_ (b) `Class
+  notes 2 <day02.html>`_
 * Day 3  (27 Jan): `Debugging <../debugging/debugging.html>`_ (unrevised)
 * Day 4  (03 Feb): `Profiling <../profiling/profiling.html>`_ (unrevised)
 * Day 5  (10 Feb): `Software testing introduction <../testing/testing.html>`_ (unrevised)
