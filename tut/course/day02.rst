@@ -19,3 +19,5 @@ Before class
 * Second, please bring a computer to class. We will have examples to
   do together.
 
+"Homework"
+~~~~~~~~~~

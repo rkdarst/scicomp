@@ -383,7 +383,7 @@ Typical workflow
   .. console::
 
      $ git fetch
-     $ git merge
+     $ git merge            # these two combined are the same as ``git pull``
 
 * Send the code back
 
@@ -396,6 +396,7 @@ then it'll fail again.  In this tutorial, with everyone doing this at
 the same time, this may be a problem.  You have to be fast!
 
 Do interactive project #1 (at the bottom)
+
 
 
 Some notes on defaults, etc
@@ -454,26 +455,23 @@ Dealing with conflicts: meta-notes
 
 * Read the instructions, ``git`` will tell you what to do.
 
-    ::
+  ::
 
-       CONFLICT (content): Merge conflict in FILENAMES
-       Failed to merge in the changes.
-       Patch failed at 0001 PATCH_NAME
-
-       When you have resolved this problem run "git rebase --continue".
-       If you would prefer to skip this patch, instead run "git rebase --skip".
-       To check out the original branch and stop rebasing run "git rebase --abort".
+     Auto-merging file.txt
+     CONFLICT (content): Merge conflict in file.txt
+     Automatic merge failed; fix conflicts and then commit the result.
 
 * ``git diff`` and ``git status`` are your friends - still.
 
 * If you forget to finish the resolve, you will have problems later.
 
 
+
 Dealing with conflicts: resolution steps
 ----------------------------------------
 
 * ``git`` puts markers put in the code on the exact lines of conflict:
-  ``<<<<<<<<<<``, ``=========``, and ``>>>>>>>>>>``.
+  ``<<<<<<<``, ``=======``, and ``>>>>>>>``.
 
 * ``git diff`` shows the conflicting lines
 
@@ -494,6 +492,7 @@ Dealing with conflicts: resolution steps
 
 * Finish with ``git status`` and ``git log1a`` and ``git diff`` to make
   sure everything is there.
+
 
 
 
@@ -521,6 +520,7 @@ Conflict notes
 Do interactive project #2 (at the bottom)
 
 
+
 Working to reduce conflicts
 ---------------------------
 
@@ -532,6 +532,8 @@ Working to reduce conflicts
 
 * Separate big changes into different commits.
 
+* Pull and push often!  The less difference between people, the fewer
+  conflicts.
 
 
 
@@ -565,15 +567,65 @@ optional.
 Next steps
 ==========
 
-This section will have follow-up information later.
+Summary of commands
+-------------------
 
-To discuss (eventually):
+These are the extra commands we have learned today.
 
-* What permissions and ownerships should we have on the repositories?
+* Getting information
 
-* How do we want to manage our own shared stuff?
+  - ``git status``
+  - ``git log1a`` (``git log --oneline --decorate --graph --all``)
 
-*
+* Branches
+
+  - ``git checkout``
+  - ``git branch <new name>``
+  - ``git merge``
+
+* Dealing with remotes
+
+  - ``git clone``  (get a copy of a remote repository)
+  - ``git remote``  (maniputate remotes)
+  - ``git fetch``
+  - ``git pull``  (this is the same as ``git fetch`` followed by ``git merge``)
+  - ``git push``
+  - ``git merge``
+
+
+* Conflicts
+
+  - ``git diff`` (show conflicts)
+  - ``git add``  (mark file as resolved)
+  - ``git commit``  (mark conflict as resolved)
+  - ``git status``  (use before and *after* conflict to ensure it is resolved)
+
+
+References
+----------
+
+* Git manual pages (same as before)
+
+* The git book (Pro Git): http://www.git-scm.com/book/
+
+  + Chapter 3, discusses branching, etc (very good diagrams and
+    explinations here).
+
+  + Section 3.5 discusses remotes, pushing, pulling, etc (notice it's
+    in the branching chapter).  Chapter 4 is more useful if you are
+    setting up a server, but 4.3 (ssh keys) and 4.8 (GitLab) may be
+    useful.
+
+  + Chapter 5 discusses practical points of running a distributed project.
+
+* Official git documentation: http://git-scm.com/documentation
+
+* Brain and Mind Laboratory `git micromanual <https://git.becs.aalto.fi/bml/bramila/wikis/git-micromanual>`_
+
+* This `cool cheat sheet
+  <http://ndpsoftware.com/git-cheatsheet.html>`_, starts becoming a
+  bit more relevant, but still has a lot that goes beyond what we know.
+
 
 
 
@@ -641,15 +693,15 @@ Projects
 ========
 
 We'll do these projects together.  Form groups of two (both people
-with computers).  I made a sample ``tutorial.git`` project for us to
+with computers).  I made a sample ``demo.git`` project for us to
 play with.
 
 * Gitlab is at https://git.becs.aalto.fi.
 
-* Project page: https://git.becs.aalto.fi/complex-networks/tutorial
+* Project page: https://git.becs.aalto.fi/scicomp/demo
 
 * git URL for cloning:
-  https://git.becs.aalto.fi/complex-networks/tutorial.git
+  https://git.becs.aalto.fi/scicomp/demo.git
 
 
 
@@ -657,7 +709,7 @@ play with.
 Interactive project #1: basic usage
 -----------------------------------
 
-* Clone ``tutorial.git`` (git clone)
+* Clone ``demo.git`` (git clone)
 
 * Add a new file with your name.  Have at least 20 lines in the
   file. (edit, git commit)
@@ -695,26 +747,13 @@ Interactive project #2: conflicts
 
 * Both push at the same time.  Whose push succeeded?
 
-* The person whose push was unsuccessful, fetch and try to rebase.
+* The person whose push was unsuccessful, fetch and try to merge.
   Resolve the conflict and send the resolution upstream.
 
-* Do the same thing as the last step, but resolve the conflict using
-  'merge' instead of 'rebase'.
 
 
 
-
-Interactive project #3: merging
--------------------------------
-
-* Same as #2, but do a merge.
-
-* Look and see how it looks different in the gitlab "network" view.
-
-
-
-
-Interactive project #4: partial commit and stashing
+Interactive project #3: partial commit and stashing
 ---------------------------------------------------
 
 * Make two different edits in the same file
@@ -725,12 +764,12 @@ Interactive project #4: partial commit and stashing
 
 * Try to push and see it fails
 
-* Try to ``git fetch`` and ``git rebase`` - see that it warns you of
+* Try to ``git fetch`` and ``git merge`` - see that it warns you of
   local uncommited changes
 
 * ``git stash`` the uncommited changes
 
-* Now ``git rebase`` and ``git push``
+* Now ``git merge`` and ``git push``
 
 * Now ``git stash pop``
 
