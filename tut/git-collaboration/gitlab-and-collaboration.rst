@@ -405,12 +405,9 @@ Some notes on defaults, etc
 
   .. console::
 
-     $ git pull
-     $ git pull origin
-     $ git merge
-     $ git merge origin/master
-     $ git push
-     $ git push origin  master
+     $ git pull                = git pull origin master
+     $ git merge               = git merge origin/master
+     $ git push                = git push origin master
 
 * There is a default upstream repository, and default branch to merge
 * To view default branch/repository, use
@@ -426,6 +423,7 @@ Some notes on defaults, etc
      git branch --set-upstream <local-branch> origin/<remote-branch>
 
 
+
 Conflicts
 ---------
 
@@ -439,7 +437,7 @@ Conflicts
 * When a conflict happens, the merge aborts and
   you have to resolve, then finish the merge.
 
-  - Git generally has pretty good error messages - **read them** and
+  - Git generally has pretty good messages - **read them** and
     follow instructions.  Don't forget or miss it, it will be bad for
     everyone.
 
@@ -551,7 +549,7 @@ Conclusion
 * *remotes* represent another repository and *branches* represent a
   line of development
 
-* The key commands ``git fetch``, ``git rebase``, ``get push``
+* The key commands ``git fetch``, ``git merge``, ``get push``
 
 * Conflicts happen when people edit the same things, but there are
   well established procedures for dealing with them
@@ -628,6 +626,14 @@ References
 
 
 
+Optional: merge requests (pull requests)
+----------------------------------------
+* New features are added in a branch
+* Branch is pushed to a server
+* A "pull request" is made which is discussed and accepted/rejected.
+* Gitlab, github, etc, provide features to handle this.
+
+
 
 Optional: Merge vs rebase
 -------------------------
@@ -676,7 +682,7 @@ Optional: stashing uncommitted changes
 
   * See current changes: ``git diff```
 
-  * Do whatever else you want to do: ``git fetch``, ``git rebase``,
+  * Do whatever else you want to do: ``git fetch``, ``git merge``,
     ``git push``
 
   * *Reapply* your stashed changes:
@@ -714,11 +720,11 @@ Interactive project #1: basic usage
 * Add a new file with your name.  Have at least 20 lines in the
   file. (edit, git commit)
 
-* send the file upstream. (git fetch, git rebase, git push)
+* send the file upstream. (git fetch, git merge, git push)
 
 * Verify that you see the file in gitlab.
 
-* Fetch everyone else's file (git fetch, git rebase)
+* Fetch everyone else's file (git fetch, git merge)
 
 * Edit a few lines in someone else's file.  Ask permission first.  No
   more than one person should edit the same file at the same time
