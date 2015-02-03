@@ -26,15 +26,10 @@ Outline
 
 - What is profiling?
 
-  - Real example: profile and call graph
-
 - How to generate profiles
 
-- What to look for
+- How to find bottlenecks
 
-- Advanced tools and tips
-
-- "Optimizing"
 
 
 
@@ -77,7 +72,7 @@ Profiling
 Wikipedia: **Profiling** is dynamic program analysis of time, space, or
 other resource usage.
 
-- This talk focuses exclusively on *time profiling*.
+- This talk focuses mostly on *time profiling*.
 
 - Profiling will help us find **bottlenecks** in the code, that use up
   most of the time.  We then work on the code around the bottleneck.
@@ -89,6 +84,7 @@ other resource usage.
   the code itself!  **This is the point of profiling first, then
   optimizing**.
 
+What you can't see, you can't improve
 
 
 
@@ -112,6 +108,8 @@ Example output (click link):
 
 .. epigraph::
 
+   - I find one slow branch that takes most time.
+
    This is a directed graph showing the flow of time through the
    program.  At the top is the entry point, and looking down you see
    the flow of time (in fraction of total time) distributed among all
@@ -130,6 +128,10 @@ How to collect the profiling data
 
 - Step 1: have a good, clean program that works correctly.
 
+- Step 1.5: Have a reproducible function or script to run
+
+  - Fast, and demonstrates the bottlenecks
+
 .. epigraph::
 
    Remember, the whole point of this is that you should write good
@@ -139,6 +141,14 @@ How to collect the profiling data
    out later anyway.
 
 
+Profiling in different languages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The following examples will mostly use Python
+
+- These are simple and show the main points
+
+- Other languages are similar, some other language examples are later.
 
 
 
@@ -235,19 +245,19 @@ Example output (click link):
 Some nomenclature
 ~~~~~~~~~~~~~~~~~
 
-- Total time: time spent in a function itself.
+- **Total time**: time spent in a function itself.
 
   - Tells you that *the code in this function* is taking a lot of time.
 
-- Cumulative time: time spent in a function and all functions it
+- **Cumulative time**: time spent in a function and all functions it
   called.
 
   - Tells you that *this function* is taking a lot of time.  Perhaps
     it is calling other functions unnecessarily.
 
-- Callers: functions which called some function.
+- **Callers**: functions which called some function.
 
-- Callees: functions which some function calls.
+- **Callees**: functions which some function calls.
 
 
 
@@ -260,14 +270,14 @@ What to look for in a profile
 - Who calls the functions that take most time?  Often, the actual
   critical function is several steps up.
 
-- (in Python) C-implemented functions or methods do not appear.
+- (in Python) some C-implemented functions or methods do not appear.
 
 - You generally want to find things that are surprising: that are
   using lots of time but *shouldn't* be major operations.  You want
   the actual computation part to take most of the time.
 
 - Each time you improve some things, re-generate the profile to see
-  new hotspots.
+  changes.
 
 .. epigraph::
 
@@ -330,6 +340,14 @@ Profile source: `profile-external.out <profile-external.out>`_
 
    On the left of this figure, we see various external community
    detection methods running using the ``subprocess`` module.
+
+Example: using a library for work
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: profile-dynsnap-1.png
+   :alt: Call graph after optimizing
+   :target: profile-dynsnap-1.png
+   :height: 5cm
 
 
 
@@ -686,3 +704,77 @@ Resources
   - gprof: http://www.cs.utah.edu/dept/old/texinfo/as/gprof.html
 
   - Valgrind (huge dynamic program analysis tool): http://valgrind.org/
+
+Matlab
+~~~~~~
+- Reference: http://se.mathworks.com/help/matlab/ref/profile.html
+
+- Tutorial: http://se.mathworks.com/help/matlab/matlab_prog/profiling-for-improving-performance.html
+
+- Example:
+
+  ::
+
+     profile on
+     # Code to be profiled here
+     profile viewer   # stop profiler, view it
+
+     p = profile('info');
+     profsave(p,'profile.html')
+
+
+Line profiling in Python
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+- There is a package ``line_profiler``: https://github.com/rkern/line_profiler
+
+- There is a *lot* of overhead, so you must specify which functions to
+  profile!
+
+- Run program with ``kernprof.py``
+
+  .. code:: console
+
+     $ kernprof -l program.py
+
+- Decorate functions to profile
+
+  .. python::
+
+     @profile
+     def bottleneck_function(...):
+         ....
+         ....
+
+- ``IPython``: ``%lprun`` magic command.
+
+
+Memory profiling in Python
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- RAM usage takes time.  Reduce memory usage to improve performance
+  (and scale up).
+
+- Heapy:
+
+  .. python::
+
+     from guppy import hpy
+     h = hpy()
+     print h.heap()
+
+- ``memory_profiler``
+
+  - Line-by-line profiling, of *increase of* memory usage
+
+  .. code:: console
+
+     python -m memory_profiler example.py
+
+  .. python::
+
+     @profile
+     def bottleneck_function(...):
+         ....
+         ....
+
