@@ -2,7 +2,12 @@ Introduction to software testing
 ********************************
 
 
-This talk is designed to discuss the concepts of software testing.  In it, I will outline the concept of software testing and summarize the current real-world best practices and procedures.  We will then discuss how to, and the difficulties of, applying this to scientific software, but we won't actually discuss how to do it this week: next time will be a tutorial for that, based on this week's feedback.
+This talk is designed to discuss the concepts of software testing.  In
+it, I will outline the concept of software testing and summarize the
+current real-world best practices and procedures.  We will then
+discuss how to, and the difficulties of, applying this to scientific
+software, but we won't actually discuss how to do it this week: next
+time will be a tutorial for that, based on this week's feedback.
 
 
 
@@ -21,16 +26,19 @@ Before you start
 
   * Do you have enough confidence that you just write and use?
 
-  * Do you write and then run it a few times and see if the results look good?
+  * Do you write and then run it a few times and see if the results
+    look good?
 
 Outline
 ~~~~~~~
 
-* First, I will discuss basic concepts of testing and how other projects use it.
+* First, I will discuss basic concepts of testing and how other
+  projects use it.
 
 * Then, I will describe some of the common tools for testing
 
-* Finally, we will discuss things that make *scientific* code testing hard
+* Finally, we will discuss things that make *scientific* code testing
+  hard
 
 Basic concepts of unit testing
 ------------------------------
@@ -50,7 +58,8 @@ Testing is considered one of the cornerstones to good software.
 
   * Design
 
-* This talk is about systematically doing so **automatically** and **systematically**, instead of just testing only while developing.
+* This talk is about systematically doing so **automatically** and
+  **systematically**, instead of just testing only while developing.
 
 * The key to making testing work is *balance*.
 
@@ -80,36 +89,52 @@ Examples of unit tests of different libraries
 
 * sqlite3 - http://sqlite.org/testing.html
 
-  * This project is especially proud of its tests.  1000 times more test code than project code, including three independent complete test suites, comparison against other DB engines, testing against power failures, corruptions, etc.
+  * This project is especially proud of its tests.  1000 times more
+    test code than project code, including three independent complete
+    test suites, comparison against other DB engines, testing against
+    power failures, corruptions, etc.
 
-* django web framework - https://docs.djangoproject.com/en/1.6/topics/testing/
+* django web framework -
+  https://docs.djangoproject.com/en/1.6/topics/testing/
 
-  * Web frameworks have lots of complications, like databases, web interfaces, etc.  Serious projects like django will include tools to manage these things: making fake databases, automatic web clients, etc.
+  * Web frameworks have lots of complications, like databases, web
+    interfaces, etc.  Serious projects like django will include tools
+    to manage these things: making fake databases, automatic web
+    clients, etc.
 
-Good projects have a policy of never accepting contributions without tests.
+Good projects have a policy of never accepting contributions without
+tests.
 
-Good projects have a policy: if someone reports a bug, add a test to reproduce the bug, then fix it.  Bug will not appear again.
+Good projects have a policy: if someone reports a bug, add a test to
+reproduce the bug, then fix it.  Bug will not appear again.
 
-Tests can be a lot of work!  You can easily write more lines of code to test than to solve the problem sometimes.  But if code is designed well, it can be very easy.
+Tests can be a lot of work!  You can easily write more lines of code
+to test than to solve the problem sometimes.  But if code is designed
+well, it can be very easy.
 
 Different types of testing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Unit testing
 
-  * Testing the smallest atomic components, each function in isolation without risk of other functions affecting things.
+  * Testing the smallest atomic components, each function in isolation
+    without risk of other functions affecting things.
 
-  * A *test failure* here is easy to track down since it should have only one function used.
+  * A *test failure* here is easy to track down since it should have
+    only one function used.
 
 * Integration testing
 
-  * Testing how things work together, functions or components can communicate properly.
+  * Testing how things work together, functions or components can
+    communicate properly.
 
 * System testing
 
   * Testing everything together, an entire run and OS interaction.
 
-  * *Example: having test dataset that calculates quickly.  You can quickly and often run on test data to make sure the script completes and has proper output.*
+  * *Example: having test dataset that calculates quickly.  You can
+    quickly and often run on test data to make sure the script
+    completes and has proper output.*
 
 * You can make tests at different levels of this hierarchy.
 
@@ -117,31 +142,41 @@ Different types of testing
 
 * In our work we may not want to test every function at every level.
 
-  * *Example: you may want unit tests on calculations, integration tests on some components, and no system tests: if the whole thing breaks, you'll notice anyway.*
+  * *Example: you may want unit tests on calculations, integration
+    tests on some components, and no system tests: if the whole thing
+    breaks, you'll notice anyway.*
 
 How to test
 ~~~~~~~~~~~
 
-* Tests should be **automatic** - can run and check themselves in a script, without any user interaction.
+* Tests should be **automatic** - can run and check themselves in a
+  script, without any user interaction.
 
 * Tests should generally be fast to run.
 
-* Commit hooks - tests are automatically run before before you can commit, or before pushing to a central server.  (**Continuous integration**)
+* Commit hooks - tests are automatically run before before you can
+  commit, or before pushing to a central server.  (**Continuous
+  integration**)
 
-* There can be significant technical overhead in testing certain applications (e.g. web applications)
+* There can be significant technical overhead in testing certain
+  applications (e.g. web applications)
 
-* Code coverage - some tools can watch the tests run and automatically tell you what lines were NOT run in any test.
+* Code coverage - some tools can watch the tests run and automatically
+  tell you what lines were NOT run in any test.
 
 As scientists, should we, and how should we, use testing in our work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Discussion time.
 
-* You can design things properly the first time, but what happens when you change something?  If it breaks, you may not know.
+* You can design things properly the first time, but what happens when
+  you change something?  If it breaks, you may not know.
 
-* Good test coverage gives you the ability to change things up without risking unknown breaking.
+* Good test coverage gives you the ability to change things up without
+  risking unknown breaking.
 
-* Good testing will rely on knowing the testing hierarchy and writing the right tests for the right jobs.
+* Good testing will rely on knowing the testing hierarchy and writing
+  the right tests for the right jobs.
 
 Unit testing tools and workflows
 --------------------------------
@@ -149,7 +184,8 @@ Unit testing tools and workflows
 unittest / nose
 ~~~~~~~~~~~~~~~
 
-* ``unittest``: In python standard library, provides a base to build on
+* ``unittest``: In python standard library, provides a base to build
+  on
 
   * Fully object oriented (to the point of being annoying to use)
 
@@ -195,7 +231,8 @@ doctests
        >>> factororial(5)
        120
 
-* When run with the doctest framework, the ``>>>`` lines are input, and output is below.
+* When run with the doctest framework, the ``>>>`` lines are input,
+  and output is below.
 
 * Input is evaluated and must match output.
 
@@ -232,13 +269,17 @@ Assertions
 
 * They should exist in any good language - if not, make them yourself.
 
-* Recommendation: write assertions when making new functions.  Remove them later once the function works AND if speed is an issue.
+* Recommendation: write assertions when making new functions.  Remove
+  them later once the function works AND if speed is an issue.
 
 * Can be removed automatically for performance purposes.
 
-  * ``python -o`` runs python without assertions,  ``gcc -DNDEBUG`` compiles without assertions.
+  * ``python -o`` runs python without assertions, ``gcc -DNDEBUG``
+    compiles without assertions.
 
-  * I personally leave them in as long as possible - you never know when an assumption will be violated by changing conditions.  Correctness is more important to me than speed.
+  * I personally leave them in as long as possible - you never know
+    when an assumption will be violated by changing conditions.
+    Correctness is more important to me than speed.
 
 Example usage:
 
@@ -250,7 +291,8 @@ Example usage:
 
 * ... write ``assert not g.has_edge(a, b)``.
 
-* If my calculations were wrong, I will know instead of it passing silently.
+* If my calculations were wrong, I will know instead of it passing
+  silently.
 
 Python syntax:
 
@@ -271,20 +313,23 @@ C syntax:
 Code coverage
 ~~~~~~~~~~~~~
 
-* Tools that take the unit tests and run and show you which lines were NOT tested.
+* Tools that take the unit tests and run and show you which lines were
+  NOT tested.
 
 * Integrated with other tools.
 
 Examples:
 
-* Coverage report with nose: http://nedbatchelder.com/code/coverage/sample_html/
+* Coverage report with nose:
+  http://nedbatchelder.com/code/coverage/sample_html/
 
 * Some other program: pybee.org/duvet/static/images/screenshot.png
 
 Thought process behind making test scripts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Think about the simplest problem with an easily computed answer.  That is your benchmark.
+* Think about the simplest problem with an easily computed answer.
+  That is your benchmark.
 
   * You will need to make *mock data* that has known properties
 
@@ -318,15 +363,21 @@ Scientific software testing
 
 * Making test scripts is hard.
 
-* But you _do_ always test your code anyway, just interactively and non-repeatably (you just run things).  **Right?**
+* But you _do_ always test your code anyway, just interactively and
+  non-repeatably (you just run things).  **Right?**
 
-* In fact, as a scientist your obligation is to make sure that your code is correct by reproducing certain things.
+* In fact, as a scientist your obligation is to make sure that your
+  code is correct by reproducing certain things.
 
-* You "just" need to think about this some and turn it into an automatic system.
+* You "just" need to think about this some and turn it into an
+  automatic system.
 
-  * Instead of testing by running stuff interactively and seeing the output, put it in a test script and run that until you get the right output.
+  * Instead of testing by running stuff interactively and seeing the
+    output, put it in a test script and run that until you get the
+    right output.
 
-* So in terms of the concept of making testable code, it's something you should do anyway, even though it's hard.
+* So in terms of the concept of making testable code, it's something
+  you should do anyway, even though it's hard.
 
 "Is this worth it?" Part 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -337,7 +388,8 @@ Scientific software testing
 
 * There are tools and techniques to make this easier.
 
-* Some aspects of scientific programming, like stochastic problems, may need extra thought.
+* Some aspects of scientific programming, like stochastic problems,
+  may need extra thought.
 
 Code structure issues
 ~~~~~~~~~~~~~~~~~~~~~
@@ -346,33 +398,41 @@ Code structure issues
 
 * Functions should be sufficiently modular, and do only one thing
 
-* Suggestion: **Separate input/output/processing from calculation**.  It's easy to test calculation in isolation.
+* Suggestion: **Separate input/output/processing from calculation**.
+  It's easy to test calculation in isolation.
 
   * Example: Raj's temporal network stuff.
 
-* Sometime, you'll need to make some real scripts and functions that can be called automatically, instead of just running everything interactively.
+* Sometime, you'll need to make some real scripts and functions that
+  can be called automatically, instead of just running everything
+  interactively.
 
 Combinatiorial issues
 ~~~~~~~~~~~~~~~~~~~~~
 
-* With 5 different options, that is 32 different combinations to test!  Do all combinations need testing?
+* With 5 different options, that is 32 different combinations to test!
+  Do all combinations need testing?
 
-* Ideally, yes, but practically, no, unless you automatically write something to test them all.
+* Ideally, yes, but practically, no, unless you automatically write
+  something to test them all.
 
 * Test corner cases: Corner cases: invalid input, overflows inputs.
 
-* Ideally, try to make sure that all code paths are hit at least once (see the coverage tests)
+* Ideally, try to make sure that all code paths are hit at least once
+  (see the coverage tests)
 
 Stochastic issues
 ~~~~~~~~~~~~~~~~~
 
-* What happens if the function depends on randomness?  You can't test that the output matches a fixed value.
+* What happens if the function depends on randomness?  You can't test
+  that the output matches a fixed value.
 
 * Possible solutions:
 
   * Seeding for reproduciblity.
 
-    * makes it immediately reproducible, but test depends on internal structure.
+    * makes it immediately reproducible, but test depends on internal
+      structure.
 
   * Compare results to a distribution.
 
@@ -380,14 +440,17 @@ Stochastic issues
 
   * Taking extreme values to eliminate stochasticity.
 
-    * I tested a model by using extreme parameter values.  The output then should have been either a clique or a tree.  It's easy to verify that, and then I hope that the middle values work.
+    * I tested a model by using extreme parameter values.  The output
+      then should have been either a clique or a tree.  It's easy to
+      verify that, and then I hope that the middle values work.
 
   * Making the stochastic part modular and mocking it.
 
 Management issues
 ~~~~~~~~~~~~~~~~~
 
-* It's always tempting to do something faster to get results than to do things right.
+* It's always tempting to do something faster to get results than to
+  do things right.
 
 * Does management care about testing?
 
@@ -396,33 +459,43 @@ What should our standards be for our group library and our code?
 
 Discussion time
 
-* All code in the library should have some sort of tests, with enough comments to know what's going of if you read them together
+* All code in the library should have some sort of tests, with enough
+  comments to know what's going of if you read them together
 
-* If you are using something that someone else wrote, you should look at the tests before using it.  You verify the tests are correct before using anyone else's code.
+* If you are using something that someone else wrote, you should look
+  at the tests before using it.  You verify the tests are correct
+  before using anyone else's code.
 
-* If the tests aren't there, I guess you have to write them.  That makes you understand what's going on.
+* If the tests aren't there, I guess you have to write them.  That
+  makes you understand what's going on.
 
-* Should there be peer review before merging with the group repository?
+* Should there be peer review before merging with the group
+  repository?
 
 Recommendations for now
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 * Start using assertions
 
-* Try to adapt your code to be more modular, with the most important scientific calculations in separate functions.  Next time, we can write tests for these.
+* Try to adapt your code to be more modular, with the most important
+  scientific calculations in separate functions.  Next time, we can
+  write tests for these.
 
 Summary
 ~~~~~~~
 
 * Testing is a key point of modern software development
 
-* There are many tools and procedures to help people do this 
+* There are many tools and procedures to help people do this
 
 * Making the tests can be significant work in itself
 
-* As scientists, we have some unique difficulties in making tests, but also a unique responsibility to do so.
+* As scientists, we have some unique difficulties in making tests, but
+  also a unique responsibility to do so.
 
-*My goal is to study feedback from this presentation, and prepare a follow-up that gives specific instructions for how to use this in your work*.
+*My goal is to study feedback from this presentation, and prepare a
+ follow-up that gives specific instructions for how to use this in
+ your work*.
 
 What do you want for the next talk?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -432,7 +505,8 @@ Please give me feedback and requests.
 Resources
 =========
 
-Simply doing an internet search for most of these topics will yield plenty of reading and tutorials of all sorts of levels.
+Simply doing an internet search for most of these topics will yield
+plenty of reading and tutorials of all sorts of levels.
 
 Reading list
 ------------
