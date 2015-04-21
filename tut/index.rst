@@ -23,6 +23,14 @@ state when it was presented).  This page has existed only a few weeks,
 so is under active development.  Also, a new tutorial hopefully
 appears every 2-3 weeks, or whenever I can present them.
 
+Course
+~~~~~~
+
+These tutorials were transformed into an informal course at the Aalto
+University Department of Biomedical Engineering and Computational
+Science, during the Spring 2015 term.  Course information is available
+at `the course page <course/>`_
+
 Tutorials
 ~~~~~~~~~
 
@@ -48,6 +56,11 @@ are in an older format.
    testing-2/testing-2                  Software testing with Python
    debugging/debugging                  Debugging
    profiling/profiling                  Profiling
+   git-advanced/git-advanced            Advanced git usage
+   algorithms-data-structures/algorithms-data-structures Understanding algorithms and data structures
+   linux-tips/linux-tips                Linux tips and tricks
+   open-science/open-science            Open science and software development
+
 
 The following tutorials are "under development": they have some
 content, but have not been presented yet and thus are not fully
@@ -56,13 +69,6 @@ structurally sound:
 .. tut-index::
 
    practical/practical-correct-programs  Practical suggestions for writing good programs.  Putting all the other tutorials together.
-
-..
-  Course
-  ~~~~~~
-  
-  The material here 
-
 
 
 Other information
