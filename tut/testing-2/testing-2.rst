@@ -6,9 +6,6 @@ Git repository for the talk:  https://git.becs.aalto.fi/complex-networks/tutoria
 
 
 
-The presentation
-================
-
 In this talk, I will cover:
 
 * The pieces that go into unit testing (functions, assertions, etc)
@@ -20,6 +17,44 @@ In this talk, I will cover:
 The pieces
 ----------
 
+What is a test?
+~~~~~~~~~~~~~~~
+
+Here is a briefest example:
+
+.. code::
+
+   import factorial
+
+   if factorial.fact(5) != 120:
+       print "factorial of 5 is wrong"
+
+
+What is a test? 2
+~~~~~~~~~~~~~~~~~
+
+Here is an example that uses testing tools:
+
+.. code::
+
+   from nose import assert_equal, assert_almost_equal
+
+   import factorial
+
+   def test_factorial():
+
+       assert_equal(120, factorial.fact(5))
+       assert_equal(.88622, factorial.gamma(1.5))
+
+* Test is run using ``nosetests`` command line tool.
+
+
+Examples of real tests
+~~~~~~~~~~~~~~~~~~~~~~
+
+* https://github.com/networkx/networkx/blob/master/networkx/algorithms/isomorphism/tests/test_isomorphism.py
+
+
 Test modules
 ~~~~~~~~~~~~
 
@@ -29,8 +64,7 @@ Test modules
 * The name should include the word "test" either at the beginning or
   after a "_" or some special symbol.
 
-* My recommendation: either call it ``NAME_test.py`` or
-  ``test_NAME.py``.  I use the second.
+* My recommendation: call it ``test_NAME.py``.
 
 * The modules must be importable (no side effects when run, if it has
   primary code put it in a ``if __name__ == "__main__":``) block
@@ -64,12 +98,12 @@ Test functions and classes
 * Test functions: extremely simple to write.
 
 * Test classes: Needs a little bit more structure (but not too much),
-  but you can easily use other thinsg like:
+  but you can easily use other things like:
 
   * setup and teardown methods.
 
     * setup: something run before the test (e.g. create an object or
-      create temporary files)
+      create temporary files used by multiple tests)
 
     * teardown: something run after the test (e.g. remove temporary
       files)
@@ -124,7 +158,7 @@ https://docs.python.org/2/library/unittest.html#assert-methods
   provides *functional versions* of these ``assert*``.
 
 * Instead of ``assertSetEqual``, it will be called
-  ``assert_set_equal`` in nose.tools.
+  ``assert_set_equal`` in ``nose.tools``.
 
 .. python::
 
@@ -174,8 +208,11 @@ If a test fails, you can automatically invoke the debugger:
 * ``nosetests --pdb-fail`` starts pdb when an ``AssertionError`` is
   raised.
 
-* Note: these options change in recent versions of node, ``--pdb``
-  should be sufficient to catch all errors.
+* Note: in recent versions, ``--pdb`` catches both cases.
+
+
+Aside: A reminder about useful ``pdb`` commands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Useful pdb commands:
 
@@ -221,8 +258,8 @@ Recommendations for making tests
 * Testing is easiest for ``pure functions``: the return value depends
   only on arguments and the function does not have any side effects.
 
-* You will be tempted to import the module and run it.  Don't do that.
-  Whatever you would do in the shell,
+* When developing, you will be tempted to import the module and run
+  it.  Don't do that.  Whatever you would do in the shell,
 
   * Put it in a test instead - it's the same amount of work to
     reproduce the problem.
@@ -311,6 +348,18 @@ Instructions:
   * Run the test script: notice it fails.
 
   * Fix the function so that it passes.
+
+
+
+Conclusions
+-----------
+* Tests run code and compare to known output.
+
+* Tests are easy to make in a testing framework.
+
+* Tests can integrate into your development process naturally.
+
+
 
 Euler 001: sum of multiples of 3 and 5
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
