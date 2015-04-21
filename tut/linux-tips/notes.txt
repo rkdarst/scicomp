@@ -1,0 +1,9 @@
+- Less on basic files and standard unix stuff.
+- More on shell scripting
+  - setting up a script, #!, chmod a+x
+  - return status
+  - variables
+  - tests and conditionals
+  - loops
+- Don't have so many slides on random programs at the end.  Focus on a
+  few, and a list of others on one slide.
