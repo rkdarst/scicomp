@@ -121,16 +121,22 @@ year.  Until the lecture, they won't be refined.
 * Day 2  (20 Jan): (a) `Git and collaboration
   <../git-collaboration/gitlab-and-collaboration.html>`_ (b) `Class
   notes 2 <day02.html>`_
-* Day 3  (27 Jan): `Debugging <../debugging/debugging.html>`_ (unrevised)
-* Day 4  (03 Feb): `Profiling <../profiling/profiling.html>`_ (unrevised)
-* Day 5  (10 Feb): `Software testing introduction <../testing/testing.html>`_ (unrevised)
+* Day 3  (27 Jan): `Debugging <../debugging/debugging.html>`_
+* Day 4  (03 Feb): `Profiling <../profiling/profiling.html>`_
+* Day 5  (10 Feb): `Software testing introduction <../testing/testing.html>`_
 * (17 Feb: evaluation week, no class) Use time to prepare code to be tested.
-* Day 6  (24 Feb): `Software testing <../testing-2/testing-2.html>`_ (unrevised)
-* Day 7  (03 Mar): `Advanced git <../git-advanced/git-advanced.html>`_ (unrevised)
-* Day 8  (10 Mar): `Understanding algorithms and data structures <../algorithms-data-structures/algorithms-data-structures.html>`_ (unrevised)
-* Day 9  (17 Mar): The UNIX system
-* Day 10 (24 Mar): `Development, free software, and science <../open-science/open-science.html>`_ (unrevised)
+* Day 6  (24 Feb): `Software testing <../testing-2/testing-2.html>`_
+* Day 7  (03 Mar): `Advanced git <../git-advanced/git-advanced.html>`_
+* Day 8  (10 Mar): `Understanding algorithms and data structures <../algorithms-data-structures/algorithms-data-structures.html>`_
+* Day 9  (17 Mar): `The UNIX system <../linux-tips/linux-tips.html>`_
+* Day 10 (24 Mar): `Development, free software, and science <../open-science/open-science.html>`_
 * Day 11 (31 Mar): Wrap-up
+
+Homework
+~~~~~~~~
+See `the homework page <hw.html>`_.
+
+Please also fill in the `course feedback form <https://docs.google.com/forms/d/1FDKiNKEOUdgt_sqnFxisqFShI5GiioipN-fo_lq9wYc/viewform>`_.
 
 
 IRC channel
