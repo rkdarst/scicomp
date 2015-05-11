@@ -74,9 +74,9 @@ Free software principles
 
 Contrasts to other ideas
 ~~~~~~~~~~~~~~~~~~~~~~~~
-* Commercial software: FS can be a business strategy
-* "Freely distributed": Can't be re-shared
-* "Open source": sometimes a marketing term, can't be shared/modified
+* Commercial software: FS can be a business strategy.
+* "Freely distributed": Can't be adapted, improved, and re-shared.
+* "Open source": sometimes a marketing term, can't be shared/modified.
 * "Non-commercial": FS allows commercial use.
 
 Why you need a license
@@ -95,7 +95,7 @@ Types of licenses
 
 * BSD/MIT: most liberal
 
-  - Do whatever you want, no warranty, attribute copyright
+  - Do whatever you want, no warranty, attribute copyright.
 
 * Gnu General Public License (GPL): "copyleft" (virulent)
 
@@ -107,8 +107,11 @@ Types of licenses
 
 How to apply a license
 ~~~~~~~~~~~~~~~~~~~~~~
-* Minimum: put the file in your source code.
-* FIXME
+* Minimum: put the license file in your repository
+* Best:
+
+  - Headers in each file saying authors, license, and year.
+  - Include full text of licenses in repository.
 
 License compatibility
 ~~~~~~~~~~~~~~~~~~~~~
@@ -195,6 +198,7 @@ Agile Sub-strategies
 * Test-driven development
 * Extreme programming
 * Scurm
+* Lean development
 * .. and plenty more
 
 
@@ -210,7 +214,7 @@ Running a project
 
 * Much more than just code to a healthy project
 
-  - Human factors and syncronization
+  - Human factors and synchronization
 
 * A project used by others must have
 
@@ -229,6 +233,7 @@ Example project: ``networkx``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * ``networkx`` is a graph library for Python
 * We will use it as an example for a open source project.
+* http://networkx.github.io/
 
 Documentation
 ~~~~~~~~~~~~~
@@ -246,14 +251,15 @@ How to write documentation
 * Use this recipe to make it faster
 
   - Summary: why would you want to use this?
+  - Details on workings
   - Inputs: formats, meanings, uses
   - Outputs: formats, meaning, uses
   - Optional items: description of algorithms
 
 (this applies to programs, packages, functions, modules, etc)
 
-Communication
-~~~~~~~~~~~~~
+Project communication strategies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * IRC
 
   - Fast but ephemeral communication
@@ -287,7 +293,7 @@ Making changes
 
   - "patch" is the standard format
   - Alternative, git pull requests can be used (gitlab/github)
-  - Some projects want issue for each request
+  - Some projects want an issue for each request
 
 * **Treat every patch or contribution as a gift**
 
@@ -309,27 +315,32 @@ Releases
   - Tag in VCS
   - Changelog
 
-* Define backwards compatibility
+* Define backwards compatibility goals
 
 ..
 
-   Have documentation on how to make a release
+   If you make releases, it's a good idea to have documentation on how
+   to make a release.  Otherwise, each time you want to release you'll
+   be figuring out the process all over again.
 
-Distribution of responsibility, succession
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* Not an open source project without other contributions
-* Try not to have single points of failure
-* Plan for the project to be handed over eventually
-* One study: most projects that survive have a permanent position
-  leading them
-* Encourage contributions
+Distribution of responsibility and succession
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Not an open source project without other contributions.
+* Try not to have single points of failure.
+* Plan for the project to be handed over eventually.
+* One study: most scientific software projects that survive have a
+  permanent position leading them.
+* Encourage contributions!
 
 
 Release tools
 ~~~~~~~~~~~~~
-* Understand your language's tools for distribution
+* Understand your language's tools for distribution.
 
   - e.g. Python ``distutils`` and ``setup.py``
+
+* Most "normal" and easiest to use for everyone.
+* Handles most special cases.
 
 
 Designing software
@@ -419,9 +430,19 @@ Projects vs libraries
   - Eventually promoted to a library
 
 
-interactive vs production systems
+Interactive vs production systems
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Interactive system (e.g. ``ipython``) are great for development
 * ... but they don't have permanence
 
 
+
+Conclusions
+-----------
+* There is no single lesson for day-to-day research work here.
+* This should help you in the transition to more formal project
+  management.
+* **Free software and licenses** allow a wide audience.
+* **Software development workflows** coordinate people.
+* Lots of **project management** tools are available.
+* **Software design** is hard.

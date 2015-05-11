@@ -1,6 +1,8 @@
 Algorithms and data structures
 ==============================
 
+This page uses MathML, if this does not appear as "n squared" then it
+does not work in your browser: :math:`n^2`
 
 .. ::
 
@@ -36,6 +38,14 @@ What are algorithms?
 * **Algorithm**: A series of steps to complete some process.
 
 * There can be different algorithms that produce the same result.
+
+* All computational research involves calculating some results via
+  algorithms.
+
+* You could argue that this is **the** core Computer Science topic,
+  and I can **not** do it justice.
+
+  - This is a brief intro for scientific programmers.
 
 
 
@@ -74,12 +84,12 @@ Another example: graph representations
 
  * List of lists: :math:`N` lists of neighbors.
 
-* How long does it take to compute the number of edge in the graph?
+* How long does it take to compute the number of edges in the graph?
 
   * Matrix: have to look at :math:`N^2` elements.
 
   * List of lists: have to take ``len()`` of :math:`N` lists, which takes
-    time :math:`cN`.
+    time :math:`c \ times N`.
 
 * The lists of lists is clearly much faster, *for this problem*.
 
@@ -93,14 +103,17 @@ How do we express the "speeds" of algorithms?
 * **Big-O notation**: used to classify algorithms by how they respond
   (processing time or memory requirements) to changes in input size.
 
-* Important since scientists tend to want to process bigger data (:math:`N`).
-
 * "Time :math:`O(N^2)`" means "time to run is proportional to :math:`N^2`".
 
-  * :math:`N` can be different parameters, e.g. array size, number of
-    records, number of nodes.
+  * Double problem size, four times as long to run.
 
-  * Can be combined: :math:`O(N \times m)`
+  * :math:`N` can be different parameters, e.g. array size, number of
+    records, number of atoms.
+
+  * Different variables can be combined: :math:`O(N \times m)`
+
+* Important since scientists tend to want to process bigger data (data
+  size: :math:`N`).
 
 * Algorithmic analysis does not care about constant factors.
 
@@ -119,6 +132,16 @@ How do we express the "speeds" of algorithms?
    the best algorithm, and then optimize constant factors.  For small
    problems, a higher complexity algorithm with smaller constant is
    better.
+
+
+
+How am I going to explain this?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Simple examples of short code lines.
+* *Not* a formal analysis.
+* Ignoring questions of when algorithms terminate.
+* Again, this is *not* a complete picture.
+
 
 
 Example 1: trivial
@@ -159,7 +182,7 @@ This is :math:`O(N^2)`.
 .. epigraph::
 
    Hopefully this is clear.  The total number of lines that execute
-   here is :math:`constant N^2`.
+   here is :math:`constant \times N^2`.
 
 
 
@@ -167,7 +190,7 @@ This is :math:`O(N^2)`.
 Example 3: consider complexity of functions called
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Suppose :math:`func(L)` is :math:`O(L)`.
+Suppose :math:`func(L)` is :math:`O(L)`:
 
 .. code::
 
@@ -194,7 +217,7 @@ Suppose ``func(N)`` is :math:`O(N)`
 
 This is :math:`O(N^2)`.
 
-Why?  First and third lines combine to give a time of
+Why?  First and second lines combine to give a time of
 :math:`1+2+\cdots+N = \frac{N(N-1)}{2} = O(N^2)`.
 
 
@@ -235,13 +258,18 @@ Complexity reduction 2
 
 .. code::
 
-   for i in range(len(data)):
+   for i in range(len(data)):       # O(N)
        if data[i] != 0:
            f(data[i])
 
 * In this case, we do :math:`O(\mathrm{len}(\mathrm{data}))`
   operations, but the important part could be called much less often
   if ``data`` is sparse.
+
+  .. code::
+
+     for dat in nonzero_data:       # O(actual_data)
+         f(dat)
 
 * In this case, one should keep track of important elements
   separately, if ``data`` will be mostly zeros.
@@ -254,17 +282,17 @@ Memory complexity
 * Memory complexity judges the amount of extra space needed for an
   algorithm.
 
+* Example: Graph adjacency matrix is :math:`O(N^2)`.
+
 .. code::
 
-   range(N)
-   xrange(N)
+   range(N)        # allocates O(N) immediately
+   xrange(N)       # allocates O(1)
 
 
 
 Algorithms: summary
 ~~~~~~~~~~~~~~~~~~~
-
-* Recursion can greatly increase complexity.
 
 * *Think* about time and memory complexity when you write things.
 
@@ -274,6 +302,8 @@ Algorithms: summary
     them if needed, and maybe ask someone for ideas.
 
 * In practice, do your best to make things :math:`O(\mathrm{size of data})`
+
+* Recursion can greatly increase complexity.
 
 * "Big data" has *extremely* clever algorithms for complexity
   reduction.
@@ -303,6 +333,8 @@ Algorithms: summary
 
 Data structures
 ~~~~~~~~~~~~~~~
+
+The practical portion of this talk
 
 * Data structures are specific arrangements of data in memory.
 
@@ -343,7 +375,8 @@ If your list is big, you do **not** want to be doing the second one!
 Example 2: Time complexity of lists and sets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Let us do a quick example of lists and sets.
+* Let us do a quick example of lists and sets: Time to find an
+  "average" element.
 
 .. python::
 
@@ -372,24 +405,26 @@ set    202ns  202ns  203ns   235ns
 
 
 
-Time complexity of Python data structures
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Time complexity of typical data structures
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Rest of talk: Python data structures and complexities.
+Rest of talk: data structures and complexities.
 
-Full story: https://wiki.python.org/moin/TimeComplexity
+* Efficient use of these is key
+
+* Python full story: https://wiki.python.org/moin/TimeComplexity
 
 
 
 
-Python ``list``
-~~~~~~~~~~~~~~~
+Dynamic heterogeneous array (Python: ``list``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Data layout: resizable linear array of :math:`N` elements.
 
-* *Front operations:* ``.append(...)`` and del[-1]: :math:`O(1)`
+* *Front operations:* ``.append(...)`` and ``del[-1]``: :math:`O(1)`
 
-* *Back operations:* ``.insert(0, ...)`` and del[0]: :math:`O(N)`
+* *Back operations:* ``.insert(0, ...)`` and ``del[0]``: :math:`O(N)`
 
 * *Indexing:* lst[...]: :math:`O(1)`
 
@@ -404,24 +439,24 @@ Python ``tuple``
 
 
 
-Python ``dict``
-~~~~~~~~~~~~~~~
+Hash table mapping (Python: ``dict``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Underlying data structure: hash table
 
  * Lookups are an :math:`O(1)` operation!
 
- .. code::
+   .. code::
 
-     def get(x):
-         return hash_table[ hash(x) % len(hash_table) ]
+       def get(x):
+           return hash_table[ hash(x) % len(hash_table) ]
 
-* *Insertions:*  ``d[k] =v``  :math:`O(1)`
+* *Insertions:*  ``d[k] = v`` :math:`O(1)`
 * *Deletions:* ``del d[k]``   :math:`O(1)`
 * *Lookups:* ``d[k]``         :math:`O(1)`
 * *Contains:*: ``k in d``     :math:`O(1)`
 * *Size:*: ``len(d)``         :math:`O(1)`
 * There is no ordering.
-* Greater memory use than lists (still :math:`O(N)`)
+* Greater memory use than lists (but still :math:`O(N)`)
 
 Basically, all operations here is :math:`O(1)`.  ``dict``\ s trade extra
 memory for fastest lookups and modification.
@@ -435,8 +470,8 @@ memory for fastest lookups and modification.
 
 
 
-Python ``set``
-~~~~~~~~~~~~~~
+Hash table set (Python: ``set``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Same storage as dictionary, but no values.
 * Insert/delete/contains also :math:`O(1)`.
 * Optimal ``intersection`` and ``union`` operations:
@@ -444,12 +479,13 @@ Python ``set``
 
 
 
-Python ``numpy`` arrays
-~~~~~~~~~~~~~~~~~~~~~~~
+Native arrays (Python: ``numpy`` arrays)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Linear array of values *of the same type*.
 * Inserting at beginning is :math:`O(N)`.
 * Resizing is :math:`O(1)` but not recommended.
 * Fast vector operations: ``+``, ``*``, ``numpy.add``, etc.
+
   * :math:`O(N)` which is optimal.
 
 
@@ -457,9 +493,11 @@ Python ``numpy`` arrays
 Other useful data structures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Linked list - ``collections.deque`` - fast ``d.appendleft()`` and
+* Linked list - fast ``d.appendleft()`` and
   ``d.popleft()``.  Can't index middle.
-* Heap - ``collections.hepaq`` - list which is always sorted.
+  - Python: ``collections.deque``
+* Heap - list which is cleverly sorted.
+  - Python: ``collections.hepaq``
 * Trie and DAWG
 
 I'm not saying to write things yourself: use libraries
@@ -468,13 +506,21 @@ I'm not saying to write things yourself: use libraries
 Other complexities
 ~~~~~~~~~~~~~~~~~~
 * Worst case performance
-* Best case performanec
+* Best case performance
 * Amortized worst case performance
+
+
 
 Transitions in complexity
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-* If you change parameters and code slows down...
-* ... are you transitioning to a higher complexity?
+* Example: my Python code from the start
+
+  - My code was fast in most cases, but when :math:`\beta` became
+    large it got slow.  Same :math:`N`.
+
+* You could leave problem size the same, but vary other parameters...
+* ... and everything slows down greatly.
+* In your parameter space, you transitioned to a different complexity.
 
 
 
@@ -487,7 +533,12 @@ Algorithms vs optimization
 * Once you have the best algorithm, tricks to speed it up are
   optimization.
 
-  * We will look at this next time.
+  * This is language and domain specific, *not covered here*.
+
+* Most important part is good algorithms and clean code.
+
+  - *My personal philosophy is "use the best possible algorithm, then
+    optimization usually isn't needed".  :math:`O(N)` is fast enough.*
 
 
 
@@ -496,18 +547,34 @@ Algorithms vs optimization
 * Book: "Mining of massive datasets", http://mmds.org/
 * Use hash tables to transform :math:`O(N^x)` operations to
   :math:`O(N)` operations
-* Example: locality-sensitive hashing
+* Example: locality-sensitive hashing and comparing books
 
-  - Finding similar documents appears to be an :math:`O(N^2)`
-    operation
+  - Finding similar books appears to be an :math:`O(N^2)`
+    operation (you are comparing every pair)
   - Hash functions which tend to put similar documents in same bin.
   - Combine them to magnify effect, reduce number of pairs to check.
 
 
 
+What next?
+~~~~~~~~~~
+
+* There is a standard CS course "Algorithms and data structures"
+
+  - Probably too abstract for most general scientific programmers.
+
+* "Hard" problems
+
+
 Conclusions
 ~~~~~~~~~~~
 
+* Algorithms are the key to making good programs
+
+* Consider complexity of functions you call and write
+
+* Try to use something optimal, and search for better option if it
+  seems bad.
 
 
 

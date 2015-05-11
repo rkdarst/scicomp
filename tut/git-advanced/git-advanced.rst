@@ -7,9 +7,9 @@ Purpose of this talk
 
 
 * We have already studied all the version control basics.
-* This will review some of the tricky points, such as branches and
-  merging.
-* We will also cover different tips, tools, and use cases of git.
+* This will review some of the easily forgotten points, that make git
+  more enjoyable.
+* This talk should mostly be a discussion of best practices.
 
 
 Important aliases
@@ -48,6 +48,31 @@ Important aliases
 
 
 
+The following aliases are put here for copy-and-paste purposes, but
+discussed later in the talk.
+
+.. code::
+
+   git config --global core.excludesfile ~/.gitignore
+
+   git config --global alias.new "log HEAD..HEAD@{upstream}"
+   git config --global alias.news "log --stat HEAD..HEAD@{upstream}"
+   git config --global alias.newd "log --patch HEAD..HEAD@{upstream}"
+   git config --global alias.newdi '!git diff "$(git merge-base HEAD HEAD@{upstream})..HEAD@{upstream}'
+
+   git config --global alias.rec "!git --no-pager log --oneline --graph --decorate -n5"
+   git config --global alias.reca "!git --no-pager log --oneline --graph --decorate -n10 --all"
+   git config --global alias.recu "!git --no-pager log --oneline --graph --decorate @{upstream}^..HEAD"
+
+
+   git config --global difftool.latexdiff.cmd '/proj/networks/darst/bin/git-latexdiff-helper "$LOCAL" "$REMOTE"'
+   git config --global alias.latexdiff "difftool -t latexdiff"
+
+   git config --global difftool.diffpdf.cmd 'diffpdf "$LOCAL" "$REMOTE"'
+   git config --global alias.diffpdf "difftool -t diffpdf"
+
+
+
 Graphical user interfaces (GUIs)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * I always use the git command line...
@@ -78,7 +103,11 @@ Git manual pages
 * ``git <command> --help``
 * ``man git-<COMMAND>``
 * These have a lot of good ideas and explanation
-* and are well written.
+* ... and are well written.
+* Learn to read efficiently:
+  - Initial summary - important
+  - Options - read when needed
+  - Details: to help with details on problems
 
 
 
@@ -117,15 +146,15 @@ Rebases
 
 Getting information
 ~~~~~~~~~~~~~~~~~~~
-* I didn't learn git right away
+* One doesn't learn ``git`` quickly
 * I learned the most by running commands and seeing the outcome
 * You have to have the tools to see what is going on!
-
+* We will refresh ourselves on some of these.
 
 
 ``git status``
 ~~~~~~~~~~~~~~
-``git st``
+alias: ``git st``
 
 Shows you:
 
@@ -135,14 +164,14 @@ Shows you:
 
 .. epigraph::
 
-   Use your .gitignore file well!
+   Use your ``.gitignore`` file well!
 
 
 
 Global ``.gitignore``
 ~~~~~~~~~~~~~~~~~~~~~
 
-Config:
+You can use one standard gitignore file across all repos:
 
 .. code::
 
@@ -164,7 +193,7 @@ Config:
 
 ``git log1a``: Viewing the git graph
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-``git log1a``
+alias: ``git log1a``
 
 This visually shows:
 
@@ -172,24 +201,22 @@ This visually shows:
 * Parentage of all commits
 * All branches and tags
 
+This single command has taught me more about ``git`` than anything
+else.
+
 .. epigraph::
 
    This uses one of my aliases, and is equivalent to ``git
    log --oneline --graph --decorate --all``.
 
-   **Use git log1a**.  This single command has taught me more about
-   git than anything else.
 
 
-
-Showing diffs with the log
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Showing more information in the log
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * ``git log -p``
 * ``git log1a -p``
 * Useful for a quick summary of what is going on.
-
-.. epigraph::
-   * ``git log --stat``
+* ``git log --stat``: shows summary of changes
 
 
 
@@ -241,7 +268,7 @@ Branches and remotes
   people's branches.
 * The server looks like a branch ``origin/master``, as seen in ``git log1a``
 
-* ``git remote``
+* ``git remote`` - edit remote parameters
 * ``git push``
 * ``git fetch``
 
@@ -255,27 +282,29 @@ Tags
 
 
 
-Merge vs rebase
-~~~~~~~~~~~~~~~
-When do you merge and when do you rebase?
-
-Merging
-
-* Less risky because it doesn't change history
-* Appears in history forever
-
-Rebasing
-
-* Changes history by rewriting commits to apply to another branch
-* Should *only* be done locally
+..
+  Merge vs rebase
+  ~~~~~~~~~~~~~~~
+  When do you merge and when do you rebase?
+  
+  **Merging**
+  
+  * Less risky because it doesn't change history
+  * Appears in history forever
+  
+  **Rebasing**
+  
+  * Changes history by rewriting commits to apply to another branch
+  * Should *only* be done locally
 
 
 
 Fetch vs pull vs merge
 ~~~~~~~~~~~~~~~~~~~~~~
-* ``git fetch``: shows you what is in remote
-* ``git merge``: connects other branch to your branch
+* ``git fetch``: Updates remote branches, does *not* affect your branches.
+* ``git merge``: Add other branch's changes to your branch.
 * ``git pull``: ``fetch`` + ``merge``
+
 
 
 
@@ -283,6 +312,7 @@ Advantages of fetching
 ~~~~~~~~~~~~~~~~~~~~~~
 * I always fetch before I rebase
 * This lets me see changes before I merge.
+  - Stay informed about the work of others.
 * I use the two commands to see
 
 .. epigraph::
@@ -325,6 +355,8 @@ Exercise 1: pushing and pulling
    Files are here:
 
    http://rkd.zgib.net/scicomp/git-advanced-exercises.tar.gz
+
+
 
 Resolving conflicts
 ~~~~~~~~~~~~~~~~~~~
@@ -388,6 +420,14 @@ Exercise 2: merge a conflict
    http://rkd.zgib.net/scicomp/git-advanced-exercises.tar.gz
 
 
+``git mergetool``
+~~~~~~~~~~~~~~~~~
+
+* There is support for using other (graphical) tools for reserving
+  conflicts.
+* Example: done in class
+
+
 
 ``git-latexdiff``
 ~~~~~~~~~~~~~~~~~
@@ -414,6 +454,10 @@ Usage: ``git latexdiff filename.tex``
    modified it to work better for papers with figures, bibtex, etc.
    If something doesn't work right (which will happen sometimes), let
    me know.
+
+   A public release with installations instructions is at
+   https://github.com/rkdarst/git-latexdiff.  It hasn't been tested
+   much on other systems!
 
 
 
