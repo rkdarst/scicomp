@@ -294,7 +294,7 @@ Standard arguments
 Configuration file
 ~~~~~~~~~~~~~~~~~~
 - Configuration comes from three places: command line,
-  ``~/.ssh/ssh_config``, and ``/etc/ssh/ssh_config``.
+  ``~/.ssh/config``, and ``/etc/ssh/ssh_config``.
 - Example:
 
   ::
