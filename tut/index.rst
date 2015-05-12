@@ -60,6 +60,7 @@ are in an older format.
    algorithms-data-structures/algorithms-data-structures Understanding algorithms and data structures
    linux-tips/linux-tips                Linux tips and tricks
    open-science/open-science            Open science and software development
+   db-intro/db-intro                    Introduction to use of databases in research
 
 
 The following tutorials are "under development": they have some
