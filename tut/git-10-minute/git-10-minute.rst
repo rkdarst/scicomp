@@ -792,18 +792,25 @@ References
 
     + Chapter 2, for working on your own project
 
-* Official git documentation: http://git-scm.com/documentation
+* `Official git documentation <http://git-scm.com/documentation>`_.
+  This is good for reference once you have the basics down.
 
   - Manual pages for each command, online
 
   - Videos
 
+  - An `official tutorial <http://git-scm.com/docs/gittutorial>`_ but
+    I think it's probably too theoretical.
+
 * This tutorial from `Software Carpentry
-  <http://software-carpentry.org/v5/novice/git/index.html>`_
+  <http://software-carpentry.org/v5/novice/git/index.html>`_ targeted
+  to scientists.
 
 * This `interactive tutorial <http://try.github.io/>`_ from Github
 
 * Brain and Mind Laboratory `git micromanual <https://git.becs.aalto.fi/bml/bramila/wikis/git-micromanual>`_
+
+* Complex networks group `How to use git <https://wiki.aalto.fi/display/CompNet/How+to+use+git>`_
 
 * This is a `cool cheat sheet
   <http://ndpsoftware.com/git-cheatsheet.html>`_, but it is too
