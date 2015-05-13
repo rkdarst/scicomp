@@ -34,6 +34,22 @@ Databases and the relational model
 - The ``relational model``: a good way of organizing and querying
   data.
 
+.. epigraph::
+
+   Basically, a database is a place to store data, with a lot of good
+   operations.  Let's compare it to a bunch of ``csv`` files.  With a
+   ``csv`` file, you can read in the data and convert it to lists or
+   arrays or dictionaries you can use.  With databases, there are a
+   lot higher level operations: get all rows that match some
+   condition.  Replace one row with another.  Replace one value in a
+   row.  Allow multiple processes to access and change data
+   simultaneously.  All of these can be indexed to allow :math:`O(1)` (very
+   fast) operations.
+
+   A lot like the rest of the tutorials, the is the same general
+   pattern of "a bit more initial organization makes later work
+   easier".
+
 The relational model
 --------------------
 - Relations (tables)
@@ -42,6 +58,16 @@ The relational model
 - Declarative language: say what you want, not how to do it
 - A closed algebra representing operations.  Can be internally
   rearranged and optimized for efficiency.
+
+.. epigraph::
+
+   Relational Algebra is one of the standard things you would learn in
+   a database course.  This isn't a database course, and discussing
+   this is all more theoretical than scientists need (or probably
+   want) to know.  Just realize that there is more than an arbitrary
+   system here.  This talk will use the SQL terminology of ``rows``\ s
+   and ``tables``\ s.  The other things mentioned here will be
+   discussed in this talk.
 
 Example: MIT reality mining data
 --------------------------------
@@ -57,6 +83,31 @@ Components of a relational database (theoretical)
 - Views: shortcuts for data access
 - Procedures: functions defined within DB itself.
 
+.. epigraph::
+
+   These are the conceptual parts of databases.  Later, we'll talk
+   about the nuts and bolts of actual databases.
+
+   The schema defines the tables and column names and data types.  In
+   relational databases, the schema needs to defined before you put
+   data in.
+
+   SQL is the query language.  It looks like ``SELECT blah, blah2 FROM
+   some-table JOIN other_table USING (id) WHERE x=5;``.  Perhaps this
+   is the most well-known thing from databases, but it's just the
+   interface language.  It is pretty standard, but modern databases
+   get away from it.
+
+   Indexes allow fast lookups by different columns.  They are the
+   equivalent of Python dictionary keys, but also store data in a
+   sorted order.  This provides the speed of databases.
+
+   Views provide shortcuts for data access.  It's another way you can
+   push calculations into the database to save work in your code.
+
+   You can also define functions (procedures) directly in the
+   database.  This pushes calculations to the data.
+
 Structured vs unstructured data
 -------------------------------
 - Structured data: tightly constrained to a data model
@@ -68,6 +119,18 @@ Structured vs unstructured data
 
 - The database structure provides easy ways of updating/changing data.
 
+.. epigraph::
+
+   An example of structured data would be a CSV file that is perfect.
+   Unstructured would be plain text documents, or CSV files with
+   missing data, incomplete rows, different datatypes.  You could even
+   say that since data types (e.g. integers) don't have metadata
+   specifying type is a small lack of structure.
+
+   The rigid structure of the data allows the usefulness of the
+   databases.  It's also the annoyance.  However, imposing structure
+   on data is something you need to do anyway.
+
 Declarative vs procedural access
 --------------------------------
 - **Procedural language**: Specify steps to produce a result
@@ -77,14 +140,31 @@ Declarative vs procedural access
   - Relational algebra allows internal optimization
   - *Huge* timesaver in terms of low-level programming
 
+.. epigraph::
+
+   One line of SQL can replace tens of lines of Python code.  You also
+   don't have to worry about all of the data loading and other
+   management talks (of course, someone had to have handled that
+   already to get it into the database).  The database engine can
+   internally optimize queries.
+
 Concrete DB: SQLite operation
 -----------------------------
 - SQLite is a *library* for database file access
 - Single file on disk (also in-memory operation)
 - All operations are within the same process
-- Good as a simple data storage formtawi
+- Good as a simple data storage format
 - Downside: bad at high concurrency
 
+.. epigraph::
+
+   SQLite is a pretty nice package for basic work.  It has all the
+   structure needed, but uses a "file" concept for storage, not
+   "server".  This makes it very convenient for development or
+   teaching purposes.  For most scientific tasks, it is probably the
+   ideal tool.  The main case where it wouldn't be suitable is when
+   you have many, many, simultaneous reads and writes, like for a
+   high-traffic production website.
 
 Concrete DB: RDBMS server operation
 -----------------------------------
@@ -93,6 +173,15 @@ Concrete DB: RDBMS server operation
 - Pros: highly optimized, advanced data caching and distribution
 - Cons: greater communication cost, bad for streaming large amounts of
   data, high maintenance cost
+
+.. epigraph::
+
+   This is more along the lines of what people think of when they hear
+   "database".  A separate server running that is managing
+   everything.  This has a lot of overhead from a system
+   administration side, but allows maximal performance under huge
+   loads.  This could be useful in some cases, but is too much extra
+   work and lost flexibility for most scientific uses.
 
 Database use cases: ideal and problematic
 -----------------------------------------
@@ -139,6 +228,15 @@ Schemaless databaseses ("NoSQL")
 - Scale to larger datasets, "big data"
 - Example: MongoDB, Hadoop, Neo4J
 
+.. epigraph::
+
+   These types of databases are what people consider modern "big data"
+   databases.  Basically, the strong structure and consistency
+   requirements of relational databases becomes too much, so these
+   relax these requirements and allow you to store more data.  Most
+   don't use SQL, but there are more declarative query languages being
+   developed for them.  These will be useful for particular uses cases
+   with either massive amounts of data or less structured data.
 
 Conclusions
 -----------
@@ -267,3 +365,8 @@ SQL resources
 
   - http://sqlite.org/lang.html
 
+.. epigraph::
+
+   Each SQL database has its own custom syntax, but overall it is
+   pretty standard.  I think the SQLite documentation is pretty good:
+   It is detailed, but also has good summary diagrams.
