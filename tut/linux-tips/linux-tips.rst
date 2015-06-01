@@ -330,21 +330,10 @@ Connection multiplexing
            ControlMaster   auto
            ControlPath     /tmp/.ssh-richard-mux-ssh-%r@%h:%p
 
-Known hosts file
-~~~~~~~~~~~~~~~~
-- Security concern: someone intercepts your traffic, you type in
-  password and they steal it
-- On first connection, you accept a host key:
-
-  ::
-
-    The authenticity of host 'aoeu (95.142.168.120)' can't be established.
-    ECDSA key fingerprint is 78:64:4c:15:c5:8b:24:39:ee:ab:e1:e5:94:6a:16:de.
-    Are you sure you want to continue connecting (yes/no)? 
-
-- If key changes, you get this message:
-
-  ::
+Known hosts file and key errors
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- ssh remembers each computer connected to.
+- Sometimes you will get this error::
 
     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
@@ -359,7 +348,42 @@ Known hosts file
     RSA host key for boltzmann has changed and you have requested strict checking.
     Host key verification failed.
 
-- To solve the message, remove line #43 in the file stated.
+- Happens if computer reinstalled, different, or someone is attacking
+  your connection.
+
+- The message says which line contains the key to be removed.
+
+.. epigraph::
+
+    - Security concern: someone man-in-the-middles the network, directs
+      your connection to their own computer and steals your password.
+    - ``ssh`` actually has **strong** security against this.
+    - On first connection, you accept a host key:
+
+      ::
+
+        The authenticity of host 'something (95.142.168.120)' can't be established.
+        ECDSA key fingerprint is 78:64:4c:15:c5:8b:24:39:ee:ab:e1:e5:94:6a:16:de.
+        Are you sure you want to continue connecting (yes/no)? 
+
+    - This can happen if the computer is reinstalled.  Less likely is that
+      the NSA is Man-in-the-middle attacking you.
+
+    - The message says that the old key is in line 43
+      (``known_hosts:43``).  This line needs to be removed, so the new key
+      can be stored.
+
+      - You can just edit the file to remove that line.
+
+      - Shortcut using ``sed``: ``sed -i LINE_NUMBERd
+        ~/.ssh/known_hosts``
+
+        So in this case: ``sed -i 43d ~/.ssh/known_hosts``
+
+      - As long as you have reason to believe that the server has had its
+        key changed, this is not a security concern.
+
+
 
 
 Port forwarding
@@ -368,6 +392,13 @@ Port forwarding
 
    ssh -L <port>:<hostname>:<other-port>
    ssh -R <port>:<hostname>:<other-port>
+
+- You can proxy web traffic through ``ssh``.
+
+::
+
+   ssh -D 2345 remote_computer
+   # Configure SOCKSv5 proxy for localhost:2345
 
 
 Proxy commands
