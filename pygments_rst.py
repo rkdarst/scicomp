@@ -115,6 +115,8 @@ class PygmentsInclude(Pygments):
         formatter = self.get_formatter()
 
         data = os.path.join(os.path.dirname(self.src), fname)
+        if not os.path.exists(data):
+            return [nodes.raw('', "File does not exist: %s"%data, format='html')]
         data = open(data).read()
 
         parsed = highlight(data, lexer, formatter)
