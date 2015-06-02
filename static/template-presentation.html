@@ -16,19 +16,69 @@
 })(jQuery);
 
 
-var position = -1;
+function do_scroll(delta) {
+    // scroll `delta` sections forward or backwards
+
+    var els = $(".title, .section");
+    var cur_pos = 0;
+
+    for(i=0; i<els.size(); i++) {
+	//if ( window.pageYOffset < els[i].getBoundingClientRect()["top"] ) {
+        //console.log(els[i], els[i].getBoundingClientRect()["top"])
+        if ( els[i].getBoundingClientRect()["top"] < window.innerHeight/2 ) {
+            continue;
+        }
+        //console.info(els[i], els[i].getBoundingClientRect()["top"]);
+        cur_pos = i-1;
+        //console.info(els[cur_pos])
+        break;
+    }
+
+
+    if ( i+delta < 0 || i+delta > els.size -1  ) {
+        return;
+    }
+
+    next_elem = els[cur_pos+delta];
+    //$(next_elem).goTo();
+
+    //var top = next_elem.getBoundingClientRect()["y"];
+    var top = $(next_elem).offset()["top"];
+    var height = next_elem.getBoundingClientRect()["height"];
+    var win_height = window.innerHeight;
+    //console.info(top, height, win_height)
+
+    var scroll_to = 0;
+    if (height >= win_height) {
+        scroll_to = top;
+    } else {
+        scroll_to = top - (win_height-height)/3.;
+    }
+    //console.info(top, height, win_height, scroll_to)
+
+    //window.scroll(0, scroll_to);
+
+    $('html, body').animate({
+        scrollTop: scroll_to //+ 'px'
+    }, 'fast');
+
+}
 
 document.addEventListener('keydown', function (event) {
 
     switch(event.which) {
             case 37: // left
-	    	 position -= 1;
+                 do_scroll(-1);
+                 event.preventDefault();
+                 return false;
 	    	 break;
 
             //case 38: // up
 
             case 39: // right
-	    	 position += 1;
+                 do_scroll(+1);
+                 event.preventDefault();
+                 return false;
 	    	 break;
 
             //case 40: // down
@@ -36,16 +86,6 @@ document.addEventListener('keydown', function (event) {
 	    default:
 	        return; // exit this handler for other keys
         }
-    //alert(position);
-
-    //var els = document.getElementsByClassName("section");
-    var els = $(".section");
-
-    var els_len = els.length;
-    position = ((position%%els_len)+els_len) %% els_len;
-
-    $(els[position]).goTo();
-
 }, true)
 
 
