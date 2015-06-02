@@ -1,5 +1,5 @@
 ===========================
-Version control for Science
+Version control for science
 ===========================
 
 Have you ever:
@@ -273,11 +273,12 @@ What should version control be used for?
 Usage of git
 ------------
 * In this course, we will use the ``git`` version control system
-* ``git`` is not just one program, there is
+* ``git`` is not just one program, it is a system.  There is:
 
   - command line program ``git``
   - Graphical user interfaces (``gitk``, ``git-cola``, and more)
   - Integrated support in your editor...
+  - Many, many other tools
 
 * This course will use the command line interface
 * Your group may settle on a completely different VCS (Mercurial,
@@ -369,7 +370,8 @@ Adding initial files
 Check status
 ------------
 
-* Check what is going on by typing
+* Check what is going on with ``git status``
+* Provides a summary of modified files
 
   .. console::
 
@@ -391,6 +393,11 @@ Check status
    since the last commit.  "Staged" is files you run ``git add`` on
    but not yet committed.  If you do this, you can use ``git diff
    --cached`` to see the diff.
+
+Check changes with diffs
+------------------------
+* Use ``git diff`` to see exact changes since your last commit
+* This shows you exact changes, with context.
 
 
 Make your first commit
@@ -552,13 +559,10 @@ Exercise Git-1.1: Connect to Triton
    .. console::
 
       $ ssh USERNAME@triton.aalto.fi
+      $ cd $WRKDIR
 
-#. Copy over example files to your home directory.  This location
-   contains all examples and exercises for SCiP:
+#. If a not your own account, make a subdirectory and change to it
 
-   .. console::
-
-      /triton/scip/
 
 
 Exercise Git-1.2: Standard configuration options
@@ -602,7 +606,8 @@ Exercise Git-1.3: Making a new repository
 
 #. In this exercise, we will go to a directory with a simple project,
    make a new git repository, and go through the steps needed to make a
-   commit.  The prototype is in ``scip/git/git-1/``.
+   commit.  Copy (``cp -r``) the prototype to your working directory.
+   The base is in ``/triton/scip/git/git-1/``.
 
 #. Change to the directory
 
@@ -654,7 +659,7 @@ Exercise Git-1.4: Making edits and commits
 
 #. Preview your changes before committing.  This is good practice to
    make sure that you know what you are doing.  Run ``git diff`` to
-   see the differences, and ``git stat`` to see a summary showing that
+   see the differences, and ``git status`` to see a summary showing that
    ``README.txt`` is modified.
 
 #. Use ``git commit README.txt`` to record the file.
@@ -663,7 +668,8 @@ Exercise Git-1.4: Making edits and commits
    and commit, b) edits to two files at the same time and commit both,
    and c) add and commit a new file.  For each change, make the loop
    of edit, ``diff``, ``status``, ``commit``, ``log`` (to verify
-   changes).
+   changes).  Commit different ways.  Try using ``commit -a``,
+   ``commit [FILENAME]``, ``commit -p``, and so on.
 
 
 Exercise Git-1.5 Check information from history
@@ -673,11 +679,19 @@ Exercise Git-1.5 Check information from history
    will wonder "what was I doing a week ago?".  ``git`` has lots of
    tools to use to answer these questions.  We will explore them now.
 
-#. Change to the OpenMP-Examples repository:
+..
+  #. Copy the OpenMP-Examples repository to your work directory.  It is
+     in ``/triton/scip/OpenMP-Examples``
+
+#. Get the OpenMP Examples repository.  We will cover the ``clone``
+   command later, but for now just run this command in your working
+   directory
 
    .. console::
 
-      $ cd ~/scip/git/OpenMP-Examples/
+      https://github.com/OpenMP/Examples.git
+
+   You should now see a new ``Examples`` folder.  Change into it.
 
 #. Run ``git log`` to see recent changes.  You should be able to see
    the description, author, and date.  Try adding on a ``-p`` or
@@ -766,7 +780,14 @@ Sharing with others
 Branches and remotes
 --------------------
 * A branch is one independent line of work
+
+  - Several people can work on the same project without interfering -
+    until they are ready
+
 * The git model considers everything a branch
+
+  - ``git``\ 's most well known feature is easy and good branching
+
 * Even a remote server is considered a branch
 * To combine two people's work, you must **merge** the branches
 
@@ -793,7 +814,7 @@ branches and remotes in great detail.
   * **ssh** - anything accessable via ssh,
     ``darstr1@amor.becs.hut.fi/proj/networks/darst/pcd/``,
 
-  * **http** - using any web server,
+  * **http[s]** - using any web server,
     ``http://rkd.zgib.net/code/pcd.git``
 
   * **git** - special git server for efficiency,
@@ -804,6 +825,12 @@ branches and remotes in great detail.
 
 Commands for sending/receiving code
 -----------------------------------
+
+* Get a new repository
+
+  .. console::
+
+     % git clone [URL]
 
 * Send your changes to server
 
@@ -827,7 +854,7 @@ Conflicts
 
 * Conflicts happen when you *merge*, and you have to **resolve** them.
 
-* When a conflict happens, the merge aborts and
+* When a conflict happens, the merge stops and
   you have to resolve, then finish the merge.
 
   - Git generally has pretty good messages - **read them** and
@@ -888,8 +915,7 @@ Dealing with conflicts: resolution steps
   sure everything is there.
 
 
-
-Exercise Git-2.1: Pulling
+Exercise Git-2.1: Cloning
 -------------------------
 #. In this set of exercises, we will explore git pushing, pulling, and
    conflict resolution at a very high level.  We aren't going to try
@@ -897,7 +923,28 @@ Exercise Git-2.1: Pulling
    points.  It is better to become familiar with the basics before
    going too deep into branches, remotes, and conflicts.
 
-#. Change to the directory ``~/scip/git/OpenMP-Examples-2/``
+#. Go to http://github.com.  Use the search at the top to find a
+   project related to your field.
+
+#. Go to the project page.  Find the "HTTPS Clone URL" on the right
+   side.
+
+#. Clone the repository
+
+   .. console::
+
+      $ git clone https://github.com/igraph/igraph.git
+
+#. Check out the log.  How many total commits are there in this
+   repository?  (Hint: ``git log | grep ^commit | wc``)
+
+
+
+Exercise Git-2.2: Pulling
+-------------------------
+
+#. Copy the directory ``/triton/scip/git/OpenMP-Examples-2/`` to your
+   working directory.
 #. View branches and remotes using ``git remote -v``.  You can see
    that it is set with the ``github.com`` server.  This is a common
    project hosting site.
@@ -906,7 +953,7 @@ Exercise Git-2.1: Pulling
 #. Check current commits using ``git log``.  What is new?
 
 
-Exercise Git-2.2: Resolving a conflict
+Exercise Git-2.3: Resolving a conflict
 --------------------------------------
 FIXME: modify this exercise to have ``from numpy import ...`` as the
 conflicting line to make the resolution a bit less trivial.
@@ -914,8 +961,9 @@ conflicting line to make the resolution a bit less trivial.
 #. In this exercise, I have set up simple get repository, all ready to
    do a pull and make a conflict.
 #. Change to the directory ``~/scip/git/git-conflict/``.
-#. Run ``git log`` and ``git status`` just to make sure that
-   everything is clean (no untracked changes, no surprises).
+#. Run ``git log``, ``git diff`` and ``git status`` just to make sure that
+   everything is clean and you know what's going on (no untracked
+   changes, no surprises).
 #. Pull changes from the default remote:
 
    .. console::
@@ -937,17 +985,20 @@ conflicting line to make the resolution a bit less trivial.
      #
      #       both modified:      code1.py
 
+#. Look at ``git diff``.  This is an advanced diff with two columns
+   with ``+`` signs indicating what comes from each side.
+
 #. Open ``code1.py`` in an editor.  You will see conflict marks::
 
-     <<<<<<< HEAD
-     import scipy
-     =======
-     import numpy
-     >>>>>>> a305cb507b399e02f1313390e3ea41cecb9b6dcf
+       <<<<<<< HEAD
+       from scipy.stats import gamma
+       =======
+       from scipy.stats import binom
+       >>>>>>> 5de531032424ab6afe5576ee817e0ace9e9937d7
 
    Between ``<<<<<<<`` and ``=======`` is what you have done (in
-   ``HEAD``).  Between ``=======`` and ``>>>>>>>`` is what the server
-   has changed (in ``a305cb5``).
+   ``HEAD``).  Between ``=======`` and ``>>>>>>>`` is what is changed
+   on the server (in commit ``5de5310``).
 
 #. You see that one side imported ``numpy``, and the other imported
    ``scipy``.  There's no problem with doing both of these, but since
@@ -955,30 +1006,43 @@ conflicting line to make the resolution a bit less trivial.
    put them together.  A more complicated case would be edits to the
    same line.
 
-   To resolve this conflict, we simply add both of these imports.
-   Edit the file and remove all conflict markers.  Make the top of the
-   file look like this::
+   To resolve this conflict, we need to import both ``gamma`` and
+   ``binom`` from ``scipy.stats``.  Remove the two parts, and the
+   conflict markers, and make one line having all changes together.
+   The top of the file should look like this after you do the
+   resolution::
 
-     import sys
-     import os
+     ...
      import scipy
+     from scipy.stats import binom, gamma
+     import scipy.linalg
      import numpy
 
 #. We will check status to make sure things are OK.  Run ``git diff``
-   and see the added and changed lines.
+   and see the added and changed lines.  This form of ``diff`` is
+   particularly useful::
+
+     - from scipy.stats import gamma
+      -from scipy.stats import binom
+     ++from scipy.stats import binom, gamma
+
 
 #. Run ``git add code1.py`` to tell ``git`` that we are done resolving
-   this conflict and prepare it for committing.
+   this conflict and prepare it for committing.  Run ``git status``
+   before and after this to see what changes.  (Hint: it should change
+   from ``Unmerged paths:`` to ``Changes to be committed:``.
 
-#. Run ``git commit``.  An editor will open and you can adjust the
-   commit message if you want.  Since there is nothing to add, just
-   save and close.
+#. Run ``git commit``.  An editor will open with a pre-filled commit
+   message (it remembers that you were doing a merge) if you want.
+   You can adjust this if needed, for example if you need to explain
+   how you reconciled two opposing features.  Since there is nothing
+   to add, just save and close.
 
 #. Run ``git log`` and you should see that all changes are recorded,
    as well as the merge commit.
 
 
-Exercise Git-2.3: Bonus: A full cycle of contribution
+Exercise Git-2.4: Bonus: A full cycle of contribution
 -----------------------------------------------------
 #. In this exercise, you will clone a repository from github, add and
    edit some files, and send the change back.  This is a full cycle of
@@ -1032,7 +1096,10 @@ Exercise Git-2.3: Bonus: A full cycle of contribution
    apply cleanly which means it is hard to use.
 
 #. Double-bonus: Research the "pull request" model of contributions.
-   Github has good documentation on this.
+   Github has good documentation on this.  Emailing patches is a
+   little bit old-fashioned, but still always works.  Using the power
+   of project hosting sites, you can more easily send changes, discuss
+   them, and get them merged.
 
 
 

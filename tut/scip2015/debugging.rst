@@ -13,11 +13,10 @@ Outline
 
 - Finally, will discuss advanced techniques for different languages.
 
-Everyone knows that debugging is twice as hard as writing a program in
-the first place. So if you're as clever as you can be when you write
-it, how will you ever debug it?
 
-| Brian Kernighan, 1974
+**Everyone knows that debugging is twice as hard as writing a program in
+the first place. So if you're as clever as you can be when you write
+it, how will you ever debug it?** - Brian Kernighan, 1974
 
 
 What is debugging?
@@ -33,6 +32,14 @@ What is debugging?
   allow you to *interact* with code as it's running in order to find
   bugs more *efficiently*.
 
+.. epigraph::
+
+   If you have programmed, you have debugged.  Any program will have
+   bugs the first time.  Debugging is an art itself, and one talk
+   can't possibly teach you how to be an expert debugger.  This talk
+   is mainly about some tools which will make debugging easier.  These
+   tools let you see into your programs in greater detail, which helps
+   you to debug better.
 
 
 ..
@@ -64,7 +71,7 @@ Print debugging
 
    This tends to be the first way of debugging.  It works, but is
    usually slow since you have to re-run the program each time it
-   goes.
+   goes.  Still, it is a good first step for small and fast programs.
 
 
 Interactive development
@@ -86,12 +93,88 @@ Interactive development
    can't be used as part of other functions or anything.  This makes
    it harder to use for big programs.
 
+Debuggers
+~~~~~~~~~
+
+- Allow you to see inside of running processes
+
+- Combines print debugging and interactivity
+
+  - A real program runs
+
+  - Debugger is connected to the process
+
+  - You can run line-by-line or wait for a crash
+
+  - You can print variables, type lines, etc, to figure out the
+    problem
+
+.. epigraph::
+
+   A debugger is a tool that can inspect other processes and view
+   internal state.  It is the equivalent of a medical imaging device
+   for programs.  By being able to see directly inside of running
+   processes, your debugging efficiency can increase greatly.  Imagine
+   a doctor trying to diagnose hard problems without advanced imaging.
+
+
+How to debug
+~~~~~~~~~~~~
+
+Use the scientific method
+
+* Make the bug reproducible
+
+  - Create some minimal example of reproducing it
+  - Put it in a unit test!
+  - Don't be afraid to check things that you "know" should be true
+
+* Observe the area in detail
+
 
 Assertions
 ~~~~~~~~~~
+- Specify a condition that must be true at a certain point of time
 
-Data display debugger
-~~~~~~~~~~~~~~~~~~~~~
+  .. code:: c
+
+     assert( n_links % 2 == 0);
+
+- If condition is false, program fails and prints the exact location in code
+
+- Catch problems *before* they become hard bugs or wrong results
+
+- For speed, can be removed in production code (e.g. ``-DNDEBUG``)
+
+- One component of **software testing**
+
+.. epigraph::
+
+   Software testing is extremely important, because it lets you ensure
+   quality by actually running code.  Assertions are a small portion
+   of that that can only test things at one point in code.  In
+   addition, they are embedded within the code, and run on all of the
+   real data going through the program.
+
+   Assertions are used for conditions that must always be true at a
+   certain point in code.  If they ever are not true, something
+   serious must be wrong and the program fails with a useful error
+   message.  As a real example, once I used it when I was counting
+   something that should always be even.  I had an assertion for
+   evenness.  One day, it started failing.  It turned out that my
+   initial input data wasn't prepared properly.
+
+   Assertions should be used for conditions that should never be
+   false and are a property of the code.  They shouldn't be used for
+   things like checking arguments, since it is expected that arguments
+   *could* be wrong and the assertions could be disabled by optimizing
+   out.
+
+..
+    Data display debugger
+    ~~~~~~~~~~~~~~~~~~~~~
+    - Debugger with advanced graphical and display features.
+
 
 Other notes
 ~~~~~~~~~~~
@@ -99,11 +182,11 @@ Other notes
 
   - Compiled code is no longer one-for-one with source code
 
-* Heisenbugs
+* **Heisenbug**: a bug for which observation changes the behavior
 
-* Memory allocation debugging:::
+* Compiler options
 
-    - ``-lefence``
+  - ``-Wall``
 
 * Are you debugging crashes or wrong results?
 
@@ -117,36 +200,6 @@ Writing your code to be debuggable
   - Test that it is correct
   - *Then* profile and optimize
 
-
-How to debug
-~~~~~~~~~~~~
-
-Use the scientific method
-
-* Make the bug reproducible
-
-  - Create some minimal example of reproducing it
-  - Put it in a unit test!
-
-* Observe the area in detail
-
-
-Debuggers
-~~~~~~~~~
-
-- Combine the two things above
-
-  - A real program runs
-
-  - When there is an error, *stop*
-
-  - You can print variables, type lines, etc, to figure out the
-    problem
-
-  - You can even step through, stopping when you choose to
-
-- This allows you to both have interactive development, and
-  programs/functions, together
 
 
 
@@ -171,6 +224,19 @@ language, toolchain, or operating system.
 
 .. epigraph::
 
+   Basically, whatever you do, you should be able to find a debugger for
+   it.  Most of the operations I describe below should work with your
+   environment.  The commands within the debuggers seem to be fairly
+   standard.
+
+   Debuggers exist not just for "normal" programs like we use here,
+   but for operating system kernels (which have to operate at a very
+   low level, maybe by external network connections since a kernel
+   can't pause to debug itself), embedded devices (which may have to
+   run over dedicated cables attached to the circuit board), as
+   servers to run over network links, and so on.
+
+
    - Debugging is actually an *interface*, so there can be more friendly
      front-ends available.  For example,
 
@@ -190,20 +256,6 @@ language, toolchain, or operating system.
   - Bash: http://sourceforge.net/projects/bashdb/
 
   - R: http://www.stats.uwo.ca/faculty/murdoch/software/debuggingR/
-
-.. epigraph::
-
-   Basically, whatever you do, you should be able to find a debugger for
-   it.  Most of the operations I describe below should work with your
-   environment.  The commands within the debuggers seem to be fairly
-   standard.
-
-   Debuggers exist not just for "normal" programs like we use here,
-   but for operating system kernels (which have to operate at a very
-   low level, maybe by external network connections since a kernel
-   can't pause to debug itself), embedded devices (which may have to
-   run over dedicated cables attached to the circuit board), as
-   servers to run over network links, and so on.
 
 
 Some terminology
@@ -253,13 +305,19 @@ Prerequisites
 
 
 
+Exercises
+~~~~~~~~~
+Note: according to current plan, these exercises will *not* be done in
+class, but are left in for reference.
+
+
 Exercise Debug-1.1: Compiling with debugging symbols
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #. In this set of exercises, we will compile a C code with debugging
    symbols and run it through the debugger in different ways.
 
-#. In ``scip/debugging``, there is a program ``error.c`` that has an
-   error in it.  Change to that directory, compile, and run it.
+#. In ``/triton/scip/debug/``, there is a program ``error.c`` that has an
+   error in it.  Copy this file to your working directory, compile, and run it.
 
    .. console::
 
@@ -409,7 +467,7 @@ Exercise Debug-1.4: Stepping through the code
 
 
 
-Exercise Debug-1.4: Bonus: Attaching to a running process
+Exercise Debug-1.5: Bonus: Attaching to a running process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #. Let's say you have started running a program, and you need to see
    what is going on inside of it?  What can you do?
@@ -442,6 +500,8 @@ Exercise Debug-1.4: Bonus: Attaching to a running process
 
    - Print a backtrace.
 
+   - Go up the stack a few levels: ``up`` and ``down`` commands.
+
    - Print ``i`` in both this and the upper frame.
 
    - Explore the difference between the ``next`` and ``step`` commands.
@@ -451,10 +511,11 @@ Exercise Debug-1.4: Bonus: Attaching to a running process
    the frontend node - a big no-no.
 
 
-Exercise Debug-1.5: Bonus: Debugging Python with gdb
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+..
+    Exercise Debug-1.5: Bonus: Debugging Python with gdb
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-FIXME: add this if desired.
+    FIXME: add this if desired.
 
 
 

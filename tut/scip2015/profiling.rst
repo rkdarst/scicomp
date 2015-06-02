@@ -6,7 +6,7 @@ Profiling software
 Scientists "know" that faster programs is better.  But what does this
 mean?
 
-First, most of the time you will spend more time writing programs than
+First, you will usually be spending more time writing programs than
 running them.  All the previous talks optimize writing, debugging,
 collaborating, and maintaining programs and is the most important
 thing you can do.
@@ -39,22 +39,23 @@ Outline
 Profiling and optimizing
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-- **Profiling**: A form of dynamic program analysis that measures time
-  (or space) usage of a program.
+- **Profiling**: A form of dynamic program analysis that measures resource
+  usage of a program.
 
-- Faster is better.  But what part of work is slowest?
+- **Optimizing**: Improving your code so that it is faster (or uses
+  less memory, or...)
 
-  - Usually writing, debugging, collaborating, maintaining.
+- Faster is better.  But remember writing code can be the slowest
+  part.
 
-- 10% of code is 90% of run time.
+- 10% of code is 90% of run time:
 
   - You only want to optimize that 10%, but what 10% is it?
 
+
 There is a famous saying:
 
-**Premature optimization is the root of all evil**
-
-| Donald Knuth, 1974
+  **Premature optimization is the root of all evil** - Donald Knuth, 1974
 
 .. epigraph::
 
@@ -247,6 +248,25 @@ How to collect the profiling data
    out later anyway.
 
 
+Collecting profiling information: C
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To do the most basic ``C`` profiling, we need to compile with special
+options in order to **instrument** the code.
+
+- Compile with the ``-g -pg`` options.
+
+- Run code normally: ``./a.out``
+
+- A file ``gmon.out`` is created with profiling information
+
+- Examine timings with ``gprof``
+
+  .. console::
+
+     $ gprof a.out gmon.out
+
+
+
 
 Collecting profiling information: Python
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -255,28 +275,20 @@ In the first step, we run the program using the ``cProfile`` module.
 This just stores up the profile information, and we will examine it in
 the next step.
 
-Change this:
+* Run your script under control of the ``cProfile`` module:
 
-.. python::
+  .. python::
 
-   $ python SCRIPT.py arg1 arg2 ....
+     $ python -m cProfile -o profile.out  SCRIPT.py arg1 arg2 ....
 
-To this:
+* ``python -m cProfile``: Run library module ``cProfile`` as a script.
 
-.. python::
-
-   $ python -m cProfile -o profile.out  SCRIPT.py arg1 arg2 ....
-
-Explanation:
-
-- ``python -m cProfile``: Run library module ``cProfile`` as a script.
-
-- ``-o profile.out``: Tells ``cProfile`` to write the profile to the
+* ``-o profile.out``: Tells ``cProfile`` to write the profile to the
   file ``profile.out``.
 
-- ``SCRIPT.py arg1 arg2 ...``: Your normal ``python`` interpreter arguments.
+* ``SCRIPT.py arg1 arg2 ...``: Your normal ``python`` interpreter arguments.
 
-- The output ``profile.out`` contains details of all function calls
+* The output ``profile.out`` contains details of all function calls
   and times.
 
 The next step is to visualize or analyze the data in ``profile.out``.
@@ -297,11 +309,27 @@ The next step is to visualize or analyze the data in ``profile.out``.
 
    Sample output: `profile-growsf.out <./profile-growsf.out>`_
 
+Viewing profile information: Python
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* There is a simple interactive browser for the profile information
 
-Example: IDE
-~~~~~~~~~~~~
-- Profiling can be run directly from integrated development
-  environments
+  .. console::
+
+     $ python -m pstats profile.out
+
+* Key commands to run:
+
+  - ``strip``: strip out unnecessary information (full file paths)
+
+  - ``sort [time|cumulative]``: cumulative
+
+  - ``stats N``: print out the top ``N`` stats.
+
+..
+    Example: IDE
+    ~~~~~~~~~~~~
+    - Profiling can be run directly from integrated development
+      environments
 
 
 What can be profiled?
@@ -337,7 +365,7 @@ Exercise Profiling-1.1: Running code
    you above.  A console-based profile shows the same information and
    is good for computers like Triton.
 
-   The examples are in the ``scip/profiling`` directory.
+   The examples are in the ``/triton/scip/profile`` directory.
 
 #. :c:`For C, you need to compile your code with an option to enable
    profile generation.  This adds an extra overhead, so is not enabled
@@ -345,7 +373,7 @@ Exercise Profiling-1.1: Running code
 
    .. console::
 
-      $ gcc -pg c-profiling.c
+      $ gcc -g -pg c-profiling.c
 
 #. Run your code.  :c:`For C, just run it like normal and you will get
    a` ``gmon.out`` :c:`file that has the profiling data`.
@@ -380,8 +408,13 @@ Exercise Profiling-1.2: Getting profile information
 
       $ gprof a.out gmon.out
 
-#. Python: Open it using ``-m pstats``, and then execute the commands
-   ``strip``, ``sort time``, and ``stats 15`` to print the data.
+   It directly prints out a summary report.  You may need to scroll up
+   some in order to see the important timing parts
+
+#. Python: There is a interactive profile viewer in the ``pstats``
+   module.  Open it using ``-m pstats``, and then execute the commands
+   ``strip``, ``sort cumulative``, and ``stats 15`` to print the data.  You
+   can use different
 
    .. console::
 
@@ -393,24 +426,28 @@ Exercise Profiling-1.2: Getting profile information
 Exercise Profiling-1.3: Examining the output
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Now that we have the call graph, let's examine what is in it.
+#. Now that we have the profiling information, let's examine what is
+   in it.
 
 #. Which function takes the most time?
 
 #. Which function, when also considering sub-functions, take the most
    time?
 
-FIXME: Examples that depend on both total time and cumulative time.  
+..
+  FIXME: Examples that depend on both total time and cumulative time.  
 
 
-Exercise Profiling-1.4: More fancy visualization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+..
+    Exercise Profiling-1.4: Bonus: More fancy visualization
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. You can make nice call graphs like you saw earlier.  This is done
-   via the ``gprof2dot.py`` script, which is already in the
-   ``scip/profiling/`` folder.
+    #. You can make nice call graphs like you saw earlier.  This is done
+       via the ``gprof2dot.py`` script, which is already in the
+       ``scip/profiling/`` folder.
 
-FIXME: Demonstrate use of gprof2dot.py
+    ..
+      FIXME: Demonstrate use of gprof2dot.py
 
 
 
@@ -465,8 +502,8 @@ Exercise Profiling-2.1: Optimization
    are, improve those parts, and see how the profile changes.
 
 #. There is a Python code for calculating :math:`\pi` using a simple
-   Monte Carlo method at ``scip/profile/pi.py``.  Change to that
-   directory.  This code takes one command line argument, the number
+   Monte Carlo method at ``/triton/scip/profile/pi.py``.  Copy this to
+   your working directory.  This code takes one command line argument, the number
    of iterations.  Run the code in the console, just using the
    ``time`` command line utility to see how long it takes.
 
@@ -485,13 +522,13 @@ Exercise Profiling-2.2: Profiling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Run this code and generate a profile in the shell. and generate the
-   ``profile1.out`` (note the number 1):
+   ``pi-profile-1.out`` (note the number 1):
 
    .. console::
 
-      $ python -m cProfile -o profile1.out pi.py 1000000
+      $ python -m cProfile -o pi-profile-1.out pi.py 1000000
 
-   Write down the total time. in the table below.
+   Write down the total time.
 
 #. Use pstats to try to figure out what functions take the most time:
 
@@ -502,12 +539,6 @@ Exercise Profiling-2.2: Profiling
       sort time
       stats 5
 
-      ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-           1    1.088    1.088    2.494    2.494 pi.py:25(get_coords)
-     2000000    1.043    0.000    1.213    0.000 random.py:351(uniform)
-           1    0.384    0.384    0.384    0.384 pi.py:44(circle_count)
-     2000000    0.170    0.000    0.170    0.000 {method 'random' of '_random.Random' objects}
-
    You see that ``get_coords`` takes up most of the time.  Then sort
    by cumulative time and see what the difference is:
 
@@ -516,11 +547,13 @@ Exercise Profiling-2.2: Profiling
       sort cumulative
       stats 5
 
-#. Generate a ``gprof2dot`` picture of this for future reference.
+#. Bonus/optional: Generate a ``gprof2dot`` picture of this for future
+   reference.  Copy ``gprof2dot`` from the ``/triton/scip/profile``
+   directory.
 
    .. console::
 
-      $ python gprof2dot.py -f pstats profile.out | dot -Tpng > pi-prof-1.png
+      $ python gprof2dot.py -f pstats pi-profile-1.out | dot -Tpng > pi-prof-1.png
 
 Exercise Profiling-2.3: Improving based on the profile
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -529,49 +562,42 @@ Exercise Profiling-2.3: Improving based on the profile
    ``get_coords_numpy``.  Change the call of ``get_coords`` to
    ``get_coords_numpy``::
 
-     x, y = get_coords(N)
-     # --->
-     x, y = get_coords_numpy(N)
+     x, y = get_coords(N)    --->    x, y = get_coords_numpy(N)
 
-#. Re-run the profile.  View it in the pstats viewer  You see that
+#. Re-run the profile, saving as ``pi-profile-2.out``.  View it in the pstats viewer.  You see that
    get_coords is so fast that it doesn't show up anymore.  Now, the
-   function ``circle_count`` takes up most of the time::
+   function ``circle_count`` takes up most of the time.
 
-     ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-          1    2.860    2.860    2.860    2.860 pi.py:44(circle_count)
-          2    0.036    0.018    0.036    0.018 {method 'uniform' of 'mtrand.RandomState' objects}
-        242    0.004    0.000    0.005    0.000 function_base.py:2897(add_newdoc)
-          2    0.004    0.002    0.013    0.007 __init__.py:2(<module>)
-          1    0.003    0.003    0.003    0.003 numeric.py:1(<module>)
-
-   In fact, you notice that the total time of ``circle_count`` went
+#. Bonus: In fact, you notice that the total time of ``circle_count`` went
    up.  Why do you think that is?
 
-#. Make another ``gprof2dot`` picture of this for future reference.
+#. Bonus: Make another ``gprof2dot`` picture of this for future reference.
 
    .. console::
 
-      $ python gprof2dot.py -f pstats profile.out | dot -Tpng > pi-prof-2.png
+      $ python gprof2dot.py -f pstats pi-profile-2.out | dot -Tpng > pi-prof-2.png
 
 Exercise Profiling-2.4: More improvement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Repeat all of the same things as above, but replace the function
-   ``circle_count`` with the function ``circle_count_numpy``.  How
-   much faster do things get?
+   ``circle_count`` with the function ``circle_count_numpy`` since
+   this is the new bottleneck.  Remember to save as
+   ``pi-profile-3.out``.  How much faster do things get?
 
-#. Save a ``gprof2dot`` image again.
+#. Bonus: Save a ``gprof2dot`` image again.
 
    .. console::
 
-      $ python gprof2dot.py -f pstats profile.out | dot -Tpng > pi-prof-3.png
+      $ python gprof2dot.py -f pstats pi-profile-3.out | dot -Tpng > pi-prof-3.png
 
 Exercise Profiling-2.4: What happened?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #. Now that we are done, we will look at all the ``gprof2dot``
-   pictures we have made.  This allows us to 
+   pictures we have made.  This allows us to quickly compare the
+   different runs.
 
-#. For convenience, my own copy of the pictures are here:
+   For convenience, my own copy of the pictures are here:
 
    - `Original <profiling/pi-prof-1.png>`_
    - `With get_coords_numpy <profiling/pi-prof-2.png>`_
@@ -588,15 +614,15 @@ Exercise Profiling-2.4: What happened?
    appearing in #3?  Are these a concern in practice?
 
 
+..
+    Exercise Profiling-2.4: Bonus: Line profiling
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Exercise Profiling-2.4: Bonus: Line profiling
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Exercise Profiling-2.5: Bonus: Memory profiling
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Exercise Profiling-2.5: Bonus: Memory profiling
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Exercise Profiling-2.6: Bonus: Line counting with ``gcov``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Exercise Profiling-2.6: Bonus: Line counting with ``gcov``
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Stochastic vs instrumenting profiling
@@ -616,8 +642,7 @@ Stochastic vs instrumenting profiling
 
   - More accurate in that it won't affect the runtime so much.
 
-  - ``oprofile`` is a suite (with Linux kernel module) that can do
-    this on already running code (C only).
+  - ``perf`` is a suite that can do this.
 
 .. epigraph::
 
@@ -639,11 +664,12 @@ How do each of these profile items interact:
 - Callers/Callees and their time
 
 
+
 Advanced profiling techniques
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-FIXME: summary of other techniques, including the ones we will cover
-later in the course
-
+* **Line-profiling**: track timings at a line level
+* **Memory profiling**: memory usage, cache hits/misses
+* **Input/Output profiling**: disk access...
 
 
 Conclusions

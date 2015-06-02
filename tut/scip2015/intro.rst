@@ -8,9 +8,7 @@ Outline of the day
 * Profiling
 * Debugging
 * Compilers, computer architecture, and optimization
-* Tools for parallel programming debugging/profiling
-* Special scientific libraries
-
+* Extension to parallel programming debugging/profiling
 
 Version control
 ---------------
@@ -29,7 +27,8 @@ Debugging
 Profiling
 ---------
 * Scientists understand things by quantifying them
-* We can quantify internals of programs to make them faster
+* Computer architecture is complicated and bottlenecks are not obvious
+* We can quantify internals of programs to find bottlenecks
 * Never optimize without profiling first
 
 Extension to high performance computing
@@ -112,13 +111,21 @@ Running with ``nosetests``
   how the result differed
 * I can directly go and find the problem
 
+Research vs production code
+---------------------------
+* **Research code**: value is in result, not code
+* **Production code**: value is in the quality of the code
+* Research code *often* outlives its original purpose and quality
+  becomes important
 
 The value of software design
 ----------------------------
 * There are plenty of famous software bugs
 * Research code vs production code
+
   - Research code: run once, get some results
   - Production code: must be maintained long-term
+
 * Scientific code must be correct, and sometimes also maintainable long-term
 * Structure is important
 
