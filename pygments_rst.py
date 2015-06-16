@@ -75,7 +75,7 @@ class Pygments(Directive):
     def get_lexer(self, lexername=None):
         if lexername:
             lexer_name = lexername
-        elif len(self.arguments) > 1:
+        elif len(self.arguments) > 0:
             lexer_name = self.arguments[0]
         else:
             lexer_name = self.default_lexer
