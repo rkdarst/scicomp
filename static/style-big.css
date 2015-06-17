@@ -50,3 +50,11 @@ ul pre {
 div.section {
     margin-top: 40em;
 }
+
+/* Layout for columns */
+div.cols {
+    display: flex;
+    margin-left, margin-right: auto;
+    justify-content: center;
+}
+

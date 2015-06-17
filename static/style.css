@@ -77,9 +77,31 @@ img.align-center, .figure.align-center, object.align-center {
 div.align-right {
   text-align: inherit }
 
+/* Colors for code blocks */
 .red {
     color:red;
 }
 .blue {
     color:blue;
+}
+
+/* Things for columns */
+div.cols {
+    display: flex;
+//    margin-left, margin-right: auto;
+//    justify-content: center;
+}
+div.col1 {
+    margin-left: .5em;
+    margin-right: .5em;
+}
+
+.center {
+    text-align: center;
+}
+
+div.linenodiv, div.linenodiv pre {
+    //font-size: 50%;
+    background-color: unset !important;
+    color: #AAAAAA; // almost invisible gray
 }
