@@ -23,13 +23,21 @@ state when it was presented).  This page has existed only a few weeks,
 so is under active development.  Also, a new tutorial hopefully
 appears every 2-3 weeks, or whenever I can present them.
 
-Course
-~~~~~~
+Courses
+~~~~~~~
 
 These tutorials were transformed into an informal course at the Aalto
 University Department of Biomedical Engineering and Computational
 Science, during the Spring 2015 term.  Course information is available
 at `the course page <course/>`_
+
+In June 2015, the `git <scip2015/git.html>`_, `debugging
+<scip2015/debugging.html>`_, and `profiling
+<scip2015/profiling.html>`_ (and an `introduction
+<scip2015/intro.html>`_ talks were given at `Scientific Computing in
+Practice 2015 <http://science-it.aalto.fi/scip/kickstart2015/>`_.
+These tutorials are made more concise and hands-on compared to the
+ones below.
 
 Tutorials
 ~~~~~~~~~
