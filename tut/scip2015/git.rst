@@ -43,7 +43,7 @@ After completing this tutorial, you should be able to:
 
 
 
-Version control for Science
+Version control for science
 ===========================
 
 What is version control?
@@ -255,7 +255,7 @@ What should version control be used for?
 * Papers, books
 * Websites
 * Anything textual
-* Miscellaneous data
+* (small) Miscellaneous data (???)
 * This course
 
 .. epigraph::
@@ -393,12 +393,6 @@ Check status
    since the last commit.  "Staged" is files you run ``git add`` on
    but not yet committed.  If you do this, you can use ``git diff
    --cached`` to see the diff.
-
-Check changes with diffs
-------------------------
-* Use ``git diff`` to see exact changes since your last commit
-* This shows you exact changes, with context.
-
 
 Make your first commit
 ----------------------
@@ -573,8 +567,9 @@ Exercise Git-1.2: Standard configuration options
    your repositories.  This can make your life easier.
 #. You should at least set your name and email address wherever you
    work.
-#. On triton, copy and paste the following commands into a shell. Don't
-   forget to change the name/email to your own.
+#. On triton, copy and paste the following commands into a shell
+   (don't paste these into the file yourself - git will do that
+   itself).  Don't forget to change the name/email to your own.
 
    .. console::
 
@@ -689,7 +684,7 @@ Exercise Git-1.5 Check information from history
 
    .. console::
 
-      https://github.com/OpenMP/Examples.git
+      $ git clone https://github.com/OpenMP/Examples.git
 
    You should now see a new ``Examples`` folder.  Change into it.
 
@@ -942,7 +937,6 @@ Exercise Git-2.1: Cloning
 
 Exercise Git-2.2: Pulling
 -------------------------
-
 #. Copy the directory ``/triton/scip/git/OpenMP-Examples-2/`` to your
    working directory.
 #. View branches and remotes using ``git remote -v``.  You can see
@@ -955,9 +949,6 @@ Exercise Git-2.2: Pulling
 
 Exercise Git-2.3: Resolving a conflict
 --------------------------------------
-FIXME: modify this exercise to have ``from numpy import ...`` as the
-conflicting line to make the resolution a bit less trivial.
-
 #. In this exercise, I have set up simple get repository, all ready to
    do a pull and make a conflict.
 #. Change to the directory ``~/scip/git/git-conflict/``.

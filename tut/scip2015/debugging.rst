@@ -374,6 +374,7 @@ Exercise Debug-1.2: Running with the debugger
 #. Explore the following commands: ``l`` or ``list``, ``bt`` or
    ``backtrace``.
 
+..
    FIXME: the program should not be all in one function for ``bt`` to
    have a useful output.
 

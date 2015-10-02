@@ -121,13 +121,11 @@ Research vs production code
 The value of software design
 ----------------------------
 * There are plenty of famous software bugs
-* Research code vs production code
+* Beware the fallacy of "research code"
 
-  - Research code: run once, get some results
-  - Production code: must be maintained long-term
-
-* Scientific code must be correct, and sometimes also maintainable long-term
-* Structure is important
+* **Scientific code must be correct**, and often also maintainable long-term
+* The structure of good software development practices even helps
+  scientists
 
 
 

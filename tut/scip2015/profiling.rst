@@ -277,7 +277,7 @@ the next step.
 
 * Run your script under control of the ``cProfile`` module:
 
-  .. python::
+  .. console::
 
      $ python -m cProfile -o profile.out  SCRIPT.py arg1 arg2 ....
 
@@ -388,7 +388,7 @@ Exercise Profiling-1.1: Running code
 
    .. console::
 
-      $ python -m cProfile -o profile.out py-profile.py
+      $ python -m cProfile -o profile.out pi.py
 
 #. You should now either have a ``gmon.out`` or ``profile.out`` file
    in this directory.  This contains all your profiling information.
@@ -402,7 +402,7 @@ Exercise Profiling-1.2: Getting profile information
    use gprof to do this` and for :py:`Python you use the pstats
    module`.
 
-#. C: We use the ``gprof`` utility to study the output.  Run it like this:
+#. :c:`C:` We use the ``gprof`` utility to study the output.  Run it like this:
 
    .. console::
 
@@ -411,7 +411,7 @@ Exercise Profiling-1.2: Getting profile information
    It directly prints out a summary report.  You may need to scroll up
    some in order to see the important timing parts
 
-#. Python: There is a interactive profile viewer in the ``pstats``
+#. :py:`Python:` There is a interactive profile viewer in the ``pstats``
    module.  Open it using ``-m pstats``, and then execute the commands
    ``strip``, ``sort cumulative``, and ``stats 15`` to print the data.  You
    can use different
@@ -438,17 +438,30 @@ Exercise Profiling-1.3: Examining the output
   FIXME: Examples that depend on both total time and cumulative time.  
 
 
-..
-    Exercise Profiling-1.4: Bonus: More fancy visualization
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    #. You can make nice call graphs like you saw earlier.  This is done
-       via the ``gprof2dot.py`` script, which is already in the
-       ``scip/profiling/`` folder.
+Exercise Profiling-1.4: Bonus: More fancy visualization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    ..
-      FIXME: Demonstrate use of gprof2dot.py
+#. You can make nice call graphs like you saw earlier.  This is done
+   via the ``gprof2dot.py`` script, which is already in the
+   ``scip/profiling/`` folder.  This is a pretty visualization, and
+   works on headless machines where you don't have a graphical
+   environment.  You have to copy (or ``sshfs``) it to your own
+   computer to view it.  Usually, I will first look at the text-based
+   profiles, and then to get a big overview make the call graph
+   pictures a few times.
 
+   :py:`Python:`
+
+   .. console::
+
+      $ python gprof2dot.py -f pstats profile.out | dot -Tpng > pi-prof-1.png
+
+   :c:`C:`
+
+   .. console::
+
+      gprof a.out gmon.out | python gprof2dot.py | dot -Tpng > profile.png
 
 
 
