@@ -69,7 +69,9 @@ are in an older format.
    linux-tips/linux-tips                Linux tips and tricks
    open-science/open-science            Open science and software development
    db-intro/db-intro                    Introduction to use of databases in research
-   db-intro/db-examples                 Examples of usage of SQL databases
+   db-intro/db-examples                 SQL intro by examples
+   git-practical/git-practical          Git: GUIs and practical issues.
+   git-reference/git-reference          Git reference information
 
 
 The following tutorials are "under development": they have some
