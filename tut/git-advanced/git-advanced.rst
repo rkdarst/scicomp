@@ -325,7 +325,7 @@ Advantages of fetching
      git config --global alias.new "log HEAD..HEAD@{upstream}"
      git config --global alias.news "log --stat HEAD..HEAD@{upstream}"
      git config --global alias.newd "log --patch HEAD..HEAD@{upstream}"
-     git config --global alias.newdi "diff $(git merge-base HEAD HEAD@{upstream})..HEAD@{upstream}"
+     git config --global alias.newdi '!git diff "$(git merge-base HEAD HEAD@{upstream})..HEAD@{upstream}'
 
      git config --global alias.rec "!git --no-pager log --oneline --graph --decorate -n5"
      git config --global alias.reca "!git --no-pager log --oneline --graph --decorate -n10 --all"
