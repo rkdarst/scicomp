@@ -114,7 +114,11 @@ class PygmentsInclude(Pygments):
         lexer = self.get_lexer(lexer)
         formatter = self.get_formatter()
 
-        data = os.path.join(os.path.dirname(self.src), fname)
+        if hasattr(self, 'src'):
+            current_source = self.src
+        else: # new
+            current_source = self.state.document.current_source
+        data = os.path.join(os.path.dirname(current_source), fname)
         if not os.path.exists(data):
             return [nodes.raw('', "File does not exist: %s"%data, format='html')]
         data = open(data).read()
